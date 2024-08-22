@@ -15,7 +15,19 @@ def carregar_dados(empresas):
 acoes = ['ITUB4.SA','PETR4.SA','MGLU3.SA','VALE3.SA','ABEV3.SA','GGBR4.SA']
 dados = carregar_dados(acoes)
 
+token = st.experimental_get_query_params().get('token', [None])[0]
 
+if token:
+    # Validar e utilizar o token
+    headers = {"Authorization": f"Bearer {token}"}
+    response = requests.get("https://api.your-backend.com/user/data", headers=headers)
+    if response.status_code == 200:
+        user_data = response.json()
+        st.write("Dados do Usuário:", user_data)
+    else:
+        st.error("Token inválido ou expiração.")
+else:
+    st.error("Token não fornecido.")
 
 #mostrar graficos nas tela
 
@@ -52,6 +64,8 @@ dados = dados.loc[intervalo_datas[0]:intervalo_datas[1]]
 
 # Criar os graficos
 st.line_chart(dados)
+
+st.write("token:", token)
 
 
 st.write('''
