@@ -1,4 +1,5 @@
 import pandas as pd
+import requests
 import streamlit as st
 import yfinance as yf
 from datetime import timedelta
@@ -17,17 +18,17 @@ dados = carregar_dados(acoes)
 
 token = st.experimental_get_query_params().get('token', [None])[0]
 
-# if token:
-#     # Validar e utilizar o token
-#     headers = {"Authorization": f"Bearer {token}"}
-#     response = requests.get("https://api.your-backend.com/user/data", headers=headers)
-#     if response.status_code == 200:
-#         user_data = response.json()
-#         st.write("Dados do Usuário:", user_data)
-#     else:
-#         st.error("Token inválido ou expiração.")
-# else:
-#     st.error("Token não fornecido.")
+if token:
+     # Validar e utilizar o token
+     headers = {"Authorization": f"Bearer {token}"}
+     response = requests.get("https://xqyx-rytf-8kv4.n7d.xano.io/api:Z8VtHP2l/auth/me", headers=headers)
+     if response.status_code == 200:
+         user_data = response.json()
+         st.write("Dados do Usuário:", user_data)
+     else:
+         st.error("Token inválido ou expiração.")
+else:
+     st.error("Token não fornecido.")
 
 #mostrar graficos nas tela
 
@@ -65,7 +66,8 @@ dados = dados.loc[intervalo_datas[0]:intervalo_datas[1]]
 # Criar os graficos
 st.line_chart(dados)
 
-st.write("token:", token)
+st.write("Token:", token)
+
 
 
 st.write('''
