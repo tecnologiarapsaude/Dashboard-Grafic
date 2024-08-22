@@ -17,17 +17,17 @@ dados = carregar_dados(acoes)
 
 token = st.experimental_get_query_params().get('token', [None])[0]
 
-if token:
-    # Validar e utilizar o token
-    headers = {"Authorization": f"Bearer {token}"}
-    response = requests.get("https://api.your-backend.com/user/data", headers=headers)
-    if response.status_code == 200:
-        user_data = response.json()
-        st.write("Dados do Usuário:", user_data)
-    else:
-        st.error("Token inválido ou expiração.")
-else:
-    st.error("Token não fornecido.")
+# if token:
+#     # Validar e utilizar o token
+#     headers = {"Authorization": f"Bearer {token}"}
+#     response = requests.get("https://api.your-backend.com/user/data", headers=headers)
+#     if response.status_code == 200:
+#         user_data = response.json()
+#         st.write("Dados do Usuário:", user_data)
+#     else:
+#         st.error("Token inválido ou expiração.")
+# else:
+#     st.error("Token não fornecido.")
 
 #mostrar graficos nas tela
 
