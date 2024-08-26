@@ -44,13 +44,16 @@ def fetch_data():
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
 
+
+            #  Pegando o arquivo detalhamento via url
             data = response.json()
             arquivo_detalhamento = data[0]['arquivo_detalhamento_vidas']
             arquivo_url = arquivo_detalhamento['url']
             st.write(arquivo_url)
+
             # arquivo_url = data[0]['arquivo_detalhamento_vidas']['url']
-            df = pd.read_excel(arquivo_url)
-            df.head()
+            df = pd.read_json(data)
+            df.head(5)
 
             return data # Retorna os dados em formato JSON
         else:
