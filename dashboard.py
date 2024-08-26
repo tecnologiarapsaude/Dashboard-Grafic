@@ -48,7 +48,7 @@ def fetch_data():
 
     # Construa a URL para a chamada à API
     # Converte a lista de inteiros em uma string separada por vírgulas
-    id_empresas_str = ','.join(map(str, id_empresas_list))
+    # id_empresas_str = ','.join(map(str, id_empresas_list))
 
 
     # URL do seu endpoint no Xano
@@ -69,6 +69,9 @@ def fetch_data():
         # verificar se a respota foi bem sucedida
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
+            grafic = response.json()
+            item = grafic['arquivo_detalhamento_vidas']
+            st.write(item)
             return response.json()  # Retorna os dados em formato JSON
         else:
             st.error(f"Erro: {response.status_code}")
