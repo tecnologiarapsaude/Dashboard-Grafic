@@ -68,7 +68,16 @@ def fetch_data():
         # verificar se a respota foi bem sucedida
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
-            return response.json()  # Retorna os dados em formato JSON
+
+            data = response.json()
+
+            arquivo_url = data['arquivo_detalhamento_vidas']['url']
+            st.write(f'URL do arquivo: {arquivo_url}')
+
+            df = pd.read_csv(arquivo_url)
+            st.line_chart(df)
+
+            return  data # Retorna os dados em formato JSON
         else:
             st.error(f"Erro: {response.status_code}")
             st.write(f"Detalhes do erro: {response.text}")
