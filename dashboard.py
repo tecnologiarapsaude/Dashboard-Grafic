@@ -12,7 +12,7 @@ if token:
      if response.status_code == 200:
             user_data = response.json()
             st.write("Dados do Usuário:", user_data)
-            date = user_data['lista_empresa']
+            date = user_data['lista_empresa']['empresas_id']
             st.write(date)
      else:
          st.error("Token inválido ou expiração.")
