@@ -50,7 +50,7 @@ def fetch_data():
 
             #  Pegando o arquivo detalhamento via url
             data = response.json()
-            arquivo_detalhamento = data[payload]['arquivo_detalhamento_vidas']
+            arquivo_detalhamento = data[0,1]['arquivo_detalhamento_vidas']
             arquivo_url = arquivo_detalhamento['url']
             st.write(arquivo_url)
             df = pd.read_csv(arquivo_url)
