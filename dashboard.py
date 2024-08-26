@@ -4,34 +4,36 @@ import streamlit as st
 from datetime import timedelta
 
 
-def get_enterprise():
+# def get_enterprise():
 
-    id_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
+#     id_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
     
-    if id_empresas:
-        # Validar e utilizar o token
-        # headers = {"Authorization": f"Bearer {id_empresas}"}
-        response = requests.get(f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={[int(id_empresas)]}')
-        
-        if response.status_code == 200:
-            user_data = response.json()
-            st.write("Dados do Usuário:", user_data)
-            date = user_data['lista_empresa']
-            st.write(date)
-            # id_empresas = date['empresas_id']
-            # st.write(id_empresas)
-        else:
-            st.error("Token inválido ou expiração.")
-    else:
-        st.error("Token não fornecido.")
+#     if id_empresas:
+#         # Validar e utilizar o token
+#         # headers = {"Authorization": f"Bearer {id_empresas}"}
+#         response = requests.get(f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={[int(id_empresas)]}')
 
-    return user_data['lista_empresa']
+#         if response.status_code == 200:
+#             user_data = response.json()
+#             st.write("Dados do Usuário:", user_data)
+#             date = user_data['lista_empresa']
+#             st.write(date)
+#             # id_empresas = date['empresas_id']
+#             # st.write(id_empresas)
+#         else:
+#             st.error("Token inválido ou expiração.")
+#     else:
+#         st.error("Token não fornecido.")
 
+#     return user_data['lista_empresa']
 
-def fetch_data(ID_empresa):
+ID_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
+
+def fetch_data(ID_empresas):
+
 
     # URL do seu endpoint no Xano
-    XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={[int(ID_empresa)]}'
+    XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={[int(ID_empresas)]}'
 
     st.write(f'URL chamada: {XANO_API_GET}')
 
@@ -68,7 +70,7 @@ Hello world!
 # df = pd.read_csv(item)
 # st.line_chart(df)
 
-st.write(get_enterprise())
+st.write(fetch_data(ID_empresas))
 
 st.write('''
     # Fim
