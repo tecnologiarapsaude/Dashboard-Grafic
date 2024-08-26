@@ -48,14 +48,14 @@ def fetch_data():
 
     # Construa a URL para a chamada à API
     # Converte a lista de inteiros em uma string separada por vírgulas
-    # id_empresas_str = ','.join(map(str, id_empresas_list))
+    id_empresas_str = ','.join(map(str, id_empresas_list))
 
 
     # URL do seu endpoint no Xano
     XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento'
 
     payload = {
-        'ID_empresas': id_empresas_list
+        'ID_empresas': id_empresas_str
     }
 
 
