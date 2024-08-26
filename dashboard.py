@@ -6,15 +6,14 @@ from datetime import timedelta
 
 def get_enterprise():
 
-    token = st.experimental_get_query_params().get('token', [None])[0]
-
-    if token:
+    id_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
+    
+    if id_empresas:
         # Validar e utilizar o token
-        headers = {"Authorization": f"Bearer {token}"}
+        headers = {"Authorization": f"Bearer {id_empresas}"}
         response = requests.get("https://xqyx-rytf-8kv4.n7d.xano.io/api:Z8VtHP2l/auth/me", headers=headers)
         if response.status_code == 200:
             user_data = response.json()
-            st.write("Dados do Usuário:", user_data)
             st.write("Dados do Usuário:", user_data)
             date = user_data['lista_empresa']
             st.write(date)
