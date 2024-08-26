@@ -25,7 +25,7 @@ def get_enterprise():
     else:
         st.error("Token não fornecido.")
 
-    return user_data.lista_empresa
+    return user_data['lista_empresa']
 
 
 def fetch_data(ID_empresa):
