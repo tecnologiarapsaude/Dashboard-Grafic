@@ -33,7 +33,7 @@ def fetch_data():
     ID_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
 
     # URL do seu endpoint no Xano
-    XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={[ID_empresas]}'
+    XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={ID_empresas}'
 
     st.write(f'URL chamada: {XANO_API_GET}')
 
