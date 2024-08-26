@@ -32,7 +32,6 @@ def fetch_data():
 
     ID_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
 
-
     # Verifica se o parâmetro 'id_empresas' foi fornecido
     if ID_empresas is None:
         st.error("Parâmetro 'id_empresas' não fornecido na URL.")
@@ -67,9 +66,10 @@ def fetch_data():
         st.write(response)
 
 
-        # grafic = response.json()
-        # item = grafic['arquivo_detalhamento_vidas']
-        # st.write(item)
+        grafic = response.json()
+        item = grafic['arquivo_detalhamento_vidas']['url']
+        st.write(item)
+
 
 
 
@@ -101,6 +101,7 @@ Hello world!
 # st.line_chart(df)
 
 st.write(fetch_data())
+
 
 st.write('''
     # Fim
