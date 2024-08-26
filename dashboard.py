@@ -67,9 +67,9 @@ def fetch_data():
         st.write(response)
 
 
-        grafic = response.json()
-        item = grafic['arquivo_detalhamento_vidas']
-        st.write(item)
+        # grafic = response.json()
+        # item = grafic['arquivo_detalhamento_vidas']
+        # st.write(item)
 
 
 
