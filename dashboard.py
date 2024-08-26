@@ -18,14 +18,14 @@ def get_enterprise():
             st.write("Dados do Usuário:", user_data)
             date = user_data['lista_empresa']
             st.write(date)
-            id_empresas = date['empresas_id']
-            st.write(id_empresas)
+            # id_empresas = date['empresas_id']
+            # st.write(id_empresas)
         else:
             st.error("Token inválido ou expiração.")
     else:
         st.error("Token não fornecido.")
 
-    return user_data['lista_empresa']
+    return user_data['lista_empresa']['empresas_id']
 
 
 def fetch_data(ID_empresa):
