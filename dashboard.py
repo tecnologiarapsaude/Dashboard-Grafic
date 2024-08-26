@@ -67,7 +67,7 @@ def fetch_data():
                 # Ler o conteúdo do arquivo CSV em um DataFrame
                 file_content = file_response.text
                 file_buffer = StringIO(file_content)
-                df = pd.read_excel(file_buffer)
+                df = pd.read_csv(file_buffer)
 
                 # Exibir as primeiras linhas do DataFrame no Streamlit
                 st.write(df.head())
