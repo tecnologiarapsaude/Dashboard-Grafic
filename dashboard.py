@@ -1,35 +1,10 @@
 import pandas as pd
 import requests
 import streamlit as st
-from datetime import timedelta
-
-
-# def get_enterprise():
-
-#     id_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
-    
-#     if id_empresas:
-#         # Validar e utilizar o token
-#         # headers = {"Authorization": f"Bearer {id_empresas}"}
-#         response = requests.get(f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={[int(id_empresas)]}')
-
-#         if response.status_code == 200:
-#             user_data = response.json()
-#             st.write("Dados do Usuário:", user_data)
-#             date = user_data['lista_empresa']
-#             st.write(date)
-#             # id_empresas = date['empresas_id']
-#             # st.write(id_empresas)
-#         else:
-#             st.error("Token inválido ou expiração.")
-#     else:
-#         st.error("Token não fornecido.")
-
-#     return user_data['lista_empresa']
-
 
 def fetch_data():
 
+    # trazendo id da empresa do weweb, pelo embed
     ID_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
 
     # Verifica se o parâmetro 'id_empresas' foi fornecido
@@ -70,14 +45,9 @@ def fetch_data():
             st.write('Resposta recebida com sucesso')
 
             data = response.json()
-
             arquivo_url = data['arquivo_detalhamento_vidas']['url']
-            st.write(f'URL do arquivo: {arquivo_url}')
 
-            df = pd.read_csv(arquivo_url)
-            st.line_chart(df)
-
-            return data # Retorna os dados em formato JSON
+            return arquivo_url # Retorna os dados em formato JSON
         else:
             st.error(f"Erro: {response.status_code}")
             st.write(f"Detalhes do erro: {response.text}")
@@ -86,6 +56,17 @@ def fetch_data():
         st.error(f"Erro ao fazer requisição: {str(e)}")
         return None
     
+    # return response.json()
+    
+    
+# data = response.json()
+
+# arquivo_url = data['arquivo_detalhamento_vidas']['url']
+# st.write(f'URL do arquivo: {arquivo_url}')
+
+# df = pd.read_csv(arquivo_url)
+# st.line_chart(df)
+
 
 st.title("Integração com Xano")
 
@@ -101,5 +82,5 @@ Hello world!
 # df = pd.read_csv(item)
 # st.line_chart(df)
 
-st.line_chart(fetch_data())
+st.write(fetch_data())
 
