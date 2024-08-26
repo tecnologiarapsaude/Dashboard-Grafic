@@ -3,27 +3,31 @@ import requests
 import streamlit as st
 from datetime import timedelta
 
-token = st.experimental_get_query_params().get('token', [None])[0]
 
-if token:
-     # Validar e utilizar o token
-     headers = {"Authorization": f"Bearer {token}"}
-     response = requests.get("https://xqyx-rytf-8kv4.n7d.xano.io/api:Z8VtHP2l/auth/me", headers=headers)
-     if response.status_code == 200:
+def get_enterprise():
+
+    token = st.experimental_get_query_params().get('token', [None])[0]
+
+    if token:
+        # Validar e utilizar o token
+        headers = {"Authorization": f"Bearer {token}"}
+        response = requests.get("https://xqyx-rytf-8kv4.n7d.xano.io/api:Z8VtHP2l/auth/me", headers=headers)
+        if response.status_code == 200:
             user_data = response.json()
+            st.write("Dados do Usuário:", user_data)
             st.write("Dados do Usuário:", user_data)
             date = user_data['lista_empresa']
             st.write(date)
             id_empresas = date['empresas_id']
             st.write(id_empresas)
-     else:
-         st.error("Token inválido ou expiração.")
-else:
-     st.error("Token não fornecido.")
+        else:
+            st.error("Token inválido ou expiração.")
+    else:
+        st.error("Token não fornecido.")
+
+    return user_data.lista_empresa
 
 
-
-st.write("Token:", token)
 def fetch_data(ID_empresa):
 
     # URL do seu endpoint no Xano
