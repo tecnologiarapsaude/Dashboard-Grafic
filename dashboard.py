@@ -14,7 +14,7 @@ if token:
             st.write("Dados do Usuário:", user_data)
             date = user_data['lista_empresa']
             st.write(date)
-            id_empresas = user_data['empresas_id']
+            id_empresas = date['empresas_id']
             st.write(id_empresas)
      else:
          st.error("Token inválido ou expiração.")
