@@ -65,17 +65,12 @@ def fetch_data():
         response = requests.post(XANO_API_GET, json=payload)
         st.write(response)
 
-
-        grafic = response.json()
-        item = grafic['arquivo_detalhamento_vidas']['url']
-        st.write(item)
-
-
-
-
         # verificar se a respota foi bem sucedida
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
+            user_date = response.json()
+            date = user_date['arquivo_detalhamento_vidas']['url']
+            st.write(date)
             return response.json()  # Retorna os dados em formato JSON
         else:
             st.error(f"Erro: {response.status_code}")
