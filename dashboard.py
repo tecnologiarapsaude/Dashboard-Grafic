@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import streamlit as st
 from io import StringIO 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 
 def fetch_data():
