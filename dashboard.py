@@ -1,6 +1,9 @@
 import pandas as pd
 import requests
 import streamlit as st
+from io import StringIO 
+import matplotlib.pyplot as plt
+
 
 def fetch_data():
 
@@ -52,8 +55,34 @@ def fetch_data():
             st.write(arquivo_url)
 
             # arquivo_url = data[0]['arquivo_detalhamento_vidas']['url']
-            df = pd.read_json(data)
-            df.head(5)
+            # df = pd.read_json(data)
+            # df.head(5)
+
+            # Baixar o arquivo CSV
+            file_response = requests.get(arquivo_url)
+            if file_response.status_code == 200:
+                st.write('Arquivo CSV baixado com sucesso')
+                
+                # Ler o conteúdo do arquivo CSV em um DataFrame
+                file_content = file_response.text
+                file_buffer = StringIO(file_content)
+                df = pd.read_csv(file_buffer)
+
+                # Exibir as primeiras linhas do DataFrame no Streamlit
+                st.write(df.head())
+                
+                # Exemplo de gráfico básico com o DataFrame
+                # plt.figure(figsize=(10, 6))
+                # plt.plot(df['data'], df['valor'], marker='o', linestyle='-')
+                # plt.title('Exemplo de Gráfico')
+                # plt.xlabel('Data')
+                # plt.ylabel('Valor')
+                # plt.grid(True)
+                # st.pyplot(plt) 
+            else:
+                st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
+
+
 
             return data # Retorna os dados em formato JSON
         else:
