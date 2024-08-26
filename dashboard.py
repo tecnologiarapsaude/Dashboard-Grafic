@@ -10,9 +10,10 @@ if token:
      headers = {"Authorization": f"Bearer {token}"}
      response = requests.get("https://xqyx-rytf-8kv4.n7d.xano.io/api:Z8VtHP2l/auth/me", headers=headers)
      if response.status_code == 200:
-         user_data = response.json()
-        #  date = user_data[0]['aquivo_NF']['url']
-         st.write("Dados do Usuário:", user_data)
+            user_data = response.json()
+            st.write("Dados do Usuário:", user_data)
+            date = user_data['lista_empresa']
+            st.write(date)
      else:
          st.error("Token inválido ou expiração.")
 else:
