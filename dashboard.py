@@ -10,8 +10,9 @@ def get_enterprise():
     
     if id_empresas:
         # Validar e utilizar o token
-        headers = {"Authorization": f"Bearer {id_empresas}"}
-        response = requests.get("https://xqyx-rytf-8kv4.n7d.xano.io/api:Z8VtHP2l/auth/me", headers=headers)
+        # headers = {"Authorization": f"Bearer {id_empresas}"}
+        response = requests.get(f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={[int(id_empresas)]}')
+        
         if response.status_code == 200:
             user_data = response.json()
             st.write("Dados do Usuário:", user_data)
@@ -24,7 +25,7 @@ def get_enterprise():
     else:
         st.error("Token não fornecido.")
 
-    return user_data['lista_empresa']['empresas_id']
+    return user_data['lista_empresa']
 
 
 def fetch_data(ID_empresa):
