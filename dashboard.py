@@ -11,6 +11,7 @@ if token:
      response = requests.get("https://xqyx-rytf-8kv4.n7d.xano.io/api:Z8VtHP2l/auth/me", headers=headers)
      if response.status_code == 200:
          user_data = response.json()
+        #  date = user_data[0]['aquivo_NF']['url']
          st.write("Dados do Usuário:", user_data)
      else:
          st.error("Token inválido ou expiração.")
@@ -23,7 +24,7 @@ st.write("Token:", token)
 def fetch_data(ID_empresa):
 
     # URL do seu endpoint no Xano
-    XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={int(ID_empresa)}'
+    XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={[int(ID_empresa)]}'
 
     st.write(f'URL chamada: {XANO_API_GET}')
 
@@ -48,18 +49,6 @@ def fetch_data(ID_empresa):
 
 st.title("Integração com Xano")
 
-param = st.text_input('Insira o parâmetro para a API')
-
-if st.button('Buscar dados'):
-    if param:
-        # chama função para pegar dados
-        data = fetch_data(param)
-        st.json(data)
-        if data:
-            st.write("Dados recebidos:")
-            st.json(data)
-    else:
-        st.write("Nenhum dado disponível.")
 
 
 st.write("""
