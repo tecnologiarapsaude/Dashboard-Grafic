@@ -63,7 +63,7 @@ def fetch_data():
 
     try:
         # realizar a chamada get api
-        response = requests.get(XANO_API_GET)
+        response = requests.get(XANO_API_GET, json=payload)
         st.write(response)
 
         # verificar se a respota foi bem sucedida
