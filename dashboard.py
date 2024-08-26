@@ -49,7 +49,7 @@ def fetch_data():
             arquivo_url = arquivo_detalhamento['url']
             st.write(arquivo_url)
             # arquivo_url = data[0]['arquivo_detalhamento_vidas']['url']
-            # df = pd.read_excel(arquivo_url)
+            df = pd.read_excel(arquivo_url)
 
             return data # Retorna os dados em formato JSON
         else:
