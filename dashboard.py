@@ -53,7 +53,8 @@ def fetch_data():
             arquivo_detalhamento = data[0]['arquivo_detalhamento_vidas']
             arquivo_url = arquivo_detalhamento['url']
             st.write(arquivo_url)
-            st.line_chart(arquivo_url)
+            df = pd.read_csv(arquivo_url)
+            st.line_chart(df)
 
             # arquivo_url = data[0]['arquivo_detalhamento_vidas']['url']
             # df = pd.read_json(data)
