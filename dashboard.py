@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import streamlit as st
 from datetime import timedelta
-import matplotlib.pyplot as plt
+import matplotlib as plt
 from io import StringIO
 
 # def get_enterprise():
@@ -92,12 +92,12 @@ def fetch_data():
                 st.write(df.head())
                 
                 # Exemplo de gráfico básico com o DataFrame
-                plt.figure(figsize=(10, 6))
-                plt.plot(df['data'], df['valor'], marker='o', linestyle='-')
-                plt.title('Exemplo de Gráfico')
-                plt.xlabel('Data')
-                plt.ylabel('Valor')
-                plt.grid(True)
+                # plt.figure(figsize=(10, 6))
+                # plt.plot(df['data'], df['valor'], marker='o', linestyle='-')
+                # plt.title('Exemplo de Gráfico')
+                # plt.xlabel('Data')
+                # plt.ylabel('Valor')
+                # plt.grid(True)
                 # st.pyplot(plt)
                 
             else:
