@@ -32,8 +32,27 @@ def fetch_data():
 
     ID_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
 
+
+    # Verifica se o parâmetro 'id_empresas' foi fornecido
+    if ID_empresas is None:
+        st.error("Parâmetro 'id_empresas' não fornecido na URL.")
+        return None
+
+    # Transforma o parâmetro em uma lista de inteiros
+    try:
+        # Supondo que os IDs sejam separados por vírgulas, ex: "1,2,3"
+        id_empresas_list = [int(id_str) for id_str in ID_empresas.split(',')]
+    except ValueError:
+        st.error("O parâmetro 'id_empresas' deve ser uma lista de inteiros separados por vírgula.")
+        return None
+
+    # Construa a URL para a chamada à API
+    # Converte a lista de inteiros em uma string separada por vírgulas
+    id_empresas_str = ','.join(map(str, id_empresas_list))
+
+
     # URL do seu endpoint no Xano
-    XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={[ID_empresas]}'
+    XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento?ID_empresa={int(id_empresas_str)}'
 
     st.write(f'URL chamada: {XANO_API_GET}')
 
