@@ -2,7 +2,8 @@ import pandas as pd
 import requests
 import streamlit as st
 from datetime import timedelta
-
+import matplotlib.pyplot as plt
+from io import StringIO
 
 # def get_enterprise():
 
@@ -69,8 +70,39 @@ def fetch_data():
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
             data = response.json()
-            user_date = data['arquivo_detalhamento_vidas']['url']
-            st.write(user_date)
+
+            # Obtenha a URL do arquivo da coluna 'arquivo_detalhamento_vidas'
+            arquivo_url = data['arquivo_detalhamento_vidas']['url']
+            
+            st.write(f'URL do arquivo: {arquivo_url}')
+            
+            # Baixe o arquivo
+            file_response = requests.get(arquivo_url)
+            if file_response.status_code == 200:
+                st.write('Arquivo baixado com sucesso')
+                
+                # Transforme o conteúdo do arquivo em um DataFrame
+                file_content = file_response.text
+                file_buffer = StringIO(file_content)
+                
+                # Supondo que o arquivo é um CSV
+                df = pd.read_csv(file_buffer)
+                
+                # Exibir as primeiras linhas do DataFrame no Streamlit
+                st.write(df.head())
+                
+                # Exemplo de gráfico básico com o DataFrame
+                plt.figure(figsize=(10, 6))
+                plt.plot(df['data'], df['valor'], marker='o', linestyle='-')
+                plt.title('Exemplo de Gráfico')
+                plt.xlabel('Data')
+                plt.ylabel('Valor')
+                plt.grid(True)
+                # st.pyplot(plt)
+                
+            else:
+                st.error(f"Erro ao baixar o arquivo: {file_response.status_code}")
+            
             return data  # Retorna os dados em formato JSON
         else:
             st.error(f"Erro: {response.status_code}")
