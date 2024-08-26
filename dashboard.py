@@ -43,15 +43,25 @@ def fetch_data():
         # verificar se a respota foi bem sucedida
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
+
             data = response.json()
+            arquivo_url = data['arquivo_detalhamento_vidas']['url']
+            df = pd.read_excel(arquivo_url)
+
             return data # Retorna os dados em formato JSON
         else:
             st.error(f"Erro: {response.status_code}")
             st.write(f"Detalhes do erro: {response.text}")
             return None
+        
+        
+
+
     except Exception as e:
         st.error(f"Erro ao fazer requisição: {str(e)}")
         return None
+    
+    
     
     # return response.json()
     
