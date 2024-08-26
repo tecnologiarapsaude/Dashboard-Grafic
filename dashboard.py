@@ -45,8 +45,8 @@ def fetch_data():
             st.write('Resposta recebida com sucesso')
 
             data = response.json()
-            arquivo_url = data[0]['arquivo_detalhamento_vidas']['url']
-            df = pd.read_excel(arquivo_url)
+            # arquivo_url = data[0]['arquivo_detalhamento_vidas']['url']
+            # df = pd.read_excel(arquivo_url)
 
             return data # Retorna os dados em formato JSON
         else:
