@@ -66,12 +66,16 @@ def fetch_data():
         response = requests.post(XANO_API_GET, json=payload)
         st.write(response)
 
+
+        grafic = response.json()
+        item = grafic['arquivo_detalhamento_vidas']
+        st.write(item)
+
+
+
         # verificar se a respota foi bem sucedida
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
-            grafic = response.json()
-            item = grafic['arquivo_detalhamento_vidas']
-            st.write(item)
             return response.json()  # Retorna os dados em formato JSON
         else:
             st.error(f"Erro: {response.status_code}")
@@ -80,7 +84,7 @@ def fetch_data():
     except Exception as e:
         st.error(f"Erro ao fazer requisição: {str(e)}")
         return None
-
+    
 
 st.title("Integração com Xano")
 
