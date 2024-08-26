@@ -77,7 +77,7 @@ def fetch_data():
             df = pd.read_csv(arquivo_url)
             st.line_chart(df)
 
-            return  data # Retorna os dados em formato JSON
+            return data # Retorna os dados em formato JSON
         else:
             st.error(f"Erro: {response.status_code}")
             st.write(f"Detalhes do erro: {response.text}")
@@ -101,10 +101,5 @@ Hello world!
 # df = pd.read_csv(item)
 # st.line_chart(df)
 
-st.write(fetch_data())
+st.line_chart(fetch_data())
 
-
-st.write('''
-    # Fim
-    #FIM
-''')
