@@ -68,10 +68,10 @@ def fetch_data():
         # verificar se a respota foi bem sucedida
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
-            user_date = response.json()
-            date = user_date['arquivo_detalhamento_vidas']['url']
-            st.write(date)
-            return response.json()  # Retorna os dados em formato JSON
+            data = response.json()
+            user_date = data['arquivo_detalhamento_vidas']['url']
+            st.write(user_date)
+            return data  # Retorna os dados em formato JSON
         else:
             st.error(f"Erro: {response.status_code}")
             st.write(f"Detalhes do erro: {response.text}")
