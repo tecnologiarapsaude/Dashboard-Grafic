@@ -60,6 +60,7 @@ def fetch_data():
                 combined_df = pd.concat(dataframes, ignore_index=True)
                 
                 st.write(combined_df.head())
+                st.line_chart(combined_df.set_index('x')['y'])
 
                 # Verifica se as colunas necessárias estão presentes
                 # if 'x' in combined_df.columns and 'y' in combined_df.columns:
