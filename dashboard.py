@@ -43,12 +43,12 @@ def fetch_data():
                     file_content = file_response.text
                     file_buffer = StringIO(file_content)
                     df = pd.read_csv(file_buffer)
+                    df_juntar_arquivos = pd.merge(df, df, on='id')
 
                     st.write(df.head())
-                    st.line_chart(df)
+                    st.line_chart(df_juntar_arquivos)
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
-
             return data
         else:
             st.error(f"Erro: {response.status_code}")
