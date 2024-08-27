@@ -31,6 +31,9 @@ def fetch_data():
             st.write('Resposta recebida com sucesso')
             data = response.json()
             
+            # armazenar os dataframes
+            dataframes = []
+
             # fazendo o for para pega todas as empresa que estao no json, e gerar o grafico 
             for arquivo in data:
                 arquivo_detalhamento = arquivo['arquivo_detalhamento_vidas']
@@ -44,11 +47,30 @@ def fetch_data():
                     file_buffer = StringIO(file_content)
                     df = pd.read_csv(file_buffer)
 
-                    st.write(df.head())
-                    st.line_chart(df)
+                    dataframes.append(df)
+
+                    # st.write(df.head())
+                    # st.line_chart(df)
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
-            return data
+            # return data
+
+            if len(dataframes) == 2:    
+                # Concatenar os DataFrames
+                combined_df = pd.concat(dataframes, ignore_index=True)
+                
+                st.write(combined_df.head())
+
+                 # Verifica se as colunas necessárias estão presentes
+                if 'x' in combined_df.columns and 'y' in combined_df.columns:
+                    st.line_chart(combined_df.set_index('x')['y'])
+                else:
+                    st.error("O DataFrame combinado não contém as colunas 'x' e 'y' necessárias para o gráfico.")
+            
+            else:
+                st.error("Menos de dois arquivos CSV foram encontrados.")
+
+
         else:
             st.error(f"Erro: {response.status_code}")
             st.write(f"Detalhes do erro: {response.text}")
