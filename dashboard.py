@@ -4,6 +4,7 @@ import streamlit as st
 from io import StringIO
 
 def fetch_data():
+    # trazendo id da empresa via o embed do weweb
     ID_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
 
     if ID_empresas is None:
@@ -11,6 +12,7 @@ def fetch_data():
         return None
 
     try:
+        # transformando a lista de empresas de strings para inteiros
         id_empresas_list = [int(id_str) for id_str in ID_empresas.split(',')]
     except ValueError:
         st.error("O parâmetro 'id_empresas' deve ser uma lista de inteiros separados por vírgula.")
@@ -23,11 +25,13 @@ def fetch_data():
     try:
         response = requests.post(XANO_API_GET, json=payload)
         st.write(response)
-
+         
+        # pegando o json com as informaçoes
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
             data = response.json()
-
+            
+            # fazendo o for para pega todas as empresa que estao no json, e gerar o grafico 
             for arquivo in data:
                 arquivo_detalhamento = arquivo['arquivo_detalhamento_vidas']
                 arquivo_url = arquivo_detalhamento['url']
@@ -56,9 +60,5 @@ def fetch_data():
 
 st.title("Integração com Xano")
 
-st.write("""
-# My first app
-Hello world!
-""")
 
 st.write(fetch_data())
