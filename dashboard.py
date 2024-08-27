@@ -61,11 +61,11 @@ def fetch_data():
                 
                 st.write(combined_df.head())
 
-                 # Verifica se as colunas necessárias estão presentes
-                if 'x' in combined_df.columns and 'y' in combined_df.columns:
-                    st.line_chart(combined_df.set_index('x')['y'])
-                else:
-                    st.error("O DataFrame combinado não contém as colunas 'x' e 'y' necessárias para o gráfico.")
+                # Verifica se as colunas necessárias estão presentes
+                # if 'x' in combined_df.columns and 'y' in combined_df.columns:
+                #     st.line_chart(combined_df.set_index('x')['y'])
+                # else:
+                #     st.error("O DataFrame combinado não contém as colunas 'x' e 'y' necessárias para o gráfico.")
             
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
