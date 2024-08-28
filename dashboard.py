@@ -54,7 +54,7 @@ def fetch_data():
 
             if len(dataframes) == 2:    
                 # Concatenar os DataFrames
-                combined_df = pd.concat(dataframes)
+                combined_df = pd.concat(dataframes, ignore_index=True)
                 
                 st.write(combined_df.head())
 
