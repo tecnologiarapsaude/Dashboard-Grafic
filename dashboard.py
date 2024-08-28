@@ -62,6 +62,7 @@ def fetch_data():
                 st.sidebar.header('Filtros')
 
                 # Filtros por data
+                st.write(combined_df.index.dtype)
                 data_inicial = combined_df.index.min().to_pydatetime()
                 data_final = combined_df.index.max().to_pydatetime()
 
