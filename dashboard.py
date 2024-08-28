@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 import streamlit as st
 from io import StringIO
+from datetime import timedelta
 
 def fetch_data():
     # trazendo id da empresa via o embed do weweb
@@ -57,11 +58,21 @@ def fetch_data():
                 
                 st.write(combined_df.head())
 
-                # gerar filtros
-
+                # gerar menu lateral com filtros
                 st.sidebar.header('Filtros')
 
+                # Filtros por data
+                data_inicial = combined_df.index.min().to_pydatetime()
+                data_final = combined_df.index.max().to_pydatetime()
 
+                intervalo_datas = st.sidebar.slider('Selecione as datas',
+                                                    min_value=data_inicial,
+                                                    max_value=data_final,
+                                                    value=(data_inicial, data_final),
+                                                    step=timedelta(days=1))
+                combined_df = combined_df.loc[intervalo_datas[0]:intervalo_datas[1]]
+
+                # Criar o graficos com os arquivos
                 st.line_chart(combined_df)
             
             else:
