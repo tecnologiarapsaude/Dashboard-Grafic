@@ -56,6 +56,12 @@ def fetch_data():
                 combined_df = pd.concat(dataframes, ignore_index=True)
                 
                 st.write(combined_df.head())
+
+                # gerar filtros
+
+                st.sidebar.header('Filtros')
+
+
                 st.line_chart(combined_df)
             
             else:
