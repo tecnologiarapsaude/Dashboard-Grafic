@@ -5,6 +5,7 @@ from io import StringIO
 from datetime import timedelta
 
 def fetch_data():
+    # trazendo id da empresa via o embed do weweb
     ID_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
 
     if ID_empresas is None:
@@ -12,6 +13,7 @@ def fetch_data():
         return None
 
     try:
+        # transformando a lista de empresas de strings para inteiros
         id_empresas_list = [int(id_str) for id_str in ID_empresas.split(',')]
     except ValueError:
         st.error("O parâmetro 'id_empresas' deve ser uma lista de inteiros separados por vírgula.")
@@ -25,13 +27,16 @@ def fetch_data():
         response = requests.post(XANO_API_GET, json=payload)
         st.write(response)
          
+        # pegando o json com as informaçoes
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
             data = response.json()
             st.write(f'Esse é o json: {data}')
             
+            # armazenar os dataframes
             dataframes = []
 
+            # fazendo o for para pega todas as empresa que estao no json, e gerar o grafico 
             for arquivo in data:
                 arquivo_detalhamento = arquivo['arquivo_detalhamento_vidas']
                 arquivo_url = arquivo_detalhamento['url']
@@ -45,46 +50,35 @@ def fetch_data():
                     file_buffer = StringIO(file_content)
                     df = pd.read_csv(file_buffer)
 
-                    # Adicionar uma coluna de data
-                    df['created_at'] = pd.to_datetime(arquivo['created_at'], unit='ms')
-                    df.set_index('created_at', inplace=True)
-
                     dataframes.append(df)
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
 
             if len(dataframes) != 0:    
-                combined_df = pd.concat(dataframes, ignore_index=False)
+                # Concatenar os DataFrames
+                combined_df = pd.concat(dataframes, ignore_index=True)
                 
                 st.write(combined_df.head())
 
+                # gerar menu lateral com filtros
                 st.sidebar.header('Filtros')
 
-                # Filtro por data usando slider
-                data_inicial = combined_df.index.min().to_pydatetime()
-                data_final = combined_df.index.max().to_pydatetime()
-
-                intervalo_datas = st.sidebar.slider('Selecione as datas', 
-                                                    min_value=data_inicial,
-                                                    max_value=data_final, 
-                                                    value=(data_inicial, data_final),
-                                                    step=timedelta(days=1))
-
-                dados_filtrados = combined_df.loc[intervalo_datas[0]:intervalo_datas[1]]
-
-                # Filtro por empresa
+                # filtrar por empresas
                 empresa_selecionada = st.sidebar.multiselect(
                     'Selecione a empresa',
-                    options=dados_filtrados['EMPRESA'].unique(),
-                    default=dados_filtrados['EMPRESA'].unique(),
+                    options=df['EMPRESA'].unique(),
+                    default=df['EMPRESA'].unique(),
                     placeholder='Selecione a Empresa'
                 )
 
                 if empresa_selecionada:
-                    dados_filtrados = dados_filtrados[dados_filtrados['EMPRESA'].isin(empresa_selecionada)]
-                    st.line_chart(dados_filtrados)
+                    # Filtrar dados com base na seleção da operadora
+                    dados_filtrados = df[df['EMPRESA'].isin(empresa_selecionada)]
+                    combined_df = dados_filtrados
+                    # Criar o graficos com os arquivos
+                    st.line_chart(combined_df)
                 else:
-                    st.line_chart(dados_filtrados)                
+                    st.line_chart(combined_df)                
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
 
@@ -97,5 +91,6 @@ def fetch_data():
         return None
 
 st.title("Integração com Xano")
+
 
 st.write(fetch_data())
