@@ -72,11 +72,11 @@ def fetch_data():
                     # Filtrar dados com base na seleção da operadora
                     dados_filtrados = df[df['EMPRESA'].isin(empresa_selecionada)]
                     combined_df = dados_filtrados
+                    # Criar o graficos com os arquivos
+                    st.line_chart(combined_df)
+                else:
                     st.line_chart(combined_df)
                     
-                
-                # Criar o graficos com os arquivos
-                st.line_chart(combined_df)
             
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
