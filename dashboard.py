@@ -40,6 +40,7 @@ def fetch_data():
                 arquivo_detalhamento = arquivo['arquivo_detalhamento_vidas']
                 arquivo_url = arquivo_detalhamento['url']
                 st.write(f"URL do arquivo: {arquivo_url}")
+                st.write(f' Esse é os dados do aquivo detalhamento: {arquivo_detalhamento}')
 
                 file_response = requests.get(arquivo_url)
                 if file_response.status_code == 200:
