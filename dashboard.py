@@ -61,17 +61,19 @@ def fetch_data():
                 # gerar menu lateral com filtros
                 st.sidebar.header('Filtros')
 
-                # Filtros por data
-                # data_inicial = combined_df.index.min().to_pydatetime()
-                # data_final = combined_df.index.max().to_pydatetime()
+                # filtrar por empresas
+                empresa_selecionada = st.sidebar.multiselect(
+                    'Selecione a empresa',
+                    options=df['EMPRESA'].unique(),
+                    default=df['EMPRESA'].unique()
+                )
 
-                # intervalo_datas = st.sidebar.slider('Selecione as datas',
-                #                                     min_value=data_inicial,
-                #                                     max_value=data_final,
-                #                                     value=(data_inicial, data_final),
-                #                                     step=timedelta(days=1))
-                # combined_df = combined_df.loc[intervalo_datas[0]:intervalo_datas[1]]
-
+                if empresa_selecionada:
+                    # Filtrar dados com base na seleção da operadora
+                    dados_filtrados = df[df['EMPRESA'].isin(empresa_selecionada)]
+                    combined_df = dados_filtrados
+                    return combined_df
+                
                 # Criar o graficos com os arquivos
                 st.line_chart(combined_df)
             
