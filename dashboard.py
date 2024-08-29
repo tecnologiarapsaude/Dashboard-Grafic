@@ -65,7 +65,8 @@ def fetch_data():
                 empresa_selecionada = st.sidebar.multiselect(
                     'Selecione a empresa',
                     options=df['EMPRESA'].unique(),
-                    default=df['EMPRESA'].unique()
+                    default=df['EMPRESA'].unique(),
+                    placeholder='Selecione a Empresa'
                 )
 
                 if empresa_selecionada:
@@ -75,9 +76,7 @@ def fetch_data():
                     # Criar o graficos com os arquivos
                     st.line_chart(combined_df)
                 else:
-                    st.line_chart(combined_df)
-                    
-            
+                    st.line_chart(combined_df)                
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
 
