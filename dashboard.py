@@ -31,6 +31,7 @@ def fetch_data():
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
             data = response.json()
+            st.write(f'Esse é o json: {data}')
             
             # armazenar os dataframes
             dataframes = []
