@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import streamlit as st
 from io import StringIO
-from datetime import timedelta
+from datetime import datetime
 
 def fetch_data():
     # trazendo id da empresa via o embed do weweb
@@ -36,12 +36,16 @@ def fetch_data():
             # armazenar os dataframes
             dataframes = []
 
-            # fazendo o for para pega todas as empresa que estao no json, e gerar o grafico 
+            # fazendo o for para pegar todas as empresas que estão no json, e gerar o gráfico 
             for arquivo in data:
+                created_at = arquivo['created_at'] / 1000  # Convertendo o timestamp de milissegundos para segundos
+                created_at_date = datetime.fromtimestamp(created_at)
+                st.write(f'Data de criação do arquivo: {created_at_date}')
+
                 arquivo_detalhamento = arquivo['arquivo_detalhamento_vidas']
                 arquivo_url = arquivo_detalhamento['url']
                 st.write(f"URL do arquivo: {arquivo_url}")
-                st.write(f' Esse é os dados do aquivo detalhamento: {arquivo_detalhamento}')
+                st.write(f' Esse é os dados do arquivo detalhamento: {arquivo_detalhamento}')
 
                 file_response = requests.get(arquivo_url)
                 if file_response.status_code == 200:
@@ -49,6 +53,9 @@ def fetch_data():
                     file_content = file_response.text
                     file_buffer = StringIO(file_content)
                     df = pd.read_csv(file_buffer)
+
+                    # Adicionando a data de criação ao DataFrame
+                    df['created_at'] = created_at_date
 
                     dataframes.append(df)
                 else:
@@ -63,22 +70,38 @@ def fetch_data():
                 # gerar menu lateral com filtros
                 st.sidebar.header('Filtros')
 
-                # filtrar por empresas
+                # Filtro de intervalo de datas
+                min_date = combined_df['created_at'].min().date()
+                max_date = combined_df['created_at'].max().date()
+                selected_date_range = st.sidebar.slider(
+                    'Selecione o intervalo de datas',
+                    min_value=min_date,
+                    max_value=max_date,
+                    value=(min_date, max_date),
+                    format="YYYY-MM-DD"
+                )
+
+                # Filtrar o DataFrame com base no intervalo de datas
+                start_date, end_date = selected_date_range
+                mask = (combined_df['created_at'].dt.date >= start_date) & (combined_df['created_at'].dt.date <= end_date)
+                filtered_df = combined_df.loc[mask]
+
+                # Filtrar por empresas
                 empresa_selecionada = st.sidebar.multiselect(
                     'Selecione a empresa',
-                    options=df['EMPRESA'].unique(),
-                    default=df['EMPRESA'].unique(),
+                    options=filtered_df['EMPRESA'].unique(),
+                    default=filtered_df['EMPRESA'].unique(),
                     placeholder='Selecione a Empresa'
                 )
 
                 if empresa_selecionada:
-                    # Filtrar dados com base na seleção da operadora
-                    dados_filtrados = df[df['EMPRESA'].isin(empresa_selecionada)]
-                    combined_df = dados_filtrados
-                    # Criar o graficos com os arquivos
-                    st.line_chart(combined_df)
-                else:
-                    st.line_chart(combined_df)                
+                    # Filtrar dados com base na seleção da empresa
+                    dados_filtrados = filtered_df[filtered_df['EMPRESA'].isin(empresa_selecionada)]
+                    filtered_df = dados_filtrados
+
+                # Exibir o gráfico com os dados filtrados ou o DataFrame original se o filtro estiver vazio
+                st.line_chart(filtered_df if not filtered_df.empty else combined_df)
+
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
 
@@ -91,6 +114,5 @@ def fetch_data():
         return None
 
 st.title("Integração com Xano")
-
 
 st.write(fetch_data())
