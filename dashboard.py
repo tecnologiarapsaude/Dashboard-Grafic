@@ -73,7 +73,7 @@ def fetch_data():
                     dados_filtrados = df[df['EMPRESA'].isin(empresa_selecionada)]
                     combined_df = dados_filtrados
                     st.line_chart(combined_df)
-                    return combined_df
+                    
                 
                 # Criar o graficos com os arquivos
                 st.line_chart(combined_df)
