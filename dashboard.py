@@ -72,6 +72,7 @@ def fetch_data():
                     # Filtrar dados com base na seleção da operadora
                     dados_filtrados = df[df['EMPRESA'].isin(empresa_selecionada)]
                     combined_df = dados_filtrados
+                    st.line_chart(combined_df)
                     return combined_df
                 
                 # Criar o graficos com os arquivos
