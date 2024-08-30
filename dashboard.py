@@ -70,7 +70,7 @@ def fetch_data():
 
                 # gerar menu lateral com filtros
                 st.sidebar.header('Filtros')
-                st.header('Filtros')
+                st.sidebar.header('Filtros')
 
 
                 # Filtro de intervalo de datas
