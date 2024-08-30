@@ -109,8 +109,8 @@ def fetch_data():
                 st.sidebar.header('Filtros')
 
 
-                # fig_empresa = px.bar(filtered_df, x='EMPRESA', y='MENSALIDADE',title='Mensalidade por Empresa')
-                # st.plotly_chart(fig_empresa)
+                fig_empresa = px.bar(filtered_df, x='EMPRESA', y='MENSALIDADE',title='Mensalidade por Empresa')
+                st.plotly_chart(fig_empresa)
                 
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
