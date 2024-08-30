@@ -65,6 +65,9 @@ def fetch_data():
             if dataframes:     
                 # Concatenar os DataFrames
                 combined_df = pd.concat(dataframes, ignore_index=True)
+
+                # Remover ou substituir valores nulos na coluna 'data_vencimento'
+                combined_df['data_vencimento'].fillna(pd.Timestamp.min, inplace=True)
                 combined_df = combined_df.dropna()
                 st.write(combined_df.head(100))
 
