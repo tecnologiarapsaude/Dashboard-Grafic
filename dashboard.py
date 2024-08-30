@@ -64,7 +64,7 @@ def fetch_data():
             if len(dataframes) != 0:    
                 # Concatenar os DataFrames
                 combined_df = pd.concat(dataframes, ignore_index=True)
-                
+                combined_df = combined_df.dropna()
                 st.write(combined_df.head(100))
 
                 # gerar menu lateral com filtros
