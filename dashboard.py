@@ -62,7 +62,7 @@ def fetch_data():
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
 
-            if len(dataframes) != 0:    
+            if dataframes:    
                 # Concatenar os DataFrames
                 combined_df = pd.concat(dataframes, ignore_index=True)
                 combined_df = combined_df.dropna()
