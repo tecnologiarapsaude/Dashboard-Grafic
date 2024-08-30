@@ -98,6 +98,7 @@ def fetch_data():
                     # Filtrar dados com base na seleção da empresa
                     dados_filtrados = filtered_df[filtered_df['EMPRESA'].isin(empresa_selecionada)]
                     filtered_df = dados_filtrados
+                    filtered_df.head()
 
                 # Exibir o gráfico com os dados filtrados ou o DataFrame original se o filtro estiver vazio
                 st.line_chart(filtered_df if not filtered_df.empty else combined_df)
