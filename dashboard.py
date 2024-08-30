@@ -39,8 +39,8 @@ def fetch_data():
 
             # fazendo o for para pegar todas as empresas que estão no json, e gerar o gráfico 
             for arquivo in data:
-                data_vencimento = arquivo['data_vencimento'] / 1000  # Convertendo o timestamp de milissegundos para segundos
-                data_vencimento_date = datetime.fromtimestamp(data_vencimento)
+                data_vencimento = arquivo['data_vencimento']
+                data_vencimento_date = data_vencimento
                 st.write(f'Data de criação do arquivo: {data_vencimento_date}')
 
                 arquivo_detalhamento = arquivo['arquivo_detalhamento_vidas']
