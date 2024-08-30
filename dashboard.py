@@ -70,6 +70,8 @@ def fetch_data():
 
                 # gerar menu lateral com filtros
                 st.sidebar.header('Filtros')
+                st.header('Filtros')
+
 
                 # Filtro de intervalo de datas
                 min_date = combined_df['created_at'].min().date()
