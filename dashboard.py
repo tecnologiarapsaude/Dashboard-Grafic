@@ -65,7 +65,7 @@ def fetch_data():
                 # Concatenar os DataFrames
                 combined_df = pd.concat(dataframes, ignore_index=True)
                 
-                st.write(combined_df.head())
+                st.write(combined_df.head(100))
 
                 # gerar menu lateral com filtros
                 st.sidebar.header('Filtros')
