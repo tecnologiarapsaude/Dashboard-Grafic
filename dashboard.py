@@ -102,7 +102,7 @@ def fetch_data():
 
                 # Exibir o gráfico com os dados filtrados ou o DataFrame original se o filtro estiver vazio
                 st.line_chart(filtered_df if not filtered_df.empty else combined_df)
-                st.write(combined_df.head(50))
+                st.write(dataframes)
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
 
