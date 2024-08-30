@@ -6,7 +6,7 @@ from datetime import datetime
 import plotly.express as px
 
 def fetch_data():
-    # trazendo id da empresa via o embed do weweb
+    # Pegando o ID da empresa via o embed do WeWeb
     ID_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
 
     if ID_empresas is None:
@@ -14,7 +14,7 @@ def fetch_data():
         return None
 
     try:
-        # transformando a lista de empresas de strings para inteiros
+        # Transformando a lista de empresas de strings para inteiros
         id_empresas_list = [int(id_str) for id_str in ID_empresas.split(',')]
     except ValueError:
         st.error("O parâmetro 'id_empresas' deve ser uma lista de inteiros separados por vírgula.")
@@ -28,37 +28,37 @@ def fetch_data():
         response = requests.post(XANO_API_GET, json=payload)
         st.write(response)
          
-        # pegando o json com as informaçoes
+        # Pegando o JSON com as informações
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
             data = response.json()
-            st.write(f'Esse é o json: {data}')
+            st.write(f'Esse é o JSON: {data}')
             
-            # armazenar os dataframes
+            # Armazenar os DataFrames
             dataframes = []
 
-            # fazendo o for para pegar todas as empresas que estão no json, e gerar o gráfico 
+            # Iterando pelos arquivos no JSON e gerando gráficos
             for arquivo in data:
                 data_vencimento = arquivo['data_vencimento']
-                data_vencimento_date = data_vencimento
-                st.write(f'Data de criação do arquivo: {data_vencimento_date}')
+                st.write(f'Data de vencimento do arquivo: {data_vencimento}')
 
                 arquivo_detalhamento = arquivo['arquivo_detalhamento_vidas']
                 arquivo_url = arquivo_detalhamento['url']
                 st.write(f"URL do arquivo: {arquivo_url}")
-                st.write(f' Esse é os dados do arquivo detalhamento: {arquivo_detalhamento}')
 
                 file_response = requests.get(arquivo_url)
                 if file_response.status_code == 200:
                     st.write('Arquivo CSV baixado com sucesso')
                     file_content = file_response.text
                     file_buffer = StringIO(file_content)
-                    df = pd.read_csv(file_buffer)
-
-                    # Adicionando a data de criação ao DataFrame
-                    df['data_vencimento'] = data_vencimento_date
-
-                    dataframes.append(df)
+                    
+                    try:
+                        df = pd.read_csv(file_buffer)
+                        # Convertendo a coluna data_vencimento para datetime
+                        df['data_vencimento'] = pd.to_datetime(data_vencimento, format='%Y-%m-%d')
+                        dataframes.append(df)
+                    except Exception as e:
+                        st.error(f"Erro ao processar o arquivo CSV: {str(e)}")
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
 
@@ -68,11 +68,11 @@ def fetch_data():
                 combined_df = combined_df.dropna()
                 st.write(combined_df.head(100))
 
-                # gerar menu lateral com filtros
+                # Menu lateral com filtros
                 st.sidebar.header('Filtros')
 
-
                 # Filtro de intervalo de datas
+                combined_df['data_vencimento'] = pd.to_datetime(combined_df['data_vencimento'], format='%Y-%m-%d')
                 min_date = combined_df['data_vencimento'].min().date()
                 max_date = combined_df['data_vencimento'].max().date()
                 selected_date_range = st.sidebar.slider(
@@ -106,10 +106,7 @@ def fetch_data():
                 st.line_chart(filtered_df if not filtered_df.empty else combined_df)
                 st.write(filtered_df.head(50))
 
-                st.sidebar.header('Filtros')
-
-
-                fig_empresa = px.bar(filtered_df, x='EMPRESA', y='MENSALIDADE',title='Mensalidade por Empresa')
+                fig_empresa = px.bar(filtered_df, x='EMPRESA', y='MENSALIDADE', title='Mensalidade por Empresa')
                 st.plotly_chart(fig_empresa)
                 
             else:
@@ -124,5 +121,4 @@ def fetch_data():
         return None
 
 st.title("Integração com Xano")
-
 st.write(fetch_data())
