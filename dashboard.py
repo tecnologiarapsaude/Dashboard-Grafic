@@ -66,9 +66,8 @@ def fetch_data():
                 # Concatenar os DataFrames
                 combined_df = pd.concat(dataframes, ignore_index=True)
 
-                # Remover ou substituir valores nulos na coluna 'data_vencimento'
-                combined_df['data_vencimento'].fillna(pd.Timestamp.min, inplace=True)
-                combined_df = combined_df.dropna()
+                # Remover valores nulos na coluna 'data_vencimento'
+                combined_df.dropna(subset=['data_vencimento'], inplace=True)
                 st.write(combined_df.head(100))
 
                 # Gerar menu lateral com filtros
