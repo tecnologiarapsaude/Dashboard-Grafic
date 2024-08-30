@@ -3,6 +3,7 @@ import requests
 import streamlit as st
 from io import StringIO
 from datetime import datetime
+import plotly.express as px
 
 def fetch_data():
     # trazendo id da empresa via o embed do weweb
@@ -103,6 +104,11 @@ def fetch_data():
                 # Exibir o gráfico com os dados filtrados ou o DataFrame original se o filtro estiver vazio
                 st.line_chart(filtered_df if not filtered_df.empty else combined_df)
                 st.write(filtered_df.head(50))
+
+
+                fig_empresa = px.bar(filtered_df, x='EMPRESA', y='MENSALIDADE',title='Mensalidade por Empresa')
+                st.plotly_chart(fig_empresa)
+                
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
 
