@@ -28,21 +28,25 @@ def fetch_data():
         response = requests.post(XANO_API_GET, json=payload)
         st.write(response)
          
+        # pegando o json com as informaçoes
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
             data = response.json()
             st.write(f'Esse é o json: {data}')
             
+            # armazenar os dataframes
             dataframes = []
 
+            # fazendo o for para pegar todas as empresas que estão no json, e gerar o gráfico 
             for arquivo in data:
-                created_at = arquivo['created_at'] / 1000
+                created_at = arquivo['created_at'] / 1000  # Convertendo o timestamp de milissegundos para segundos
                 created_at_date = datetime.fromtimestamp(created_at)
                 st.write(f'Data de criação do arquivo: {created_at_date}')
 
                 arquivo_detalhamento = arquivo['arquivo_detalhamento_vidas']
                 arquivo_url = arquivo_detalhamento['url']
                 st.write(f"URL do arquivo: {arquivo_url}")
+                st.write(f' Esse é os dados do arquivo detalhamento: {arquivo_detalhamento}')
 
                 file_response = requests.get(arquivo_url)
                 if file_response.status_code == 200:
@@ -51,33 +55,22 @@ def fetch_data():
                     file_buffer = StringIO(file_content)
                     df = pd.read_csv(file_buffer)
 
+                    # Adicionando a data de criação ao DataFrame
                     df['created_at'] = created_at_date
 
                     dataframes.append(df)
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
 
-            if len(dataframes) != 0:    
-                # Tabela com o primeiro arquivo
-                st.subheader("Dados do Primeiro Arquivo")
-                st.dataframe(dataframes[0].head())
-
+            if dataframes:     
                 # Concatenar os DataFrames
                 combined_df = pd.concat(dataframes, ignore_index=True)
                 combined_df = combined_df.dropna()
+                st.write(combined_df.head(100))
 
-                # Gráfico com todos os dados misturados
-                st.subheader("Gráfico com Todos os Dados")
-                fig = px.scatter(combined_df, x='created_at', y='MENSALIDADE', color='EMPRESA', 
-                                 title='Mensalidades por Data e Empresa')
-                st.plotly_chart(fig)
-
-                # Tabela com todos os valores concatenados
-                st.subheader("Todos os Dados Concatenados")
-                st.dataframe(combined_df)
-
-                # Mantendo os filtros originais
+                # gerar menu lateral com filtros
                 st.sidebar.header('Filtros')
+
 
                 # Filtro de intervalo de datas
                 min_date = combined_df['created_at'].min().date()
@@ -105,18 +98,22 @@ def fetch_data():
 
                 if empresa_selecionada:
                     # Filtrar dados com base na seleção da empresa
-                    filtered_df = filtered_df[filtered_df['EMPRESA'].isin(empresa_selecionada)]
+                    dados_filtrados = filtered_df[filtered_df['EMPRESA'].isin(empresa_selecionada)]
+                    filtered_df = dados_filtrados
+                    
 
-                # Exibir o gráfico com os dados filtrados
-                st.subheader("Gráfico Filtrado")
-                st.line_chart(filtered_df.set_index('created_at')['MENSALIDADE'])
+                # Exibir o gráfico com os dados filtrados ou o DataFrame original se o filtro estiver vazio
+                st.line_chart(filtered_df if not filtered_df.empty else combined_df)
+                st.write(filtered_df.head(50))
 
-                # Gráfico de barras por empresa
-                fig_empresa = px.bar(filtered_df, x='EMPRESA', y='MENSALIDADE', title='Mensalidade por Empresa')
+                st.sidebar.header('Filtros')
+
+
+                fig_empresa = px.bar(filtered_df, x='EMPRESA', y='MENSALIDADE',title='Mensalidade por Empresa')
                 st.plotly_chart(fig_empresa)
                 
             else:
-                st.error("Nenhum arquivo CSV foi encontrado.")
+                st.error("Menos de dois arquivos CSV foram encontrados.")
 
         else:
             st.error(f"Erro: {response.status_code}")
@@ -126,6 +123,6 @@ def fetch_data():
         st.error(f"Erro ao fazer requisição: {str(e)}")
         return None
 
-st.title("Visualização de Dados de Faturamento")
+st.title("Integração com Xano")
 
-fetch_data()
+st.write(fetch_data())
