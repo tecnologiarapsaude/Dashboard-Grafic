@@ -9,9 +9,9 @@ def fetch_data():
     # trazendo id da empresa via o embed do weweb
     ID_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
 
-    if ID_empresas is None:
-        st.error("Parâmetro 'id_empresas' não fornecido na URL.")
-        return None
+    # if ID_empresas is None:
+    #     st.error("Parâmetro 'id_empresas' não fornecido na URL.")
+    #     return None
 
     try:
         # transformando a lista de empresas de strings para inteiros
