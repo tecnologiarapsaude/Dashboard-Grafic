@@ -5,19 +5,22 @@ from io import StringIO
 from datetime import datetime
 import plotly.express as px
 
+
 def fetch_data():
     # trazendo id da empresa via o embed do weweb
-    ID_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
+    ID_empresas = st.experimental_get_query_params().get(
+        'id_empresas', [None])[0]
 
-    # if ID_empresas is None:
-    #     st.error("Parâmetro 'id_empresas' não fornecido na URL.")
-    #     return None
+    if ID_empresas is None:
+        st.error("Parâmetro 'id_empresas' não fornecido na URL.")
+        return None
 
     try:
         # transformando a lista de empresas de strings para inteiros
         id_empresas_list = [int(id_str) for id_str in ID_empresas.split(',')]
     except ValueError:
-        st.error("O parâmetro 'id_empresas' deve ser uma lista de inteiros separados por vírgula.")
+        st.error(
+            "O parâmetro 'id_empresas' deve ser uma lista de inteiros separados por vírgula.")
         return None
 
     XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento_teste_Post'
@@ -27,26 +30,28 @@ def fetch_data():
     try:
         response = requests.post(XANO_API_GET, json=payload)
         st.write(response)
-         
+
         # pegando o json com as informaçoes
         if response.status_code == 200:
             st.write('Resposta recebida com sucesso')
             data = response.json()
             st.write(f'Esse é o json: {data}')
-            
+
             # armazenar os dataframes
             dataframes = []
 
-            # fazendo o for para pegar todas as empresas que estão no json, e gerar o gráfico 
+            # fazendo o for para pegar todas as empresas que estão no json, e gerar o gráfico
             for arquivo in data:
-                created_at = arquivo['created_at'] / 1000  # Convertendo o timestamp de milissegundos para segundos
+                # Convertendo o timestamp de milissegundos para segundos
+                created_at = arquivo['created_at'] / 1000
                 created_at_date = datetime.fromtimestamp(created_at)
                 st.write(f'Data de criação do arquivo: {created_at_date}')
 
                 arquivo_detalhamento = arquivo['arquivo_detalhamento_vidas']
                 arquivo_url = arquivo_detalhamento['url']
                 st.write(f"URL do arquivo: {arquivo_url}")
-                st.write(f' Esse é os dados do arquivo detalhamento: {arquivo_detalhamento}')
+                st.write(
+                    f' Esse é os dados do arquivo detalhamento: {arquivo_detalhamento}')
 
                 file_response = requests.get(arquivo_url)
                 if file_response.status_code == 200:
@@ -60,9 +65,10 @@ def fetch_data():
 
                     dataframes.append(df)
                 else:
-                    st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
+                    st.error(
+                        f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
 
-            if dataframes:     
+            if dataframes:
                 # Concatenar os DataFrames
                 combined_df = pd.concat(dataframes, ignore_index=True)
                 combined_df = combined_df.dropna()
@@ -71,23 +77,25 @@ def fetch_data():
                 # gerar menu lateral com filtros
                 st.sidebar.header('Filtros')
 
+                if len(dataframes) > 1:
+                    # Filtro de intervalo de datas
+                    min_date = combined_df['created_at'].min().date()
+                    max_date = combined_df['created_at'].max().date()
+                    selected_date_range = st.sidebar.slider(
+                        'Selecione o intervalo de datas',
+                        min_value=min_date,
+                        max_value=max_date,
+                        value=(min_date, max_date),
+                        format="YYYY-MM-DD"
+                    )
 
-                # Filtro de intervalo de datas
-                min_date = combined_df['created_at'].min().date()
-                max_date = combined_df['created_at'].max().date()
-                selected_date_range = st.sidebar.slider(
-                    'Selecione o intervalo de datas',
-                    min_value=min_date,
-                    max_value=max_date,
-                    value=(min_date, max_date),
-                    format="YYYY-MM-DD"
-                )
-
-                # Filtrar o DataFrame com base no intervalo de datas
-                start_date, end_date = selected_date_range
-                mask = (combined_df['created_at'].dt.date >= start_date) & (combined_df['created_at'].dt.date <= end_date)
-                filtered_df = combined_df.loc[mask]
-
+                    # Filtrar o DataFrame com base no intervalo de datas
+                    start_date, end_date = selected_date_range
+                    mask = (combined_df['created_at'].dt.date >= start_date) & (
+                        combined_df['created_at'].dt.date <= end_date)
+                    filtered_df = combined_df.loc[mask]
+                else:
+                    filtered_df = combined_df
                 # Filtrar por empresas
                 empresa_selecionada = st.sidebar.multiselect(
                     'Selecione a empresa',
@@ -98,20 +106,21 @@ def fetch_data():
 
                 if empresa_selecionada:
                     # Filtrar dados com base na seleção da empresa
-                    dados_filtrados = filtered_df[filtered_df['EMPRESA'].isin(empresa_selecionada)]
+                    dados_filtrados = filtered_df[filtered_df['EMPRESA'].isin(
+                        empresa_selecionada)]
                     filtered_df = dados_filtrados
-                    
 
                 # Exibir o gráfico com os dados filtrados ou o DataFrame original se o filtro estiver vazio
-                st.line_chart(filtered_df if not filtered_df.empty else combined_df)
+                st.line_chart(
+                    filtered_df if not filtered_df.empty else combined_df)
                 st.write(filtered_df.head(50))
 
                 st.sidebar.header('Filtros')
 
-
-                fig_empresa = px.bar(filtered_df, x='EMPRESA', y='MENSALIDADE',title='Mensalidade por Empresa')
+                fig_empresa = px.bar(
+                    filtered_df, x='EMPRESA', y='MENSALIDADE', title='Mensalidade por Empresa')
                 st.plotly_chart(fig_empresa)
-                
+
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
 
@@ -122,6 +131,7 @@ def fetch_data():
     except Exception as e:
         st.error(f"Erro ao fazer requisição: {str(e)}")
         return None
+
 
 st.title("Integração com Xano")
 
