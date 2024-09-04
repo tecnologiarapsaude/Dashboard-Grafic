@@ -135,7 +135,11 @@ def fetch_data():
                 st.plotly_chart(custo_operadora)
 
                 # grafico de distribuição por faixa etaria e sexo
-                distribuicao_faixa_sexo = px.bar(filtered_df, x='ID', y='EMPRESA', title='Distribuição por Faixa Etária e Sexo')
+
+                # Combine 'ID' e 'Sexo' em uma nova coluna
+                df['ID_Sexo'] = df['ID'].astype(str) + ' - ' + df['SEXO']
+
+                distribuicao_faixa_sexo = px.bar(filtered_df, x='ID_Sexo', y='EMPRESA', title='Distribuição por Faixa Etária e Sexo')
                 st.plotly_chart(distribuicao_faixa_sexo)
             
             
