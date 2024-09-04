@@ -133,6 +133,10 @@ def fetch_data():
                 # grafico de custo por operadora
                 custo_operadora = px.bar(filtered_df, x='EMPRESA', y=' COBRADO ', title='Custo por Operadoras')
                 st.plotly_chart(custo_operadora)
+
+                # grafico de distribuição por faixa etaria e sexo
+                custo_operadora = px.bar(filtered_df, x='ID', y='SEXO', title='Custo por Operadoras')
+                st.plotly_chart(custo_operadora)
             
             
             
