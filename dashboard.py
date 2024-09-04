@@ -129,7 +129,10 @@ def fetch_data():
 
                 with col3:
                     st.header('Card3')
-            
+
+                # grafico de custo por operadora
+                custo_operadora = px.bar(filtered_df, x='COBRADO', y='EMPRESA', title='Mensalidade por Empresa')
+                st.line_chart(custo_operadora)
             
             
             
