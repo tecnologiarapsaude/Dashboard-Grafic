@@ -122,9 +122,9 @@ def fetch_data():
                 components.html(
                     """
                     <div class='container' style='display:flex;' >
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <div>22</div>
+                        <div>22</div>
+                        <div>22</div>
                     </div>
 
                     """
