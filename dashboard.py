@@ -119,16 +119,16 @@ def fetch_data():
                 st.title('Distribuição de Vidas')
 
                 # criando colunas paras tres cards
-                components.html(
-                    """
-                    <div class='container' style='display:flex; border:1px, solid, red  ' >
-                        <div class='card1'>  22  </div>
-                        <div class='card2'>  22  </div>
-                        <div class='card3'>  22  </div>
-                    </div>
+                col1, col2, col3 = st.columns(3)
 
-                    """
-                )
+                with col1:
+                    st.header('Card1')
+
+                with col1:
+                    st.header('Card2')
+
+                with col1:
+                    st.header('Card3')
             
             
             
