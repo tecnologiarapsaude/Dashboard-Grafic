@@ -115,7 +115,6 @@ def fetch_data():
                 st.plotly_chart(fig_empresa)
 
                 # Graficos de distribuição de vidas
-                st.write('Distribuição de Vidas')
                 st.title('Distribuição de Vidas')
 
                 # criando colunas paras tres cards
@@ -131,7 +130,7 @@ def fetch_data():
                     st.header('Card3')
 
                 # grafico de custo por operadora
-                custo_operadora = px.bar(filtered_df, x='COBRADO', y='EMPRESA', title='Mensalidade por Empresa')
+                custo_operadora = px.bar(filtered_df, x='PLANO', y='EMPRESA', title='Mensalidade por Empresa')
                 st.plotly_chart(custo_operadora)
             
             
