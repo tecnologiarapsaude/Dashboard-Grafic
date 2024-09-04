@@ -124,10 +124,10 @@ def fetch_data():
                 with col1:
                     st.header('Card1')
 
-                with col1:
+                with col2:
                     st.header('Card2')
 
-                with col1:
+                with col3:
                     st.header('Card3')
             
             
