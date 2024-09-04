@@ -8,8 +8,7 @@ import plotly.express as px
 
 def fetch_data():
     # trazendo id da empresa via o embed do weweb
-    ID_empresas = st.experimental_get_query_params().get(
-        'id_empresas', [None])[0]
+    ID_empresas = st.experimental_get_query_params().get('id_empresas', [None])[0]
 
     if ID_empresas is None:
         st.error("Parâmetro 'id_empresas' não fornecido na URL.")
@@ -19,8 +18,7 @@ def fetch_data():
         # transformando a lista de empresas de strings para inteiros
         id_empresas_list = [int(id_str) for id_str in ID_empresas.split(',')]
     except ValueError:
-        st.error(
-            "O parâmetro 'id_empresas' deve ser uma lista de inteiros separados por vírgula.")
+        st.error("O parâmetro 'id_empresas' deve ser uma lista de inteiros separados por vírgula.")
         return None
 
     XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento_teste_Post'
@@ -50,8 +48,7 @@ def fetch_data():
                 arquivo_detalhamento = arquivo['arquivo_detalhamento_vidas']
                 arquivo_url = arquivo_detalhamento['url']
                 st.write(f"URL do arquivo: {arquivo_url}")
-                st.write(
-                    f' Esse é os dados do arquivo detalhamento: {arquivo_detalhamento}')
+                st.write(f' Esse é os dados do arquivo detalhamento: {arquivo_detalhamento}')
 
                 file_response = requests.get(arquivo_url)
                 if file_response.status_code == 200:
@@ -65,8 +62,7 @@ def fetch_data():
 
                     dataframes.append(df)
                 else:
-                    st.error(
-                        f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
+                    st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
 
             if dataframes:
                 # Concatenar os DataFrames
@@ -91,8 +87,7 @@ def fetch_data():
 
                     # Filtrar o DataFrame com base no intervalo de datas
                     start_date, end_date = selected_date_range
-                    mask = (combined_df['created_at'].dt.date >= start_date) & (
-                        combined_df['created_at'].dt.date <= end_date)
+                    mask = (combined_df['created_at'].dt.date >= start_date) & (combined_df['created_at'].dt.date <= end_date)
                     filtered_df = combined_df.loc[mask]
                 else:
                     filtered_df = combined_df
@@ -106,20 +101,20 @@ def fetch_data():
 
                 if empresa_selecionada:
                     # Filtrar dados com base na seleção da empresa
-                    dados_filtrados = filtered_df[filtered_df['EMPRESA'].isin(
-                        empresa_selecionada)]
+                    dados_filtrados = filtered_df[filtered_df['EMPRESA'].isin(empresa_selecionada)]
                     filtered_df = dados_filtrados
 
                 # Exibir o gráfico com os dados filtrados ou o DataFrame original se o filtro estiver vazio
-                st.line_chart(
-                    filtered_df if not filtered_df.empty else combined_df)
+                st.line_chart(filtered_df if not filtered_df.empty else combined_df)
                 st.write(filtered_df.head(50))
 
                 st.sidebar.header('Filtros')
 
-                fig_empresa = px.bar(
-                    filtered_df, x='EMPRESA', y='MENSALIDADE', title='Mensalidade por Empresa')
+                fig_empresa = px.bar(   filtered_df, x='EMPRESA', y='MENSALIDADE', title='Mensalidade por Empresa')
                 st.plotly_chart(fig_empresa)
+
+                # Graficos de distribuição de vidas
+                st.write('Distribuição de Vidas')
 
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
