@@ -132,7 +132,7 @@ def fetch_data():
 
                 # grafico de custo por operadora
                 custo_operadora = px.bar(filtered_df, x='COBRADO', y='EMPRESA', title='Mensalidade por Empresa')
-                st.line_chart(custo_operadora)
+                st.plotly_chart(custo_operadora)
             
             
             
