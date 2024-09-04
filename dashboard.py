@@ -108,10 +108,11 @@ def fetch_data():
                 # Exibir o gráfico com os dados filtrados ou o DataFrame original se o filtro estiver vazio
                 st.line_chart(filtered_df if not filtered_df.empty else combined_df)
                 st.write(filtered_df.head(50))
+                # st.write()
 
                 st.sidebar.header('Filtros')
 
-                fig_empresa = px.bar(filtered_df, x='EMPRESA', y='MENSALIDADE', title='Mensalidade por Empresa')
+                fig_empresa = px.bar(combined_df, x='EMPRESA', y='MENSALIDADE', title='Mensalidade por Empresa')
                 st.plotly_chart(fig_empresa)
 
                 # Graficos de distribuição de vidas
