@@ -115,6 +115,7 @@ def fetch_data():
 
                 # Graficos de distribuição de vidas
                 st.write('Distribuição de Vidas')
+                st.title('Distribuição de Vidas')
 
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
