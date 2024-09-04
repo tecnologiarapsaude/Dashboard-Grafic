@@ -4,6 +4,7 @@ import streamlit as st
 from io import StringIO
 from datetime import datetime
 import plotly.express as px
+import streamlit.components.v1 as components
 
 
 def fetch_data():
@@ -110,13 +111,28 @@ def fetch_data():
 
                 st.sidebar.header('Filtros')
 
-                fig_empresa = px.bar(   filtered_df, x='EMPRESA', y='MENSALIDADE', title='Mensalidade por Empresa')
+                fig_empresa = px.bar(filtered_df, x='EMPRESA', y='MENSALIDADE', title='Mensalidade por Empresa')
                 st.plotly_chart(fig_empresa)
 
                 # Graficos de distribuição de vidas
                 st.write('Distribuição de Vidas')
                 st.title('Distribuição de Vidas')
 
+                # criando colunas paras tres cards
+                components.html(
+                    """
+                    <div class='container' style='display:flex;' >
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+
+                    """
+                )
+            
+            
+            
+            
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
 
