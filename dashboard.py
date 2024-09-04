@@ -112,7 +112,7 @@ def fetch_data():
 
                 st.sidebar.header('Filtros')
 
-                fig_empresa = px.bar(combined_df, x='EMPRESA', y='MENSALIDADE', title='Mensalidade por Empresa')
+                fig_empresa = px.bar(filtered_df, x='EMPRESA', y=' COBRADO ', title='Mensalidade por Empresa')
                 st.plotly_chart(fig_empresa)
 
                 # Graficos de distribuição de vidas
