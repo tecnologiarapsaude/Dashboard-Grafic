@@ -121,10 +121,10 @@ def fetch_data():
                 # criando colunas paras tres cards
                 components.html(
                     """
-                    <div class='container' style='display:flex;' >
-                        <div>22</div>
-                        <div>22</div>
-                        <div>22</div>
+                    <div class='container' style='display:flex; border:1px, solid, red  ' >
+                        <div class='card1'>  22  </div>
+                        <div class='card2'>  22  </div>
+                        <div class='card3'>  22  </div>
                     </div>
 
                     """
