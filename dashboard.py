@@ -147,7 +147,7 @@ def fetch_data():
                 filtered_df['Total_Vidas'] = filtered_df.groupby(filtered_df['EMPRESA']).size()
                 
                 
-                vidas_operadoras = px.bar(filtered_df, x='Total_Vidas', y='EMPRESA', title='Vidas por Operadora')
+                vidas_operadoras = px.bar(filtered_df, x='EMPRESA', y='Total_Vidas', title='Vidas por Operadora')
                 st.plotly_chart(vidas_operadoras)
             
             
