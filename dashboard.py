@@ -147,7 +147,7 @@ def fetch_data():
                 empresa = filtered_df['EMPRESA']
                 st.write(empresa)
                     
-                filtered_df['Total_Vidas'] = filtered_df['TITULAR'].count()
+                filtered_df['Total_Vidas'] = filtered_df['TITULAR']
                 
                 vidas_operadoras = px.bar(filtered_df, x='EMPRESA', y='Total_Vidas', title='Vidas por Operadora')
                 st.plotly_chart(vidas_operadoras)
