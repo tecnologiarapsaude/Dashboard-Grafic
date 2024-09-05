@@ -144,9 +144,8 @@ def fetch_data():
                 
                 # Grafico de Vidas em cada operadora
 
-                for i in filtered_df:
-                    empresa = filtered_df['EMPRESA']
-                    st.write(empresa)
+                empresa = filtered_df['EMPRESA']
+                st.write(empresa)
                     
                 filtered_df['Total_Vidas'] = filtered_df['TITULAR'].count()
                 
