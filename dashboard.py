@@ -144,7 +144,7 @@ def fetch_data():
                 
                 # Grafico de Vidas em cada operadora
 
-                filtered_df['Total_Vidas'].groupby(filtered_df['EMPRESA']).size()
+                filtered_df['Total_Vidas'].groupby(['EMPRESA']).size()
                     
                 # filtered_df['Total_Vidas'] = filtered_df.groupby(['EMPRESA']).size()
                 
