@@ -41,10 +41,10 @@ def fetch_data():
 
             # fazendo o for para pegar todas as empresas que estão no json, e gerar o gráfico
             for arquivo in data:
-                # Convertendo o timestamp de milissegundos para segundos
-                created_at = arquivo['created_at'] / 1000
-                created_at_date = datetime.fromtimestamp(created_at)
-                st.write(f'Data de criação do arquivo: {created_at_date}')
+                # Convertendo a data de vencimento em datetime
+                data_vencimento_str = arquivo['data_vencimento'] 
+                data_vencimento = datetime.strptime(data_vencimento_str, '%Y-%m-%d')
+                st.write(f'Data de criação do arquivo: {data_vencimento}')
 
                 arquivo_detalhamento = arquivo['arquivo_detalhamento_vidas']
                 arquivo_url = arquivo_detalhamento['url']
@@ -58,8 +58,8 @@ def fetch_data():
                     file_buffer = StringIO(file_content)
                     df = pd.read_csv(file_buffer)
 
-                    # Adicionando a data de criação ao DataFrame
-                    df['created_at'] = created_at_date
+                    # Adicionando a data de vencimento ao DataFrame
+                    df['data_vencimento'] = data_vencimento
 
                     dataframes.append(df)
                 else:
@@ -76,19 +76,19 @@ def fetch_data():
 
                 if len(dataframes) > 1:
                     # Filtro de intervalo de datas
-                    min_date = combined_df['created_at'].min().date()
-                    max_date = combined_df['created_at'].max().date()
+                    min_date = combined_df['data_vencimento'].min().date()
+                    max_date = combined_df['data_vencimento'].max().date()
                     selected_date_range = st.sidebar.slider(
                         'Selecione o intervalo de datas',
                         min_value=min_date,
                         max_value=max_date,
                         value=(min_date, max_date),
-                        format="YYYY-MM-DD"
+                        format="DD-MM-YYYY"
                     )
 
                     # Filtrar o DataFrame com base no intervalo de datas
                     start_date, end_date = selected_date_range
-                    mask = (combined_df['created_at'].dt.date >= start_date) & (combined_df['created_at'].dt.date <= end_date)
+                    mask = (combined_df['data_vencimento'].dt.date >= start_date) & (combined_df['data_vencimento'].dt.date <= end_date)
                     filtered_df = combined_df.loc[mask]
                 else:
                     filtered_df = combined_df
