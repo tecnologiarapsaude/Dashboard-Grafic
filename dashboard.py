@@ -144,7 +144,7 @@ def fetch_data():
                 
                 # Grafico de Vidas em cada operadora
                     
-                filtered_df['Total_Vidas'] = filtered_df.groupby(filtered_df['EMPRESA']).value_counts()
+                filtered_df['Total_Vidas'] = filtered_df.groupby(filtered_df['EMPRESA']).count()
                 
                 
                 vidas_operadoras = px.bar(filtered_df, x='EMPRESA', y='Total_Vidas', title='Vidas por Operadora')
