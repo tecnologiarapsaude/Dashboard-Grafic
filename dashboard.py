@@ -143,7 +143,7 @@ def fetch_data():
                 st.plotly_chart(distribuicao_faixa_sexo)
                 
                 # Grafico de Vidas em cada operadora
-                empresa = filtered_df.groupby('EMPRESA').value_counts()
+                empresa = filtered_df.groupby('EMPRESA').count()
                 st.write(empresa)
                     
                 filtered_df['Total_Vidas'] = filtered_df.groupby('EMPRESA').size()
