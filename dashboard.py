@@ -145,6 +145,7 @@ def fetch_data():
                 # Grafico de Vidas em cada operadora
 
                 for coluna in filtered_df:
+                    st.write(coluna)
                     filtered_df['Total_Vidas'] = filtered_df['EMPRESA'].count()
                 
                 vidas_operadoras = px.bar(filtered_df, x='EMPRESA', y='Total_Vidas', title='Vidas por Operadora')
