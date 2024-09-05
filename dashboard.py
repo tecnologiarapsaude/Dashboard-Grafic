@@ -144,7 +144,7 @@ def fetch_data():
                 
                 # Grafico de Vidas em cada operadora
 
-                titular = filtered_df.groupby(['TITULAR']).size()
+                titular = filtered_df.groupby(['EMPRESA']).size()
                 st.write(titular)
                     
                 filtered_df['Total_Vidas'] = filtered_df['EMPRESA'].value_counts()
