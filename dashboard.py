@@ -141,7 +141,10 @@ def fetch_data():
 
                 distribuicao_faixa_sexo = px.bar(filtered_df, x='EMPRESA', y='ID_Sexo', title='Distribuição por Faixa Etária e Sexo')
                 st.plotly_chart(distribuicao_faixa_sexo)
-            
+                
+                # Grafico de Vidas em cada operadora
+                total_vidas = filtered_df.count()
+                st.write(total_vidas)
             
             
             else:
