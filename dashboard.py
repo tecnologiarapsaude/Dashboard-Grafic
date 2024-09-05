@@ -144,13 +144,12 @@ def fetch_data():
                 
                 # Grafico de Vidas em cada operadora
 
-                titular = filtered_df.groupby(['EMPRESA']).size()
-                str(titular)
+                filtered_df['Total_Vidas'].groupby(filtered_df['EMPRESA']).size()
                     
-                filtered_df['Total_Vidas'] = filtered_df.groupby(['EMPRESA']).size()
+                # filtered_df['Total_Vidas'] = filtered_df.groupby(['EMPRESA']).size()
                 
                 
-                vidas_operadoras = px.bar(filtered_df, x=titular, y='EMPRESA', title='Vidas por Operadora')
+                vidas_operadoras = px.bar(filtered_df, x='Total_Vidas', y='EMPRESA', title='Vidas por Operadora')
                 st.plotly_chart(vidas_operadoras)
             
             
