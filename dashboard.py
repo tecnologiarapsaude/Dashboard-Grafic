@@ -143,10 +143,9 @@ def fetch_data():
                 st.plotly_chart(distribuicao_faixa_sexo)
                 
                 # Grafico de Vidas em cada operadora
-                total_vidas = filtered_df['TITULAR'].count()
-                total_vidas_str = str(total_vidas)
+                filtered_df['Total_Vidas'] = filtered_df['TITULAR'].count()
                 
-                vidas_operadoras = px.bar(filtered_df, x='EMPRESA', y=total_vidas_str, title='Vidas por Operadora')
+                vidas_operadoras = px.bar(filtered_df, x='EMPRESA', y='Total_Vidas', title='Vidas por Operadora')
                 st.plotly_chart(vidas_operadoras)
             
             
