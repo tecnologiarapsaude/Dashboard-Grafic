@@ -143,7 +143,7 @@ def fetch_data():
                 st.plotly_chart(distribuicao_faixa_sexo)
                 
                 # Grafico de Vidas em cada operadora
-                total_vidas = filtered_df.count()
+                total_vidas = filtered_df['TITULAR'].count()
                 st.write(total_vidas)
             
             
