@@ -146,7 +146,7 @@ def fetch_data():
                 empresa = filtered_df.groupby('EMPRESA').count()
                 st.write(empresa)
                     
-                filtered_df['Total_Vidas'] = filtered_df.groupby('EMPRESA').size()
+                filtered_df['Total_Vidas'] = filtered_df.groupby('EMPRESA').count()
                 st.write(filtered_df)
 
                 vidas_operadoras = px.bar(filtered_df, x='EMPRESA', y='Total_Vidas', title='Vidas por Operadora')
