@@ -70,6 +70,15 @@ def fetch_data():
                     else:
                         df['Nome_Fantasia'] = 'Operadora não encontrada'
 
+                    # Comparando status_faturas_id com o status_faturas
+                    status_faturas_id = arquivo['status_faturas_id']
+                    status_fatura = arquivo['_status_faturas']
+
+                    if status_faturas_id == status_fatura['id']:
+                        df['Status_Fatura'] = status_fatura['Status_Fatura']
+                    else:
+                        df['Status_Fatura'] = 'Status não encontrado'
+
                     dataframes.append(df)
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
@@ -113,6 +122,17 @@ def fetch_data():
                 if operadora_selecionada:
                     # Filtrar dados com base na seleção da empresa
                     dados_filtrados = filtered_df[filtered_df['Nome_Fantasia'].isin(operadora_selecionada)]
+                    filtered_df = dados_filtrados
+                #Filtrar por Status_Fatura
+                status_fatura_selecionada = st.sidebar.multiselect(
+                    'Selecione o Status Fatura',
+                    options=filtered_df['Status_Fatura'].unique(),
+                    default=filtered_df['Status_Fatura'].unique(),
+                    placeholder='Selecione o Status Fatura'
+                )
+
+                if status_fatura_selecionada:
+                    dados_filtrados = filtered_df[filtered_df['Status_Fatura'].isin(status_fatura_selecionada)]
                     filtered_df = dados_filtrados
 
                 # Filtrar por empresas
