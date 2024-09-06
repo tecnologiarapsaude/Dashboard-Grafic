@@ -61,9 +61,14 @@ def fetch_data():
                     # Adicionando a data de vencimento ao DataFrame
                     df['data_vencimento'] = data_vencimento
 
-                    # Adicionando o Nome_Fantasia da operadorea ao DataFrame
-                    df['Nome_Fantasia'] = arquivo['_operadoras']['Nome_Fantasia']
-                    df['operadoras_id'] = arquivo['operadoras_id']
+                    # Comparando operadoras_id com o id em _operadoras e obtendo Nome_Fantasia
+                    operadoras_id = arquivo['operadoras_id']
+                    operadoras = arquivo['_operadoras']
+
+                    if operadoras_id == operadoras['id']:
+                        df['Nome_Fantasia'] = operadoras['Nome_Fantasia']
+                    else:
+                        df['Nome_Fantasia'] = 'Operadora não encontrada'
 
                     dataframes.append(df)
                 else:
