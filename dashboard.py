@@ -61,6 +61,10 @@ def fetch_data():
                     # Adicionando a data de vencimento ao DataFrame
                     df['data_vencimento'] = data_vencimento
 
+                    # Adicionando o Nome_Fantasia da operadorea ao DataFrame
+                    df['Nome_Fantasia'] = arquivo['_operadoras']['Nome_Fantasia']
+                    df['operadoras_id'] = arquivo['operadoras_id']
+
                     dataframes.append(df)
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
@@ -92,6 +96,20 @@ def fetch_data():
                     filtered_df = combined_df.loc[mask]
                 else:
                     filtered_df = combined_df
+                
+                #Filtro por Nome_Fantasia da Operadora
+                operadora_selecionada = st.sidebar.multiselect(
+                    'Selecione a Operadora',
+                    options=filtered_df['Nome_Fantasia'].unique(),
+                    default=filtered_df['Nome_Fantasia'].unique(),
+                    placeholder='Selecione a Operadora'
+                )
+
+                if operadora_selecionada:
+                    # Filtrar dados com base na seleção da empresa
+                    dados_filtrados = filtered_df[filtered_df['Nome_Fantasia'].isin(operadora_selecionada)]
+                    filtered_df = dados_filtrados
+
                 # Filtrar por empresas
                 empresa_selecionada = st.sidebar.multiselect(
                     'Selecione a empresa',
