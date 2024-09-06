@@ -149,7 +149,7 @@ def fetch_data():
                     with col1:
                         # pegando o total de vidas do dataframe
                         total_vidas = filtered_df['TITULAR'].count()
-                        st.header('Total de Vidas')
+                        st.subheader('Total de Vidas')
                         st.subheader(total_vidas)
 
                     with col2:
