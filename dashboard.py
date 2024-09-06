@@ -159,7 +159,7 @@ def fetch_data():
                     with col3:  
                         # pegando o total de dependentes do dataframe 
                         # OBS:Não tem a tabela dependentes foi colocada outra tabela
-                        total_dependentes = filtered_df['MATRICULA']
+                        total_dependentes = filtered_df['CODIGO']
                         st.metric(label='Total de Dependentes', value=f'{total_dependentes:,}')
 
                 # grafico de custo por operadora
