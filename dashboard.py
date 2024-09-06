@@ -148,7 +148,7 @@ def fetch_data():
                 with st.container():
                     with col1:
                         # pegando o total de vidas do dataframe
-                        total_vidas = filtered_df['EMPRESA'].count()
+                        total_vidas = filtered_df['TITULAR'].count()
                         st.write(total_vidas)
                         st.header('Card1')
 
