@@ -144,14 +144,16 @@ def fetch_data():
                 # criando colunas paras tres cards
                 col1, col2, col3 = st.columns(3)
 
-                with col1:
-                    st.header('Card1')
+                # Criando um container para separar os conteudos
+                with st.container():
+                    with col1:
+                        st.header('Card1')
 
-                with col2:
-                    st.header('Card2')
+                    with col2:
+                        st.header('Card2')
 
-                with col3:
-                    st.header('Card3')
+                    with col3:
+                        st.header('Card3')
 
                 # grafico de custo por operadora
                 custo_operadora = px.bar(filtered_df, x='EMPRESA', y=' COBRADO ', title='Custo por Operadoras')
