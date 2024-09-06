@@ -144,9 +144,12 @@ def fetch_data():
                 # criando colunas paras tres cards
                 col1, col2, col3 = st.columns(3)
 
-                # Criando um container para separar os conteudos
+                # Criando um container para separar os conteudos das colunas
                 with st.container():
                     with col1:
+                        # pegando o total de vidas do dataframe
+                        total_vidas = filtered_df['EMPRESA'].count()
+                        st.write(total_vidas)
                         st.header('Card1')
 
                     with col2:
