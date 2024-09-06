@@ -148,14 +148,19 @@ def fetch_data():
                 with st.container():
                     with col1:
                         # pegando o total de vidas do dataframe
-                        total_vidas = filtered_df['TITULAR'].count()
+                        total_vidas = filtered_df['BENEFICIARIO'].count()
                         st.metric(label="Total de Vidas", value=f'{total_vidas:,}')
 
                     with col2:
-                        st.header('Card2')
+                        # pegando o total de titular do dataframe
+                        total_titular = filtered_df['TITULAR'].count()
+                        st.metric(label='Total de Titulares' , value=f'{total_titular:,}')
 
-                    with col3:
-                        st.header('Card3')
+                    with col3:  
+                        # pegando o total de dependentes do dataframe 
+                        # OBS:Não tem a tabela dependentes foi colocada outra tabela
+                        total_dependentes = filtered_df['MATRICULA']
+                        st.metric(label='Total de Dependentes', value=f'{total_dependentes:,}')
 
                 # grafico de custo por operadora
                 custo_operadora = px.bar(filtered_df, x='EMPRESA', y=' COBRADO ', title='Custo por Operadoras')
