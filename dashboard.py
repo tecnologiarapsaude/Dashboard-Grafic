@@ -79,6 +79,15 @@ def fetch_data():
                     else:
                         df['Status_Fatura'] = 'Status não encontrado'
 
+                    # _tipo_atendimento & 'tipo_atendimento_id
+                    tipo_atendimento_id = arquivo['tipo_atendimento_id']
+                    tipo_atendimento = arquivo['_tipo_atendimento']
+
+                    if tipo_atendimento_id == tipo_atendimento['id']:
+                        df['Tipo_Atendimento'] = tipo_atendimento['Tipo_Atendimento']
+                    else:
+                        df['Tipo_Atendimento'] = 'Tipo atendimento não existe'
+
                     dataframes.append(df)
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
@@ -133,6 +142,18 @@ def fetch_data():
 
                 if status_fatura_selecionada:
                     dados_filtrados = filtered_df[filtered_df['Status_Fatura'].isin(status_fatura_selecionada)]
+                    filtered_df = dados_filtrados
+
+                # Filtro por Tipo de Atendimento
+                tipo_atendimento_selecionado = st.sidebar.multiselect(
+                    'Selecione o Tipo de Atendimento',
+                    options = filtered_df['Tipo_Atendimento'].unique(),
+                    default=filtered_df['Tipo_Atendimento'].unique(),
+                    placeholder="Selecione o Tipo de atendimento"
+                )
+
+                if tipo_atendimento_selecionado:
+                    dados_filtrados = filtered_df[filtered_df['Tipo_Atendimento'].isin(tipo_atendimento_selecionado)]
                     filtered_df = dados_filtrados
 
                 # Filtrar por empresas
