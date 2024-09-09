@@ -183,7 +183,7 @@ def fetch_data():
                         st.metric(label='Total de Dependentes', value=f'{total_dependentes:,}')
 
                 # grafico de custo por operadora
-                custo_operadora = px.bar(filtered_df, x='EMPRESA', y=' COBRADO ', title='Custo por Operadoras')
+                custo_operadora = px.bar(filtered_df, x='Nome_Fantasia', y=' COBRADO ', title='Custo por Operadoras')
                 st.plotly_chart(custo_operadora)
 
                 # grafico de distribuição por faixa etaria e sexo
@@ -191,17 +191,17 @@ def fetch_data():
                 # Combine 'ID' e 'Sexo' em uma nova coluna
                 filtered_df['ID_Sexo'] = filtered_df['ID'].astype(str) + ' - ' + filtered_df['SEXO']
 
-                distribuicao_faixa_sexo = px.bar(filtered_df, x='EMPRESA', y='ID_Sexo', title='Distribuição por Faixa Etária e Sexo')
+                distribuicao_faixa_sexo = px.bar(filtered_df, x='Nome_Fantasia', y='ID_Sexo', title='Distribuição por Faixa Etária e Sexo')
                 st.plotly_chart(distribuicao_faixa_sexo)
                 
                 # Grafico de Vidas em cada operadora
-                empresa = filtered_df.groupby('EMPRESA').size()
+                empresa = filtered_df.groupby('Nome_Fantasia').size()
                 st.write(empresa)
                     
-                filtered_df['Total_Vidas'] = filtered_df['EMPRESA'].count()
+                filtered_df['Total_Vidas'] = filtered_df['Nome_Fantasia'].count()
                 st.write(filtered_df)
 
-                vidas_operadoras = px.bar(filtered_df, x='EMPRESA', y='Total_Vidas', title='Vidas por Operadora')
+                vidas_operadoras = px.bar(filtered_df, x='Nome_Fantasia', y='Total_Vidas', title='Vidas por Operadora')
                 
                 st.plotly_chart(vidas_operadoras)
             
