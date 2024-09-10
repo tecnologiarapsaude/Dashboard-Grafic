@@ -238,6 +238,7 @@ def fetch_data():
                 total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index()
                 plt.figure(figsize=(10, 6)) 
                 total_vidas.plot(kind='bar', color='skyblue', edgecolor='black')
+                st.pyplot()
 
                 st.write(total_vidas)
 
