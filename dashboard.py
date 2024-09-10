@@ -234,10 +234,10 @@ def fetch_data():
                 
                 # Grafico de Vidas em cada operadora
                     
-                filtered_df['Total_Vidas'] = filtered_df['TITULAR'].count()
+                filtered_df['Total_Vidas'] = filtered_df['ID'].value_counts()
                 st.write(filtered_df['Total_Vidas'])
 
-                vidas_operadoras = px.bar(filtered_df, x='Nome_Fantasia', y='Total_Vidas', title='Vidas por Operadora', color='red')
+                vidas_operadoras = px.bar(filtered_df, x='Nome_Fantasia', y='Total_Vidas', title='Vidas por Operadora')
                 
                 st.plotly_chart(vidas_operadoras)
             
