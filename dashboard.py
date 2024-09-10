@@ -220,7 +220,7 @@ def fetch_data():
                 plt.figure(figsize=(10, 6))
                 total_idades.plot(kind='bar')
                 plt.xlabel('ID')
-                plt.ylabel('Total_Pessoas')
+                plt.ylabel('Total Pessoas')
                 plt.title('Distribuição por Faixa Etária')
                 plt.grid(True)
                 plt.show()
