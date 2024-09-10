@@ -224,7 +224,6 @@ def fetch_data():
                 plt.title('Distribuição por Faixa Etária')
                 plt.grid(True, linestyle='--', alpha=0.7)
                 plt.tight_layout()
-                plt.style.use('dark_background')
                 st.pyplot()
 
                 distribuicao_faixa_sexo = px.bar(filtered_df, x='ID', y='Total_Pessoas', title='Distribuição por Faixa Etária e Sexo')
