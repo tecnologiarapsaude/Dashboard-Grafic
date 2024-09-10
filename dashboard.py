@@ -218,7 +218,7 @@ def fetch_data():
                 with st.container():
                     total_idades = filtered_df['ID'].value_counts().sort_index()
                     plt.figure(figsize=(10, 6))
-                    total_idades.plot(kind='bar',  color='skyblue', edgecolor='#0e1117')
+                    total_idades.plot(kind='bar',  color='#0e1117', edgecolor='#0e1117')
                     plt.xlabel('Idade')
                     plt.ylabel('Total Pessoas')
                     plt.title('Distribuição por Faixa Etária')
@@ -238,7 +238,7 @@ def fetch_data():
                 # fazendo a contagem de quantas vidas tem cada operadora
                 total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index()
                 plt.figure(figsize=(10, 6)) 
-                total_vidas.plot(kind='bar', color='skyblue', edgecolor='#0e1117')
+                total_vidas.plot(kind='bar', color='#0e1117', edgecolor='#0e1117')
                 plt.xlabel('Operadoras')
                 plt.ylabel('Total de vidas')
                 plt.grid(True, linestyle='--', alpha=0.3)
