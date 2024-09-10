@@ -240,12 +240,12 @@ def fetch_data():
                 plt.figure(figsize=(10, 6)) 
                 total_vidas.plot(kind='bar', color='skyblue', edgecolor='#0e1117')
                 plt.xlabel('Operadoras')
-                plt.ylabel('Total de vidas')
+                plt.ylabel('Total de vidas', color='blue')
                 plt.title('Vidas por Operadoras')
                 plt.grid(True, linestyle='--', alpha=0.3)
                 plt.tight_layout()
                 plt.gca().set_facecolor('#0e1117') #ALTERANDO A COR DE FUNDO 
-                plt.gcf().patch.set_facecolor('#0e1117')
+                plt.gcf().patch.set_facecolor('red')
                 st.pyplot()
 
                 st.write(total_vidas)
