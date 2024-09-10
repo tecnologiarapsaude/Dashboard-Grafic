@@ -208,7 +208,7 @@ def fetch_data():
                 st.plotly_chart(custo_operadora)
 
                 # grafico de distribuição por faixa etaria e sexo
-                filtered_df['Total_Pessoas'] = filtered_df['Nome_Fantasia'].count()
+                filtered_df['Total_Pessoas'] = filtered_df['TITULAR'].count()
 
                 # Combine 'ID' e 'Sexo' em uma nova coluna
                 filtered_df['ID_Sexo'] = filtered_df['ID'].astype(str) + ' - ' + filtered_df['SEXO']
