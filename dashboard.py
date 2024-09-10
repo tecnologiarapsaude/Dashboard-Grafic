@@ -237,8 +237,8 @@ def fetch_data():
                 # fazendo a contagem de quantas vidas tem cada operadora
                 total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index()
                 plt.figure(figsize=(10, 6)) 
-                total_vidas.plot(kind='bar', color='skyblue', edgcolor='black')
-                
+                total_vidas.plot(kind='bar', color='skyblue', edgecolor='black')
+
                 st.write(total_vidas)
 
                 # Grafico de Vidas em cada operadora com streamlit 
