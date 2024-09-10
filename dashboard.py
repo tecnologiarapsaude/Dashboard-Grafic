@@ -217,7 +217,7 @@ def fetch_data():
 
                 st.write(total_idades)
                 # preparar o grafico com matplotlib
-                plt.figure(figsize=(10, 6))
+                plt.figure(figsize=(100, 60))
                 total_idades.plot(kind='bar')
                 plt.xlabel('ID')
                 plt.ylabel('Total Pessoas')
