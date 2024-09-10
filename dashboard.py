@@ -213,7 +213,7 @@ def fetch_data():
                 # Combine 'ID' e 'Sexo' em uma nova coluna
                 filtered_df['ID_Sexo'] = filtered_df['ID'].astype(str) + ' - ' + filtered_df['SEXO']
 
-                distribuicao_faixa_sexo = px.bar(filtered_df, x='ID_Sexo', y='Total_Pessoas', title='Distribuição por Faixa Etária e Sexo')
+                distribuicao_faixa_sexo = px.bar(filtered_df, x='ID', y='Total_Pessoas', title='Distribuição por Faixa Etária e Sexo')
                 st.plotly_chart(distribuicao_faixa_sexo)
                 
                 # Grafico de Vidas em cada operadora
