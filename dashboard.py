@@ -222,7 +222,7 @@ def fetch_data():
                     plt.xlabel('Idade')
                     plt.ylabel('Total Pessoas')
                     plt.title('Distribuição por Faixa Etária')
-                    plt.grid(True, linestyle='--', alpha=0.1)
+                    plt.grid(True, linestyle='--', alpha=0.3)
                     plt.tight_layout()
                     st.pyplot()
 
@@ -240,7 +240,7 @@ def fetch_data():
                 total_vidas.plot(kind='bar', color='skyblue', edgecolor='black')
                 plt.xlabel('Operadoras')
                 plt.ylabel('Total de vidas')
-                plt.grid(True, linestyle='--', alpha=0.1)
+                plt.grid(True, linestyle='--', alpha=0.3)
                 plt.tight_layout()
                 st.pyplot()
 
