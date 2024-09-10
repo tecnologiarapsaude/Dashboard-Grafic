@@ -218,9 +218,12 @@ def fetch_data():
                 with st.container():
                     total_idades = filtered_df['ID'].value_counts().sort_index()
                     plt.figure(figsize=(10, 6))
-                    total_idades.plot(kind='bar',  color='skyblue', edgecolor='#0e1117')
+                    total_idades.plot(kind='bar',  color='skyblue', edgecolor='white')
                     plt.xlabel('Idade', color='white')
                     plt.ylabel('Total Pessoas', color='white')
+                    # Alterar a cor dos números dos eixos (ticks)
+                    plt.tick_params(axis='x', colors='white')  # Cor dos números no eixo X
+                    plt.tick_params(axis='y', colors='white')  # Cor dos números no eixo Y
                     plt.title('Distribuição por Faixa Etária', color='white')
                     plt.grid(True, linestyle='--', alpha=0.3, color='white')
                     plt.tight_layout()
@@ -242,6 +245,9 @@ def fetch_data():
                 total_vidas.plot(kind='bar', color='skyblue', edgecolor='white')
                 plt.xlabel('Operadoras', color='white')
                 plt.ylabel('Total de vidas', color='white')
+                # Alterar a cor dos números dos eixos (ticks)
+                plt.tick_params(axis='x', colors='white')  # Cor dos números no eixo X
+                plt.tick_params(axis='y', colors='white')  # Cor dos números no eixo Y
                 plt.title('Vidas por Operadoras', color='white')
                 plt.grid(True, linestyle='--', alpha=0.3, color='white')
                 plt.tight_layout()
