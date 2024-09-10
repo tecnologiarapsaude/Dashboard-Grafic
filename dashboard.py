@@ -216,6 +216,14 @@ def fetch_data():
                 total_idades = filtered_df['ID'].value_counts().sort_index()
 
                 st.write(total_idades)
+                # preparar o grafico com matplotlib
+                plt.figure(figsize=(10, 6))
+                total_idades.plot(kind='bar')
+                plt.xlabel('ID')
+                plt.ylabel('Total_Pessoas')
+                plt.title('Distribuição por Faixa Etária')
+                plt.grid(True)
+                plt.show()
 
                 distribuicao_faixa_sexo = px.bar(filtered_df, x='ID', y='Total_Pessoas', title='Distribuição por Faixa Etária e Sexo')
                 st.plotly_chart(distribuicao_faixa_sexo)
