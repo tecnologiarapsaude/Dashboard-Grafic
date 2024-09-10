@@ -204,40 +204,40 @@ def fetch_data():
                         total_dependentes = filtered_df['MATRICULA'].count()
                         st.metric(label='Total de Dependentes', value=f'{total_dependentes:,}')
 
-                # grafico de custo por operadora
+                # grafico de custo por operadora com streamlit
                 custo_operadora = px.bar(filtered_df, x='Nome_Fantasia', y=' COBRADO ', title='Custo por Operadoras')
                 st.plotly_chart(custo_operadora)
 
                 # grafico de distribuição por faixa etaria e sexo
                 
-
                 # Combine 'ID' e 'Sexo' em uma nova coluna
                 # filtered_df['ID_Sexo'] = filtered_df['ID'].astype(str) + ' - ' + filtered_df['SEXO']
-                total_idades = filtered_df['ID'].value_counts().sort_index()
-
-                st.write(total_idades)
-                # preparar o grafico com matplotlib
-                plt.figure(figsize=(10, 6))
-                total_idades.plot(kind='bar',  color='skyblue', edgecolor='black')
-                plt.xlabel('ID')
-                plt.ylabel('Total Pessoas')
-                plt.title('Distribuição por Faixa Etária')
-                plt.grid(True, linestyle='--', alpha=0.1)
-                plt.tight_layout()
-                st.pyplot()
 
 
-                # Grafico com streamlit
+                # preparar o grafico com matplotlib faixa etaria e sexo
+                with st.container():
+                    total_idades = filtered_df['ID'].value_counts().sort_index()
+                    plt.figure(figsize=(10, 6))
+                    total_idades.plot(kind='bar',  color='skyblue', edgecolor='black')
+                    plt.xlabel('ID')
+                    plt.ylabel('Total Pessoas')
+                    plt.title('Distribuição por Faixa Etária')
+                    plt.grid(True, linestyle='--', alpha=0.1)
+                    plt.tight_layout()
+                    st.pyplot()
+
+
+                ## grafico de distribuição por faixa etaria e sexo com streamlit
                 filtered_df['Total_idades'] = filtered_df['ID'].value_counts().sort_index()
                 distribuicao_faixa_sexo = px.bar(filtered_df, x='ID', y='Total_idades', title='Distribuição por Faixa Etária e Sexo')
                 st.plotly_chart(distribuicao_faixa_sexo)
                 
-                # Grafico de Vidas em cada operadora
+                # Grafico de Vidas em cada operadora com streamlit
                     
                 total_vidas = filtered_df['TITULAR'].value_counts().sort_index()
                 st.write(total_vidas)
 
-                vidas_operadoras = px.bar(filtered_df, x='ID', y='Nome_Fantasia', title='Vidas por Operadora')
+                vidas_operadoras = px.bar(filtered_df, x='Nome_Fantasia', y='ID', title='Vidas por Operadora')
                 
                 st.plotly_chart(vidas_operadoras)
             
