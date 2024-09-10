@@ -214,46 +214,6 @@ def fetch_data():
                 # Combine 'ID' e 'Sexo' em uma nova coluna
                 # filtered_df['ID_Sexo'] = filtered_df['ID'].astype(str) + ' - ' + filtered_df['SEXO']
                 total_idades = filtered_df['ID'].value_counts().sort_index()
-                
-
-
-
-                # Criar o gráfico com Plotly
-                distribuicao_faixa_sexo = px.bar(
-                    filtered_df,
-                    x='ID',
-                    y='Total Pessoas',
-                    title='Distribuição por Faixa Etária',
-                    labels={'ID': 'ID', 'Total Pessoas': 'Total Pessoas'},
-                    color_discrete_sequence=['skyblue']  # Define a cor das barras
-                )
-
-                # Configurar o layout do gráfico para fundo preto
-                distribuicao_faixa_sexo.update_layout(
-                    plot_bgcolor='black',  # Cor de fundo do gráfico
-                    paper_bgcolor='black',  # Cor de fundo do papel
-                    font_color='white',  # Cor do texto
-                    xaxis_title='ID',
-                    yaxis_title='Total Pessoas',
-                    title='Distribuição por Faixa Etária',
-                    title_font_color='white'
-                )
-
-                # Exibir o gráfico em Streamlit
-                st.plotly_chart(distribuicao_faixa_sexo)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 st.write(total_idades)
                 # preparar o grafico com matplotlib
