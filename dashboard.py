@@ -218,7 +218,7 @@ def fetch_data():
                 with st.container():
                     total_idades = filtered_df['ID'].value_counts().sort_index()
                     plt.figure(figsize=(10, 6))
-                    total_idades.plot(kind='bar',  color='skyblue', edgecolor='black')
+                    total_idades.plot(kind='bar',  color='skyblue', edgecolor='red')
                     plt.xlabel('ID')
                     plt.ylabel('Total Pessoas')
                     plt.title('Distribuição por Faixa Etária')
@@ -234,7 +234,7 @@ def fetch_data():
                 
                 # Grafico de Vidas em cada operadora com streamlit
                     
-                total_vidas = filtered_df['TITULAR'].value_counts().sort_index()
+                total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index()
                 st.write(total_vidas)
 
                 vidas_operadoras = px.bar(filtered_df, x='Nome_Fantasia', y='ID', title='Vidas por Operadora')
