@@ -5,6 +5,7 @@ from io import StringIO
 from datetime import datetime
 import plotly.express as px
 import streamlit.components.v1 as components
+import matplotlib.pyplot as plt
 
 
 def fetch_data():
