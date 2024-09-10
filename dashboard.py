@@ -222,7 +222,7 @@ def fetch_data():
                 plt.xlabel('ID')
                 plt.ylabel('Total Pessoas')
                 plt.title('Distribuição por Faixa Etária')
-                plt.grid(True, linestyle='--', alpha=0.9)
+                plt.grid(True, linestyle='--', alpha=0.1)
                 plt.tight_layout()
                 st.pyplot()
 
