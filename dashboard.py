@@ -215,17 +215,7 @@ def fetch_data():
 
 
                 # preparar o grafico com matplotlib faixa etaria e sexo
-                with st.container():
-                    total_idades = filtered_df['ID'].value_counts().sort_index()
-                    plt.figure(figsize=(10, 6))
-                    total_idades.plot(kind='bar',  color='skyblue', edgecolor='#0e1117')
-                    plt.xlabel('Idade')
-                    plt.ylabel('Total Pessoas')
-                    plt.title('Distribuição por Faixa Etária')
-                    plt.grid(True, linestyle='--', alpha=0.3)
-                    plt.tight_layout()
-                    plt.gca().set_facecolor('#0e1117') #ALTERANDO A COR DE FUNDO
-                    st.pyplot()
+                
 
 
                 ## grafico de distribuição por faixa etaria e sexo com streamlit
@@ -240,7 +230,7 @@ def fetch_data():
                 plt.figure(figsize=(10, 6)) 
                 total_vidas.plot(kind='bar', color='skyblue', edgecolor='#0e1117')
                 plt.xlabel('Operadoras')
-                plt.ylabel('Total de vidas', color='blue')
+                plt.ylabel('Total de vidas')
                 plt.title('Vidas por Operadoras')
                 plt.grid(True, linestyle='--', alpha=0.3)
                 plt.tight_layout()
