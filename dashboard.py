@@ -234,7 +234,7 @@ def fetch_data():
                 
                 # Grafico de Vidas em cada operadora
                     
-                filtered_df['Total_Vidas'] = filtered_df['TITULAR'].value_counts()
+                filtered_df['Total_Vidas'] = filtered_df['TITULAR'].value_counts().sort_index()
                 st.write(filtered_df)
 
                 vidas_operadoras = px.bar(filtered_df, x='Nome_Fantasia', y='Total_Vidas', title='Vidas por Operadora')
