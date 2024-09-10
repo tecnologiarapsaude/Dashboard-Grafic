@@ -222,7 +222,7 @@ def fetch_data():
                 plt.xlabel('ID')
                 plt.ylabel('Total Pessoas')
                 plt.title('Distribuição por Faixa Etária')
-                plt.grid(True)
+                plt.grid(True, linestyle='--', alpha=0.7)
                 plt.show()
 
                 distribuicao_faixa_sexo = px.bar(filtered_df, x='ID', y='Total_Pessoas', title='Distribuição por Faixa Etária e Sexo')
