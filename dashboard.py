@@ -208,11 +208,12 @@ def fetch_data():
                 st.plotly_chart(custo_operadora)
 
                 # grafico de distribuição por faixa etaria e sexo
+                filtered_df['Total_Pessoas'] = filtered_df['Nome_Fantasia'].count()
 
                 # Combine 'ID' e 'Sexo' em uma nova coluna
                 filtered_df['ID_Sexo'] = filtered_df['ID'].astype(str) + ' - ' + filtered_df['SEXO']
 
-                distribuicao_faixa_sexo = px.bar(filtered_df, x='ID_Sexo', y='Nome_Fantasia', title='Distribuição por Faixa Etária e Sexo')
+                distribuicao_faixa_sexo = px.bar(filtered_df, x='ID_Sexo', y='Total_Pessoas', title='Distribuição por Faixa Etária e Sexo')
                 st.plotly_chart(distribuicao_faixa_sexo)
                 
                 # Grafico de Vidas em cada operadora
