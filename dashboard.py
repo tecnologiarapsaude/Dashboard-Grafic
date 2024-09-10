@@ -209,7 +209,7 @@ def fetch_data():
                 st.plotly_chart(custo_operadora)
 
                 # grafico de distribuição por faixa etaria e sexo
-                filtered_df['Total_idades'] = filtered_df['ID'].value_counts().sort_index()
+                
 
                 # Combine 'ID' e 'Sexo' em uma nova coluna
                 # filtered_df['ID_Sexo'] = filtered_df['ID'].astype(str) + ' - ' + filtered_df['SEXO']
@@ -226,14 +226,15 @@ def fetch_data():
                 plt.tight_layout()
                 st.pyplot()
 
+
+                # Grafico com streamlit
+                filtered_df['Total_idades'] = filtered_df['ID'].value_counts().sort_index()
                 distribuicao_faixa_sexo = px.bar(filtered_df, x='ID', y='Total_idades', title='Distribuição por Faixa Etária e Sexo')
                 st.plotly_chart(distribuicao_faixa_sexo)
                 
                 # Grafico de Vidas em cada operadora
-                empresa = filtered_df.groupby('Nome_Fantasia').size()
-                st.write(empresa)
                     
-                filtered_df['Total_Vidas'] = filtered_df['Nome_Fantasia'].count()
+                filtered_df['Total_Vidas'] = filtered_df['TITULAR'].count()
                 st.write(filtered_df)
 
                 vidas_operadoras = px.bar(filtered_df, x='Nome_Fantasia', y='Total_Vidas', title='Vidas por Operadora')
