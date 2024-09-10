@@ -237,7 +237,7 @@ def fetch_data():
                 total_vidas = filtered_df['TITULAR'].value_counts().sort_index()
                 st.write(total_vidas)
 
-                vidas_operadoras = px.bar(filtered_df, x='Nome_Fantasia', y='Total_Vidas', title='Vidas por Operadora')
+                vidas_operadoras = px.bar(filtered_df, x='Nome_Fantasia', y='ID', title='Vidas por Operadora')
                 
                 st.plotly_chart(vidas_operadoras)
             
