@@ -224,7 +224,7 @@ def fetch_data():
                     plt.title('Distribuição por Faixa Etária')
                     plt.grid(True, linestyle='--', alpha=0.3)
                     plt.tight_layout()
-                    plt.style.use('0e1117')
+                    plt.gca().set_facecolor('#0e1117')
                     st.pyplot()
 
 
@@ -243,7 +243,7 @@ def fetch_data():
                 plt.ylabel('Total de vidas')
                 plt.grid(True, linestyle='--', alpha=0.3)
                 plt.tight_layout()
-                plt.style.use('0e1117')
+                plt.gca().set_facecolor('#0e1117')
                 st.pyplot()
 
                 st.write(total_vidas)
