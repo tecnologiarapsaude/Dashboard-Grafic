@@ -243,7 +243,7 @@ def fetch_data():
                     y='Total_idades', 
                     title='Distribuição por Faixa Etária e Sexo',
                     labels={'Idade': 'Idade', 'Total_idades': 'Total Pessoas'},
-                    color='count',  # Adiciona uma cor baseada na contagem
+                    color='Idade',  # Adiciona uma cor baseada na contagem
                     color_continuous_scale='Blues')  # Paleta de cores, ajuste conforme desejado)
                 
 
