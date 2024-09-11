@@ -228,7 +228,7 @@ def fetch_data():
                 # fazendo a contagem de quantas vidas tem cada operadora
                 total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
                 total_vidas.columns = ['nome_operadora','total_vidas'] #renomendo as tabelas do dataframe
-                vidas_operadoras = px.bar_polar(
+                vidas_operadoras = px.icicle(
                     total_vidas, 
                     # x='nome_operadora', 
                     # y='total_vidas', 
