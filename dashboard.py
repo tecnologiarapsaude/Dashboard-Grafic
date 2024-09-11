@@ -239,7 +239,7 @@ def fetch_data():
                 st.write(total_idades1)
                 distribuicao_faixa_sexo = px.bar(
                     total_idades1, 
-                    x='ID', 
+                    x='count', 
                     y='Total_idades', 
                     title='Distribuição por Faixa Etária e Sexo',
                     labels={'ID': 'Idade', 'Total_idades': 'Total Pessoas'},
