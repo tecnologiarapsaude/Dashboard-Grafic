@@ -237,7 +237,7 @@ def fetch_data():
                     color='total_vidas',
                     # color_discrete_sequence=['orange', 'blue', 'red']
                     )
-                vidas_operadoras.show()
+                st.plotly_chart(vidas_operadoras)
                 st.write(total_vidas)
             
             
