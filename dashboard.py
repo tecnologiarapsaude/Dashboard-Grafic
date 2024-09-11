@@ -233,10 +233,10 @@ def fetch_data():
 
 
                 ## grafico de distribuição por faixa etaria e sexo com streamlit
-                total_idades = filtered_df['ID'].value_counts().sort_index()
-                total_idades.columns = ['ID', 'Total_idades']
+                total_idades1 = filtered_df['ID'].value_counts().sort_index()
+                total_idades1.columns = ['ID', 'Total_idades']
                 distribuicao_faixa_sexo = px.bar(
-                    total_idades, 
+                    total_idades1, 
                     x='ID', 
                     y='Total_idades', 
                     title='Distribuição por Faixa Etária e Sexo',
