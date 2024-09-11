@@ -208,50 +208,23 @@ def fetch_data():
                 custo_operadora = px.bar(filtered_df, x='Nome_Fantasia', y=' COBRADO ', title='Custo por Operadoras')
                 st.plotly_chart(custo_operadora)
 
-                # grafico de distribuição por faixa etaria e sexo
                 
-                # Combine 'ID' e 'Sexo' em uma nova coluna
-                # filtered_df['ID_Sexo'] = filtered_df['ID'].astype(str) + ' - ' + filtered_df['SEXO']
-
-
-                # preparar o grafico com matplotlib faixa etaria e sexo
+                # preparar o grafico com streamlit faixa etaria e sexo
                 with st.container():
-                    total_idades = filtered_df['ID'].value_counts().sort_index()
-                    plt.figure(figsize=(10, 6))
-                    total_idades.plot(kind='bar',  color='skyblue', edgecolor='white')
-                    plt.xlabel('Idade', color='white')
-                    plt.ylabel('Total Pessoas', color='white')
-                    # Alterar a cor dos números dos eixos (ticks)
-                    plt.tick_params(axis='x', colors='white')  # Cor dos números no eixo X
-                    plt.tick_params(axis='y', colors='white')  # Cor dos números no eixo Y
-                    plt.title('Distribuição por Faixa Etária', color='white')
-                    plt.grid(True, linestyle='--', alpha=0.3, color='white')
-                    plt.tight_layout()
-                    plt.gca().set_facecolor('#0e1117') #ALTERANDO A COR DE FUNDO
-                    plt.gcf().patch.set_facecolor('#0e1117')
-                    st.pyplot()
-
-
-                ## grafico de distribuição por faixa etaria e sexo com streamlit
-                # total_idades1 = filtered_df['ID'].value_counts().sort_index()
-                total_idades1 = filtered_df['ID'].value_counts().sort_index().reset_index()
-                total_idades1.columns = ['Idade', 'Total_idades']
-                st.write(total_idades1)
-                distribuicao_faixa_sexo = px.bar(
-                    total_idades1, 
+                    total_idades = filtered_df['ID'].value_counts().sort_index().reset_index()
+                    total_idades.columns = ['Idade', 'Total_idades']
+                    distribuicao_faixa_sexo = px.bar(
+                    total_idades, 
                     x='Idade', 
                     y='Total_idades', 
                     title='Distribuição por Faixa Etária e Sexo',
                     labels={'Idade': 'Idade', 'Total_idades': 'Total Pessoas'},
                     color='Idade',  # Adiciona uma cor baseada na contagem
                     color_continuous_scale='Blues')  # Paleta de cores, ajuste conforme desejado)
-                
+                    st.plotly_chart(distribuicao_faixa_sexo)
 
 
-                st.plotly_chart(distribuicao_faixa_sexo)
-                
                 # Grafico de Vidas em cada operadora com matplotlib
-
                 # fazendo a contagem de quantas vidas tem cada operadora
                 total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index()
                 plt.figure(figsize=(10, 6)) 
