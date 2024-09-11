@@ -64,10 +64,13 @@ def fetch_data():
 
                     empresa_id = arquivo['empresas_id']
                     empresas = arquivo['_empresas']
-                    if empresa_id == empresas['id']:
-                        df['nome_fantasia'] = empresas['nome_fantasia']
+
+                    empresa_encontrada = next((empresa for empresa in empresas if empresa['id'] == empresa_id), None)
+
+                    if empresa_encontrada:
+                        df['Nome_Empresa'] = empresa_encontrada['nome_fantasia']
                     else:
-                        df['nome_fantasia'] = 'Empresa não encontrada'
+                        df['Nome_Empresa'] = 'Empresa não encontrada'
 
                     # Comparando operadoras_id com o id em _operadoras e obtendo Nome_Fantasia
                     operadoras_id = arquivo['operadoras_id']
@@ -181,14 +184,14 @@ def fetch_data():
                 # Filtrar por empresas
                 empresa_selecionada = st.sidebar.multiselect(
                     'Selecione a empresa',
-                    options=filtered_df['nome_fantasia'].unique(),
-                    default=filtered_df['nome_fantasia'].unique(),
+                    options=filtered_df['Nome_Empresa'].unique(),
+                    default=filtered_df['Nome_Empresa'].unique(),
                     placeholder='Selecione a Empresa'
                 )
 
                 if empresa_selecionada:
                     # Filtrar dados com base na seleção da empresa
-                    dados_filtrados = filtered_df[filtered_df['nome_fantasia'].isin(empresa_selecionada)]
+                    dados_filtrados = filtered_df[filtered_df['Nome_Empresa'].isin(empresa_selecionada)]
                     filtered_df = dados_filtrados
 
                 # Exibir o gráfico com os dados filtrados ou o DataFrame original se o filtro estiver vazio
