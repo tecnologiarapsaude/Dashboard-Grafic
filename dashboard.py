@@ -102,24 +102,38 @@ def fetch_data():
                 # gerar menu lateral com filtros
                 st.sidebar.header('Filtros')
 
-                if len(dataframes) > 1:
-                    # Filtro de intervalo de datas
-                    min_date = combined_df['data_vencimento'].min().date()
-                    max_date = combined_df['data_vencimento'].max().date()
-                    selected_date_range = st.sidebar.slider(
-                        'Selecione o intervalo de datas',
-                        min_value=min_date,
-                        max_value=max_date,
-                        value=(min_date, max_date),
-                        format="DD-MM-YYYY"
-                    )
+                # Opção de filtro: intervalo de datas ou por mês atual
+                filtro_opcao = st.sidebar.radio(
+                    'Selecione o tipo de filtro',
+                    ('Intervalo de datas', 'Mês atual')
+                )
 
-                    # Filtrar o DataFrame com base no intervalo de datas
-                    start_date, end_date = selected_date_range
-                    mask = (combined_df['data_vencimento'].dt.date >= start_date) & (combined_df['data_vencimento'].dt.date <= end_date)
+                # Filtro de intervalo de datas
+                if filtro_opcao == 'Intervalo de datas':
+                    if len(dataframes) > 1:
+                        # Filtro de intervalo de datas
+                        min_date = combined_df['data_vencimento'].min().date()
+                        max_date = combined_df['data_vencimento'].max().date()
+                        selected_date_range = st.sidebar.slider(
+                            'Selecione o intervalo de datas',
+                            min_value=min_date,
+                            max_value=max_date,
+                            value=(min_date, max_date),
+                            format="DD-MM-YYYY"
+                        )
+
+                        # Filtrar o DataFrame com base no intervalo de datas
+                        start_date, end_date = selected_date_range
+                        mask = (combined_df['data_vencimento'].dt.date >= start_date) & (combined_df['data_vencimento'].dt.date <= end_date)
+                        filtered_df = combined_df.loc[mask]
+                    else:
+                        filtered_df = combined_df
+                elif filtro_opcao == 'Mês atual':
+                    # Filtro para o mês atual
+                    current_month = datetime.now().month
+                    current_year = datetime.now().year
+                    mask = (combined_df['data_vencimento'].dt.month == current_month) & (combined_df['data_vencimento'].dt.year == current_year)
                     filtered_df = combined_df.loc[mask]
-                else:
-                    filtered_df = combined_df
                 
                 #Filtro por Nome_Fantasia da Operadora
                 operadora_selecionada = st.sidebar.multiselect(
