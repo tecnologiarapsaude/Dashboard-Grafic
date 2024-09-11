@@ -67,7 +67,7 @@ def fetch_data():
                     if empresa_id == empresas['id']:
                         df['nome_fantasia'] = empresas['nome_fantasia']
                     else:
-                        df['Empresa'] = 'Empresa não encontrada'
+                        df['nome_fantasia'] = 'Empresa não encontrada'
 
                     # Comparando operadoras_id com o id em _operadoras e obtendo Nome_Fantasia
                     operadoras_id = arquivo['operadoras_id']
