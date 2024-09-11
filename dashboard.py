@@ -224,28 +224,18 @@ def fetch_data():
                     st.plotly_chart(distribuicao_faixa_sexo)
 
 
-                # Grafico de Vidas em cada operadora com matplotlib
+                # Grafico de Vidas em cada operadora com streamlit
                 # fazendo a contagem de quantas vidas tem cada operadora
                 total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index()
-                plt.figure(figsize=(10, 6)) 
-                total_vidas.plot(kind='bar', color='skyblue', edgecolor='white')
-                plt.xlabel('Operadoras', color='white')
-                plt.ylabel('Total de vidas', color='white')
-                # Alterar a cor dos números dos eixos (ticks)
-                plt.tick_params(axis='x', colors='white')  # Cor dos números no eixo X
-                plt.tick_params(axis='y', colors='white')  # Cor dos números no eixo Y
-                plt.title('Vidas por Operadoras', color='white')
-                plt.grid(True, linestyle='--', alpha=0.3, color='white')
-                plt.tight_layout()
-                plt.gca().set_facecolor('#0e1117') #ALTERANDO A COR DE FUNDO 
-                plt.gcf().patch.set_facecolor('#0e1117')
-                st.pyplot()
-
-                st.write(total_vidas)
-
-                # Grafico de Vidas em cada operadora com streamlit 
-                vidas_operadoras = px.bar(filtered_df, x='Nome_Fantasia', y='ID', title='Vidas por Operadora')
+                total_vidas = ['nome_operadora','total_vidas'] #renomendo as tabelas do dataframe
+                vidas_operadoras = px.bar(
+                    total_vidas, 
+                    x='nome_operadora', 
+                    y='total_vidas', 
+                    title='Vidas por Operadora',
+                    labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'})
                 st.plotly_chart(vidas_operadoras)
+                st.write(total_vidas)
             
             
             else:
