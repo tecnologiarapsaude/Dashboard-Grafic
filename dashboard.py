@@ -214,13 +214,13 @@ def fetch_data():
                     total_idades = filtered_df['ID'].value_counts().sort_index().reset_index()
                     total_idades.columns = ['Idade', 'Total_idades']
                     distribuicao_faixa_sexo = px.bar(
-                    total_idades, 
-                    x='Idade', 
-                    y='Total_idades', 
-                    title='Distribuição por Faixa Etária e Sexo',
-                    labels={'Idade': 'Idade', 'Total_idades': 'Total Pessoas'},
-                    color='Idade',  # Adiciona uma cor baseada na contagem
-                    color_continuous_scale='Blues')  # Paleta de cores, ajuste conforme desejado)
+                        total_idades, 
+                        x='Idade', 
+                        y='Total_idades', 
+                        title='Distribuição por Faixa Etária e Sexo',
+                        labels={'Idade': 'Idade', 'Total_idades': 'Total Pessoas'},
+                        color='Idade',  # Adiciona uma cor baseada na contagem
+                        color_continuous_scale='Blues')  # Paleta de cores, ajuste conforme desejado)
                     st.plotly_chart(distribuicao_faixa_sexo)
 
 
@@ -233,7 +233,10 @@ def fetch_data():
                     x='nome_operadora', 
                     y='total_vidas', 
                     title='Vidas por Operadora',
-                    labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'})
+                    labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'},
+                    color='total_vidas',
+                    color_continuous_scale='Blues',
+                    )
                 st.plotly_chart(vidas_operadoras)
                 st.write(total_vidas)
             
