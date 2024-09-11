@@ -225,19 +225,20 @@ def fetch_data():
 
 
                 # Grafico de Vidas em cada operadora com streamlit
-                # fazendo a contagem de quantas vidas tem cada operadora
-                total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
-                total_vidas.columns = ['nome_operadora','total_vidas'] #renomendo as tabelas do dataframe
-                vidas_operadoras = px.pie(
-                    total_vidas, 
-                    names='nome_operadora', 
-                    values='total_vidas', 
-                    title='Vidas por Operadora',
-                    labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'},
-                    color='total_vidas',
-                    # color_discrete_sequence=['orange', 'blue', 'red']
-                    )
-                st.plotly_chart(vidas_operadoras)
+                with st.container():
+                    # fazendo a contagem de quantas vidas tem cada operadora
+                    total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
+                    total_vidas.columns = ['nome_operadora','total_vidas'] #renomendo as tabelas do dataframe
+                    vidas_operadoras = px.pie(
+                        total_vidas, 
+                        names='nome_operadora', 
+                        values='total_vidas', 
+                        title='Vidas por Operadora',
+                        labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'},
+                        color='total_vidas',
+                        # color_discrete_sequence=['orange', 'blue', 'red']
+                        )
+                    st.plotly_chart(vidas_operadoras)
                 st.write(total_vidas)
             
             
