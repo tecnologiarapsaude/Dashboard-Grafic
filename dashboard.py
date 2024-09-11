@@ -230,8 +230,8 @@ def fetch_data():
                 total_vidas.columns = ['nome_operadora','total_vidas'] #renomendo as tabelas do dataframe
                 vidas_operadoras = px.bar_polar(
                     total_vidas, 
-                    x='nome_operadora', 
-                    y='total_vidas', 
+                    # x='nome_operadora', 
+                    # y='total_vidas', 
                     title='Vidas por Operadora',
                     labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'},
                     color='nome_operadora',
