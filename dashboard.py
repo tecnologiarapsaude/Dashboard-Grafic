@@ -217,7 +217,6 @@ def fetch_data():
                 # preparar o grafico com matplotlib faixa etaria e sexo
                 with st.container():
                     total_idades = filtered_df['ID'].value_counts().sort_index()
-                    st.write(total_idades)
                     plt.figure(figsize=(10, 6))
                     total_idades.plot(kind='bar',  color='skyblue', edgecolor='white')
                     plt.xlabel('Idade', color='white')
@@ -236,7 +235,7 @@ def fetch_data():
                 ## grafico de distribuição por faixa etaria e sexo com streamlit
                 # total_idades1 = filtered_df['ID'].value_counts().sort_index()
                 total_idades1 = filtered_df['ID'].value_counts().sort_index()
-                total_idades1.columns = ['ID', 'Total_idades']
+                # total_idades1.columns = ['ID', 'Total_idades']
                 st.write(total_idades1)
                 distribuicao_faixa_sexo = px.bar(
                     total_idades1, 
