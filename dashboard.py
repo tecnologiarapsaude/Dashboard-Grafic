@@ -228,13 +228,13 @@ def fetch_data():
                 # fazendo a contagem de quantas vidas tem cada operadora
                 total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
                 total_vidas.columns = ['nome_operadora','total_vidas'] #renomendo as tabelas do dataframe
-                vidas_operadoras = px.area(
+                vidas_operadoras = px.bar_polar(
                     total_vidas, 
                     x='nome_operadora', 
                     y='total_vidas', 
                     title='Vidas por Operadora',
                     labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'},
-                    # color='violet',
+                    color='nome_operadora',
                     color_discrete_sequence=['orange', 'blue', 'red']
                     )
                 st.plotly_chart(vidas_operadoras)
