@@ -227,7 +227,7 @@ def fetch_data():
                 # Grafico de Vidas em cada operadora com streamlit
                 # fazendo a contagem de quantas vidas tem cada operadora
                 total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
-                total_vidas = ['nome_operadora','total_vidas'] #renomendo as tabelas do dataframe
+                total_vidas.columns = ['nome_operadora','total_vidas'] #renomendo as tabelas do dataframe
                 vidas_operadoras = px.bar(
                     total_vidas, 
                     x='nome_operadora', 
