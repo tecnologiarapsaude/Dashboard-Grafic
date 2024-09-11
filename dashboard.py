@@ -199,8 +199,6 @@ def fetch_data():
                 st.write(filtered_df.head(50))
                 # st.write()
 
-                st.sidebar.header('Filtros')
-
                 fig_empresa = px.bar(filtered_df, x='Nome_Fantasia', y='MENSALIDADE', title='Mensalidade por Empresa')
                 st.plotly_chart(fig_empresa)
 
