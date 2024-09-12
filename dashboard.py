@@ -234,6 +234,8 @@ def fetch_data():
                         y=' COBRADO ', 
                         title='Custo por Operadoras',
                         labels={'Nome_Fantasia':'Operadora',' COBRADO ':'Valor Cobrado'},
+                        color='Nome_Fantasia',  # Adiciona uma cor baseada na contagem
+                        color_continuous_scale='Blues'
                         )
                     st.plotly_chart(custo_operadora)
 
