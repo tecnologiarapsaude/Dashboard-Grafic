@@ -228,22 +228,12 @@ def fetch_data():
 
                 # grafico de custo por operadora com streamlit
                 with st.container():
-                    operadora_valor = []
-                    valor_cobrado_operadora = filtered_df[' COBRADO ']
-                    valor_cobrado_operadora.columns = ['valor_cobrado']
-                    total_custo_operadora = filtered_df['Nome_Fantasia']
-                    operadora_valor.append(valor_cobrado_operadora)
-                    operadora_valor.append(total_custo_operadora)
-                    pd.concat(operadora_valor)
-                    st.write(operadora_valor)
-                   
-                    
                     custo_operadora = px.bar(
                         filtered_df, 
                         x='Nome_Fantasia', 
                         y=' COBRADO ', 
                         title='Custo por Operadoras',
-
+                        labels={'Nome_Fantasia':'Operadora',' COBRADO ':'Valor Cobrado'},
                         )
                     st.plotly_chart(custo_operadora)
 
