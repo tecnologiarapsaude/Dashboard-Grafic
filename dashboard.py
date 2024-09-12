@@ -277,9 +277,20 @@ def fetch_data():
                             )
                         st.plotly_chart(vidas_operadoras)
 
+                    # Grafico de distribuição por vinculos com streamlit
                     with col_distribuicao_vinculo:
                         total_vinculos = filtered_df['T/D'].value_counts().sort_index().reset_index()
-                        total_vinculos.columns = ['titular_dependete','total']
+                        total_vinculos.columns = ['nome_vinculo','total_vinculo']
+                        grafico_vinculo = px.pie(
+                            total_vinculos,
+                            title='Vinculos',
+                            names='nome_vinculo',
+                            values='total_vinculo',
+                            labels={'nome_vinculo':'Nome do Vinculo','total_vinculo':'Total de Vinculos'},
+                            color='nome_vinculo',
+                            hole=.6
+                        )
+
                         st.write(total_vinculos)
             
             else:
