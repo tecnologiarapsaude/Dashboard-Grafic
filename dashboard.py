@@ -246,8 +246,8 @@ def fetch_data():
                     total_idades.columns = ['Idade', 'Total_idades']
                     distribuicao_faixa_sexo = px.bar(
                         total_idades, 
-                        x='Total_idades', 
-                        y='Idade', 
+                        x='Idade', 
+                        y='Total_idades', 
                         title='Distribuição por Faixa Etária e Sexo',
                         labels={'Idade': 'Idade', 'Total_idades': 'Total Pessoas'},
                         color='Idade',  # Adiciona uma cor baseada na contagem
