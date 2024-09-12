@@ -255,11 +255,12 @@ def fetch_data():
                     st.plotly_chart(distribuicao_faixa_sexo)
 
 
-                # Grafico de Vidas em cada operadora com streamlit
+                # Container dos graficos de vidas em cada operadora e distribuiçao por vinculo
                 with st.container():
                     # criado colunas para separa os graficos
                     col_vidas_operadora,col_distribuicao_vinculo = st.columns(2) 
 
+                    # Grafico de Vidas em cada operadora com streamlit
                     with col_vidas_operadora:
                         # fazendo a contagem de quantas vidas tem cada operadora
                         total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
@@ -277,9 +278,9 @@ def fetch_data():
                         st.plotly_chart(vidas_operadoras)
 
                     with col_distribuicao_vinculo:
-                        pass
-                st.write(total_vidas)
-            
+                        total_vinculos = filtered_df['T/D'].value_counts().sort_index().reset_index()
+                        total_vinculos.columns = ['titular_dependete','total']
+                        st.write(total_vinculos)
             
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
