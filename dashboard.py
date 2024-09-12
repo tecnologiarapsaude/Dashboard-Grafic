@@ -273,7 +273,7 @@ def fetch_data():
                             labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'},
                             color='total_vidas',
                             hole=.6
-                            # color_discrete_sequence=['orange', 'blue', 'red']
+                            color_discrete_sequence=['orange', 'blue']
                             )
                         st.plotly_chart(vidas_operadoras)
 
@@ -288,8 +288,7 @@ def fetch_data():
                             values='total_vinculo',
                             labels={'nome_vinculo':'Nome do Vinculo','total_vinculo':'Total de Vinculos'},
                             color='nome_vinculo',
-                            hole=.6,
-                            color_discrete_sequence=['orange', 'blue'])
+                            hole=.6,)
                         st.plotly_chart(grafico_vinculo)
             
             else:
