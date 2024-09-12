@@ -257,45 +257,14 @@ def fetch_data():
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
                     # Dados fictícios para um funil empilhado
-                    data = {
-                        'Etapa': ['Visitantes', 'Leads', 'Oportunidades', 'Clientes',
-                                'Visitantes', 'Leads', 'Oportunidades', 'Clientes',
-                                'Visitantes', 'Leads', 'Oportunidades', 'Clientes',
-                                'Visitantes', 'Leads', 'Oportunidades', 'Clientes'],
-                        'Faixa Etária': ['18-24', '18-24', '18-24', '18-24',
-                                        '25-34', '25-34', '25-34', '25-34',
-                                        '35-44', '35-44', '35-44', '35-44',
-                                        '45-54', '45-54', '45-54', '45-54'],
-                        'Sexo': ['Masculino', 'Feminino'] * 8,
-                        'Quantidade': [150, 160, 140, 130,
-                                    200, 220, 180, 170,
-                                    100, 110, 90, 80,
-                                    50, 60, 40, 30]
-                    }
-
-                    # Criar o DataFrame
-                    df = pd.DataFrame(data)
-
-                    # Criar o gráfico de barras empilhadas
-                    fig = px.bar(
-                        df,
-                        x='Etapa',
-                        y='Quantidade',
-                        color='Sexo',
-                        facet_col='Faixa Etária',  # Adiciona uma coluna de facetas para faixa etária
-                        title='Distribuição por Faixa Etária e Sexo (Simulação de Funil Empilhado)',
-                        labels={'Etapa': 'Etapa do Funil', 'Quantidade': 'Quantidade'},
-                        text='Quantidade',
-                        template='plotly_white',
-                        category_orders={'Etapa': ['Visitantes', 'Leads', 'Oportunidades', 'Clientes']}  # Ordenar as etapas do funil
-                    )
-
-                    # Ajustar o gráfico para parecer um funil empilhado
-                    fig.update_layout(barmode='stack', xaxis_title='', yaxis_title='Quantidade')
-                    fig.update_traces(texttemplate='%{text}', textposition='inside')
-
-                    # Exibir o gráfico no Streamlit
-                    st.plotly_chart(fig)
+                    stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
+                    df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
+                    df_mtl['office'] = 'Montreal'
+                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
+                    df_toronto['office'] = 'Toronto'
+                    df = pd.concat([df_mtl, df_toronto], axis=0)
+                    fig = px.funnel(df, x='number', y='stage', color='office')
+                    fig.show()
 
 
                 # Container dos graficos de vidas em cada operadora e distribuiçao por vinculo
