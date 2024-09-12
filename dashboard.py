@@ -234,6 +234,7 @@ def fetch_data():
                     total_custo_operadora = filtered_df['Nome_Fantasia']
                     operadora_valor.append(valor_cobrado_operadora)
                     operadora_valor.append(total_custo_operadora)
+                    pd.concat(operadora_valor)
                     st.write(operadora_valor)
                    
                     
