@@ -232,6 +232,7 @@ def fetch_data():
                     valor_cobrado_operadora.columns = ['valor_cobrado', 'total_cobrado']
                     total_custo_operadora = filtered_df['Nome_Fantasia']
                     st.write(total_custo_operadora)
+                    st.write(valor_cobrado_operadora)
                     
                     custo_operadora = px.bar(
                         filtered_df, 
