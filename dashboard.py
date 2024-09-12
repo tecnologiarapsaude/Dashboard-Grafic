@@ -257,20 +257,27 @@ def fetch_data():
 
                 # Grafico de Vidas em cada operadora com streamlit
                 with st.container():
-                    # fazendo a contagem de quantas vidas tem cada operadora
-                    total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
-                    total_vidas.columns = ['nome_operadora','total_vidas'] #renomendo as tabelas do dataframe
-                    vidas_operadoras = px.pie(
-                        total_vidas, 
-                        names='nome_operadora', 
-                        values='total_vidas', 
-                        title='Vidas por Operadora',
-                        labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'},
-                        color='total_vidas',
-                        hole=.6
-                        # color_discrete_sequence=['orange', 'blue', 'red']
-                        )
-                    st.plotly_chart(vidas_operadoras)
+                    # criado colunas para separa os graficos
+                    col_vidas_operadora,col_distribuicao_vinculo = st.columns(2) 
+
+                    with col_vidas_operadora:
+                        # fazendo a contagem de quantas vidas tem cada operadora
+                        total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
+                        total_vidas.columns = ['nome_operadora','total_vidas'] #renomendo as tabelas do dataframe
+                        vidas_operadoras = px.pie(
+                            total_vidas, 
+                            names='nome_operadora', 
+                            values='total_vidas', 
+                            title='Vidas por Operadora',
+                            labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'},
+                            color='total_vidas',
+                            hole=.6
+                            # color_discrete_sequence=['orange', 'blue', 'red']
+                            )
+                        st.plotly_chart(vidas_operadoras)
+
+                    with col_distribuicao_vinculo:
+                        pass
                 st.write(total_vidas)
             
             
