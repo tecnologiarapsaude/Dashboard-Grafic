@@ -267,7 +267,7 @@ def fetch_data():
                         title='Vidas por Operadora',
                         labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'},
                         color='total_vidas',
-                        hole=.3
+                        hole=.8
                         # color_discrete_sequence=['orange', 'blue', 'red']
                         )
                     st.plotly_chart(vidas_operadoras)
