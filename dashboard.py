@@ -262,9 +262,9 @@ def fetch_data():
                     total_idades = filtered_df['ID'].value_counts().sort_index().reset_index()
                     total_idades.columns = ['Idade', 'Total_idades']
                     stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
-                    df_mtl = pd.DataFrame(dict(number=total_idades['Total_idades'], stage=total_idades['Idades']))
+                    df_mtl = pd.DataFrame(dict(number=total_idades['Total_idades'], stage=total_idades['Idade']))
                     df_mtl['Sexo'] = 'M'
-                    df_toronto = pd.DataFrame(dict(number=total_idades['Total_idades'], stage=total_idades['Idades']))
+                    df_toronto = pd.DataFrame(dict(number=total_idades['Total_idades'], stage=total_idades['Idade']))
                     df_toronto['Sexo'] = 'F'
                     df = pd.concat([df_mtl, df_toronto], axis=0)
                     fig = px.funnel(df, x='number', y='stage', color='Sexo')
