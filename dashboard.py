@@ -291,9 +291,11 @@ def fetch_data():
                         barmode='stack',  # Empilha as barras
                         xaxis_title='Número',
                         yaxis_title='Etapa do Funil',
-                        yaxis={'categoryorder':'total ascending'}  # Ordena as etapas do funil
+                        yaxis={'categoryorder':'total descending'},  # Ordena as etapas do funil do maior para o menor
+                        xaxis=dict(tickvals=[0, 10, 20, 30, 40, 50, 60], ticktext=["0", "10", "20", "30", "40", "50", "60"])  # Ajusta ticks do eixo x
                     )
                     fig.update_traces(texttemplate='%{text}', textposition='inside')
+
 
                     # Exibir o gráfico no Streamlit
                     st.plotly_chart(fig)
