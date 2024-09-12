@@ -290,8 +290,6 @@ def fetch_data():
                             color='nome_vinculo',
                             hole=.6)
                         st.plotly_chart(grafico_vinculo)
-
-                        st.write(total_vinculos)
             
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
