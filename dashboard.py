@@ -258,6 +258,7 @@ def fetch_data():
                 with st.container():
                     # Dados fictícios para um funil empilhado
                     idades = filtered_df['ID']
+                    st.write(idades)
                     total_idades = filtered_df['ID'].value_counts().sort_index().reset_index()
                     total_idades.columns = ['Idade', 'Total_idades']
                     stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
