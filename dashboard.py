@@ -258,7 +258,10 @@ def fetch_data():
                 with st.container():
                     data = {
                         'Etapa': ['Visitantes', 'Leads', 'Oportunidades', 'Clientes'],
-                        'Quantidade': [1000, 800, 500, 300]}
+                        'Categoria': ['Masculino', 'Masculino', 'Masculino', 'Masculino',
+                        'Feminino', 'Feminino', 'Feminino', 'Feminino'],
+                        'Quantidade': [500, 300, 200, 150,
+                   600, 350, 220, 180]}
                     df_funnel = pd.DataFrame(data)
 
                     # Criar o gráfico de funil
