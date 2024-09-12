@@ -231,7 +231,7 @@ def fetch_data():
                     # Verificar se a coluna é numérica e converter se necessário
                     filtered_df[' COBRADO '] = pd.to_numeric(filtered_df[' COBRADO '], errors='coerce')
                     total_valor = filtered_df[' COBRADO '].sum()
-                    st.write(f'Total Valor Cobrado: {total_valor}')
+                    st.write(f'Total Valor Cobrado: {total_valor:.2f}')
                     custo_operadora = px.bar(
                         filtered_df, 
                         x='Nome_Fantasia', 
