@@ -256,14 +256,21 @@ def fetch_data():
 
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
-                    # Dados fictícios para um gráfico de funil empilhado
+                    # Dados fictícios para um funil empilhado
                     data = {
                         'Etapa': ['Visitantes', 'Leads', 'Oportunidades', 'Clientes',
+                                'Visitantes', 'Leads', 'Oportunidades', 'Clientes',
+                                'Visitantes', 'Leads', 'Oportunidades', 'Clientes',
                                 'Visitantes', 'Leads', 'Oportunidades', 'Clientes'],
-                        'Categoria': ['Masculino', 'Masculino', 'Masculino', 'Masculino',
-                                    'Feminino', 'Feminino', 'Feminino', 'Feminino'],
-                        'Quantidade': [500, 300, 200, 150,
-                                    600, 350, 220, 180]
+                        'Faixa Etária': ['18-24', '18-24', '18-24', '18-24',
+                                        '25-34', '25-34', '25-34', '25-34',
+                                        '35-44', '35-44', '35-44', '35-44',
+                                        '45-54', '45-54', '45-54', '45-54'],
+                        'Sexo': ['Masculino', 'Feminino'] * 8,
+                        'Quantidade': [150, 160, 140, 130,
+                                    200, 220, 180, 170,
+                                    100, 110, 90, 80,
+                                    50, 60, 40, 30]
                     }
 
                     # Criar o DataFrame
@@ -274,15 +281,16 @@ def fetch_data():
                         df,
                         x='Etapa',
                         y='Quantidade',
-                        color='Categoria',
-                        title='Funil Empilhado por Categoria',
+                        color='Sexo',
+                        facet_col='Faixa Etária',  # Adiciona uma coluna de facetas para faixa etária
+                        title='Distribuição por Faixa Etária e Sexo (Simulação de Funil Empilhado)',
                         labels={'Etapa': 'Etapa do Funil', 'Quantidade': 'Quantidade'},
                         text='Quantidade',
                         template='plotly_white',
                         category_orders={'Etapa': ['Visitantes', 'Leads', 'Oportunidades', 'Clientes']}  # Ordenar as etapas do funil
                     )
 
-                    # Ajustar o gráfico para parecer um funil
+                    # Ajustar o gráfico para parecer um funil empilhado
                     fig.update_layout(barmode='stack', xaxis_title='', yaxis_title='Quantidade')
                     fig.update_traces(texttemplate='%{text}', textposition='inside')
 
