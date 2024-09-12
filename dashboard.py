@@ -227,8 +227,19 @@ def fetch_data():
                         st.metric(label='Total de Dependentes', value=f'{total_dependentes:,}')
 
                 # grafico de custo por operadora com streamlit
-                custo_operadora = px.bar(filtered_df, x='Nome_Fantasia', y=' COBRADO ', title='Custo por Operadoras')
-                st.plotly_chart(custo_operadora)
+                with st.container():
+                    total_custo_operadora = filtered_df[' COBRADO '].value_counts().sort_index().reset_index()
+                    total_custo_operadora.columns = ['valor_cobrado', 'total_cobrado']
+                    st.write(total_custo_operadora)
+                    
+                    custo_operadora = px.bar(
+                        filtered_df, 
+                        x='Nome_Fantasia', 
+                        y=' COBRADO ', 
+                        title='Custo por Operadoras',
+
+                        )
+                    st.plotly_chart(custo_operadora)
 
                 
                 # preparar o grafico com streamlit faixa etaria e sexo
