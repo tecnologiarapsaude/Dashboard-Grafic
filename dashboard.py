@@ -256,60 +256,15 @@ def fetch_data():
 
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
-                    stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "Invoice sent"]
 
-                    # Dados para Montreal e Toronto
-                    df_mtl = pd.DataFrame({
-                        'number': [39, 27.4, 20.6, 11, 3],
-                        'stage': stages,
-                        'office': 'Montreal'
-                    })
-
-                    df_toronto = pd.DataFrame({
-                        'number': [52, 36, 18, 14, 5],
-                        'stage': stages,
-                        'office': 'Toronto'
-                    })
-
-                    # Concatenar os DataFrames
+                    stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
+                    df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
+                    df_mtl['office'] = 'Montreal'
+                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
+                    df_toronto['office'] = 'Toronto'
                     df = pd.concat([df_mtl, df_toronto], axis=0)
-
-                    # Criar o gráfico de barras empilhadas
-                    fig = px.bar(
-                        df,
-                        x='number',
-                        y='stage',
-                        color='office',
-                        title='Distribuição por Etapa do Funil em Montreal e Toronto',
-                        labels={'number': 'Número', 'stage': 'Etapa do Funil'},
-                        text='number',
-                        template='plotly_white'
-                    )
-
-                    # Ajustar o gráfico para parecer um funil empilhado
-                    fig.update_layout(
-                        barmode='stack',  # Empilha as barras
-                        xaxis_title='Número',
-                        yaxis_title='Etapa do Funil',
-                        yaxis={'categoryorder':'total descending'},  # Ordena as etapas do funil do maior para o menor
-                        xaxis=dict(
-                            title='Número',
-                            autorange='reversed',  # Inverte o eixo x para o visual do funil
-                            tickvals=[0, 10, 20, 30, 40, 50, 60],  # Ajusta os valores dos ticks
-                            ticktext=["0", "10", "20", "30", "40", "50", "60"]  # Ajusta os rótulos dos ticks
-                        )
-                    )
-
-                    # Ajuste das traces
-                    fig.update_traces(texttemplate='%{text}', textposition='inside')
-                    fig.update_layout(
-                        xaxis=dict(
-                            range=[0, df['number'].max() * 1.1]  # Ajusta o intervalo do eixo x
-                        )
-                    )
-
-                    # Exibir o gráfico no Streamlit
-                    st.plotly_chart(fig)
+                    fig = px.funnel(df, x='number', y='stage', color='office')
+                    fig.show()
 
 
                 # Container dos graficos de vidas em cada operadora e distribuiçao por vinculo
