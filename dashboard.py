@@ -262,9 +262,9 @@ def fetch_data():
                     total_idades.columns = ['Idade', 'Total_idades']
                     stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
                     df_mtl = pd.DataFrame(dict(number=total_idades['Total_idades'], stage=idades))
-                    df_mtl['office'] = 'Montreal'
+                    df_mtl['Sexo'] = 'M'
                     df_toronto = pd.DataFrame(dict(number=total_idades['Total_idades'], stage=idades))
-                    df_toronto['office'] = 'Toronto'
+                    df_toronto['Sexo'] = 'F'
                     df = pd.concat([df_mtl, df_toronto], axis=0)
                     fig = px.funnel(df, x='number', y='stage', color='office')
                     st.plotly_chart(fig)
