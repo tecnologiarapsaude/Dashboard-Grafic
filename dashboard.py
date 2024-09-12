@@ -264,7 +264,7 @@ def fetch_data():
                     df_toronto['office'] = 'Toronto'
                     df = pd.concat([df_mtl, df_toronto], axis=0)
                     fig = px.funnel(df, x='number', y='stage', color='office')
-                    fig.show()
+                    st.plotly_chart(fig)
 
 
                 # Container dos graficos de vidas em cada operadora e distribuiçao por vinculo
