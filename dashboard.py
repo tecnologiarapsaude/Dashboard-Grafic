@@ -228,7 +228,7 @@ def fetch_data():
 
                 # grafico de custo por operadora com streamlit
                 with st.container():
-                    total_valor = filtered_df[' COBRADO '].value_counts().sort_index().reset_index()
+                    total_valor = filtered_df[' COBRADO '].sum()
                     st.write(total_valor)
                     custo_operadora = px.bar(
                         filtered_df, 
