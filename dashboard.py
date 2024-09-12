@@ -233,9 +233,9 @@ def fetch_data():
                     total_valor = filtered_df[' COBRADO '].sum()
 
                     custo_operadora = px.bar(
-                        total_valor, 
+                        filtered_df, 
                         x='Nome_Fantasia', 
-                        y=' COBRADO ', 
+                        y=total_valor, 
                         title='Custo por Operadoras',
                         labels={'Nome_Fantasia':'Operadora',' COBRADO ':'Valor Cobrado'},
                         color='Nome_Fantasia',  # Adiciona uma cor baseada na contagem
