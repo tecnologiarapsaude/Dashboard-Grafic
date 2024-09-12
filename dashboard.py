@@ -288,8 +288,8 @@ def fetch_data():
                             values='total_vinculo',
                             labels={'nome_vinculo':'Nome do Vinculo','total_vinculo':'Total de Vinculos'},
                             color='nome_vinculo',
-                            hole=.6
-                        )
+                            hole=.6)
+                        st.plotly_chart(grafico_vinculo)
 
                         st.write(total_vinculos)
             
