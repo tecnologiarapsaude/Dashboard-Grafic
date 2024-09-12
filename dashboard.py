@@ -256,14 +256,46 @@ def fetch_data():
 
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
-                    # Dados fictícios para um funil empilhado
-                    stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
-                    df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
-                    df_mtl['office'] = 'Montreal'
-                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
-                    df_toronto['office'] = 'Toronto'
+                    stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "Invoice sent"]
+
+                    # Dados para Montreal e Toronto
+                    df_mtl = pd.DataFrame({
+                        'number': [39, 27.4, 20.6, 11, 3],
+                        'stage': stages,
+                        'office': 'Montreal'
+                    })
+
+                    df_toronto = pd.DataFrame({
+                        'number': [52, 36, 18, 14, 5],
+                        'stage': stages,
+                        'office': 'Toronto'
+                    })
+
+                    # Concatenar os DataFrames
                     df = pd.concat([df_mtl, df_toronto], axis=0)
-                    fig = px.funnel(df, x='number', y='stage', color='office')
+
+                    # Criar o gráfico de barras empilhadas
+                    fig = px.bar(
+                        df,
+                        x='number',
+                        y='stage',
+                        color='office',
+                        title='Distribuição por Etapa do Funil em Montreal e Toronto',
+                        labels={'number': 'Número', 'stage': 'Etapa do Funil'},
+                        text='number',
+                        template='plotly_white'
+                    )
+
+                    # Ajustar o gráfico para parecer um funil empilhado
+                    fig.update_layout(
+                        barmode='stack',  # Empilha as barras
+                        xaxis_title='Número',
+                        yaxis_title='Etapa do Funil',
+                        yaxis={'categoryorder':'total ascending'}  # Ordena as etapas do funil
+                    )
+                    fig.update_traces(texttemplate='%{text}', textposition='inside')
+
+                    # Exibir o gráfico no Streamlit
                     st.plotly_chart(fig)
 
 
