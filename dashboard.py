@@ -256,24 +256,34 @@ def fetch_data():
 
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
+                # Exemplo de dados fictícios para um funil empilhado
                     data = {
                         'Etapa': ['Visitantes', 'Leads', 'Oportunidades', 'Clientes'],
                         'Categoria': ['Masculino', 'Masculino', 'Masculino', 'Masculino',
                         'Feminino', 'Feminino', 'Feminino', 'Feminino'],
-                        'Quantidade': [500, 300, 200, 150,
-                   600, 350, 220, 180]}
-                    df_funnel = pd.DataFrame(data)
+                        'Quantidade': [500, 300, 200, 150,600, 350, 220, 180]}
+                    df = pd.DataFrame(data)
 
-                    # Criar o gráfico de funil
-                    fig_funnel = px.funnel(
-                        df_funnel,
-                        x='Quantidade',
-                        y='Etapa',
-                        title='Funil de Vendas'
+                    # Criar o gráfico de barras empilhadas
+                    fig = px.bar(
+                        df,
+                        x='Etapa',
+                        y='Quantidade',
+                        color='Categoria',
+                        title='Funil Empilhado por Categoria',
+                        labels={'Etapa': 'Etapa do Funil', 'Quantidade': 'Quantidade'},
+                        text='Quantidade',
+                        template='plotly_white',
+                        category_orders={'Etapa': ['Visitantes', 'Leads', 'Oportunidades', 'Clientes']}  # Ordenar as etapas do funil
                     )
 
+                    # Ajustar o gráfico para parecer um funil
+                    fig.update_layout(barmode='stack', xaxis_title='', yaxis_title='Quantidade')
+                    fig.update_traces(texttemplate='%{text}', textposition='inside')
+
                     # Exibir o gráfico no Streamlit
-                    st.plotly_chart(fig_funnel)
+                    st.plotly_chart(fig)
+
 
                 # Container dos graficos de vidas em cada operadora e distribuiçao por vinculo
                 with st.container():
