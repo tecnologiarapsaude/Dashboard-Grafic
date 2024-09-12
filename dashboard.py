@@ -266,7 +266,7 @@ def fetch_data():
                     df_toronto = pd.DataFrame(dict(number=total_idades['Total_idades'], stage=idades))
                     df_toronto['Sexo'] = 'F'
                     df = pd.concat([df_mtl, df_toronto], axis=0)
-                    fig = px.funnel(df, x='number', y='stage', color='office')
+                    fig = px.funnel(df, x='number', y='stage', color='Sexo')
                     st.plotly_chart(fig)
 
 
