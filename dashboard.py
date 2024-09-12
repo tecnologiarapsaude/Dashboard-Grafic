@@ -254,6 +254,23 @@ def fetch_data():
                         color_continuous_scale='Blues')  # Paleta de cores, ajuste conforme desejado)
                     st.plotly_chart(distribuicao_faixa_sexo)
 
+                # teste do grafico do estilo funil para faixa etaria e sexo
+                with st.container():
+                    data = {
+                        'Etapa': ['Visitantes', 'Leads', 'Oportunidades', 'Clientes'],
+                        'Quantidade': [1000, 800, 500, 300]}
+                    df_funnel = pd.DataFrame(data)
+
+                    # Criar o gráfico de funil
+                    fig_funnel = px.funnel(
+                        df_funnel,
+                        x='Quantidade',
+                        y='Etapa',
+                        title='Funil de Vendas'
+                    )
+
+                    # Exibir o gráfico no Streamlit
+                    st.plotly_chart(fig_funnel)
 
                 # Container dos graficos de vidas em cada operadora e distribuiçao por vinculo
                 with st.container():
