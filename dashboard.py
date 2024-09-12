@@ -292,10 +292,21 @@ def fetch_data():
                         xaxis_title='Número',
                         yaxis_title='Etapa do Funil',
                         yaxis={'categoryorder':'total descending'},  # Ordena as etapas do funil do maior para o menor
-                        xaxis=dict(tickvals=[0, 10, 20, 30, 40, 50, 60], ticktext=["0", "10", "20", "30", "40", "50", "60"])  # Ajusta ticks do eixo x
+                        xaxis=dict(
+                            title='Número',
+                            autorange='reversed',  # Inverte o eixo x para o visual do funil
+                            tickvals=[0, 10, 20, 30, 40, 50, 60],  # Ajusta os valores dos ticks
+                            ticktext=["0", "10", "20", "30", "40", "50", "60"]  # Ajusta os rótulos dos ticks
+                        )
                     )
-                    fig.update_traces(texttemplate='%{text}', textposition='inside')
 
+                    # Ajuste das traces
+                    fig.update_traces(texttemplate='%{text}', textposition='inside')
+                    fig.update_layout(
+                        xaxis=dict(
+                            range=[0, df['number'].max() * 1.1]  # Ajusta o intervalo do eixo x
+                        )
+                    )
 
                     # Exibir o gráfico no Streamlit
                     st.plotly_chart(fig)
