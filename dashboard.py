@@ -233,7 +233,7 @@ def fetch_data():
                     total_valor = filtered_df[' COBRADO '].sum()
                     st.write(f'Total Valor Cobrado: {total_valor:.2f}')
                     custo_operadora = px.bar(
-                        filtered_df, 
+                        total_valor, 
                         x='Nome_Fantasia', 
                         y=' COBRADO ', 
                         title='Custo por Operadoras',
