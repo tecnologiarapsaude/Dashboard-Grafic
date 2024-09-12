@@ -256,12 +256,17 @@ def fetch_data():
 
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
-                # Exemplo de dados fictícios para um funil empilhado
+                    # Dados fictícios para um gráfico de funil empilhado
                     data = {
-                        'Etapa': ['Visitantes', 'Leads', 'Oportunidades', 'Clientes'],
+                        'Etapa': ['Visitantes', 'Leads', 'Oportunidades', 'Clientes',
+                                'Visitantes', 'Leads', 'Oportunidades', 'Clientes'],
                         'Categoria': ['Masculino', 'Masculino', 'Masculino', 'Masculino',
-                        'Feminino', 'Feminino', 'Feminino', 'Feminino'],
-                        'Quantidade': [500, 300, 200, 150,600, 350, 220, 180]}
+                                    'Feminino', 'Feminino', 'Feminino', 'Feminino'],
+                        'Quantidade': [500, 300, 200, 150,
+                                    600, 350, 220, 180]
+                    }
+
+                    # Criar o DataFrame
                     df = pd.DataFrame(data)
 
                     # Criar o gráfico de barras empilhadas
