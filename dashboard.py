@@ -272,7 +272,7 @@ def fetch_data():
 
 
                     df_grouped = filtered_df.groupby(['faixa_etaria', 'SEXO']).size().reset_index()
-                    df_grouped.columns = ['Idade','Sexo','Total']
+                    df_grouped.columns = ['Faixa_etaria','Sexo','Total']
 
                     df_masculino = df_grouped[df_grouped['Sexo'] == 'M'].reset_index(drop=True)
                     df_feminino = df_grouped[df_grouped['Sexo'] == 'F'].reset_index(drop=True)
@@ -283,8 +283,8 @@ def fetch_data():
                     df = pd.concat([df_masculino, df_feminino], axis=0)
                     fig = px.funnel(
                         df, 
-                        x='Sexo', 
-                        y='Idade', 
+                        x='Total', 
+                        y='Faixa_etaria', 
                         color='Sexo',
                         title='Distribuição por Faixa Etária e Sexo',
                         labels={'Idade':'Idades','Total':'Total de Idades'}
