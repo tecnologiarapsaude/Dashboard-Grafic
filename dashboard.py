@@ -226,7 +226,7 @@ def fetch_data():
                     # Verificar se a coluna é numérica e converter se necessário
                     # filtered_df[' COBRADO '] = pd.to_numeric(df[' COBRADO '], errors='coerce')
                     total_valor = filtered_df[' COBRADO '].value_counts().sort_index().reset_index()
-                    df_total_valor = filtered_df.groupby(['Nome_Fantasia', ' COBRADO ']).size().reset_index()
+                    df_total_valor = filtered_df.groupby(['Nome_Fantasia', ' COBRADO ']).size().reset_index().sum()
 
                     st.write(total_valor)
                     st.write(df_total_valor)
