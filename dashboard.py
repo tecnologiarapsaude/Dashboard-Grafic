@@ -224,7 +224,8 @@ def fetch_data():
                 # grafico de custo por operadora com streamlit
                 with st.container():
                     # Verificar se a coluna é numérica e converter se necessário
-                    total_valor = filtered_df[' COBRADO '].value_counts().sort_index().reset_index().sum()
+                    total_valor = filtered_df[' COBRADO '].value_counts().sort_index().reset_index()
+                    total_valor.sum()
                     st.write(total_valor)
                     custo_operadora = px.bar(
                         filtered_df, 
@@ -267,18 +268,11 @@ def fetch_data():
 
                     filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes, default='Não Definido')
 
-                    st.write(filtered_df)
-
-
-
                     df_grouped = filtered_df.groupby(['faixa_etaria', 'SEXO']).size().reset_index()
                     df_grouped.columns = ['Faixa_etaria','Sexo','Total']
 
                     df_masculino = df_grouped[df_grouped['Sexo'] == 'M'].reset_index(drop=True)
                     df_feminino = df_grouped[df_grouped['Sexo'] == 'F'].reset_index(drop=True)
-
-                    st.write(df_masculino)
-                    st.write(df_feminino)
 
                     df = pd.concat([df_masculino, df_feminino], axis=0)
                     fig = px.funnel(
