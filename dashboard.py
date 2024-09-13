@@ -286,13 +286,9 @@ def fetch_data():
                         )
                     )
 
-                    # Ajustar as barras para exibir o texto
-                    fig.update_traces(texttemplate='%{text}', textposition='inside')
-
-
 
                     st.write(df)
-                    
+
                     # Exibir o gráfico no Streamlit  
                     st.plotly_chart(fig)
 
