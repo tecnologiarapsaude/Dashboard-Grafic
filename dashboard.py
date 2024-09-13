@@ -258,8 +258,11 @@ def fetch_data():
                     faixa_etaria = filtered_df['ID'].value_counts().sort_index().reset_index()
                     faixa_etaria.columns = ['idade', 'total_idade']
 
+                    idades = faixa_etaria['idade']
+
                     st.write(stages)
                     st.write(faixa_etaria)
+                    st.write(idades)
 
                     df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
                     df_mtl['Sexo'] = 'M'
