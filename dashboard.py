@@ -266,14 +266,34 @@ def fetch_data():
                     df = pd.concat([df_masculino, df_feminino], axis=0)
                     fig = px.funnel(
                         df, 
-                        x='Idade', 
-                        y='Total', 
+                        x='Total', 
+                        y='Idade', 
                         color='Sexo',
                         title='Distribuição por Faixa Etária e Sexo',
                         labels={'Idade':'Idades','Total':'Total de Idades'}
                         )
-                    
+
+                    # Ajustar o gráfico para parecer um funil empilhado
+                    fig.update_layout(
+                        barmode='stack',  # Empilha as barras
+                        xaxis_title='Total de Pessoas',
+                        yaxis_title='Faixa Etária',
+                        yaxis=dict(
+                            categoryorder='total descending'  # Ordena as faixas etárias do maior para o menor
+                        ),
+                        xaxis=dict(
+                            title='Total de Pessoas'
+                        )
+                    )
+
+                    # Ajustar as barras para exibir o texto
+                    fig.update_traces(texttemplate='%{text}', textposition='inside')
+
+
+
                     st.write(df)
+                    
+                    # Exibir o gráfico no Streamlit  
                     st.plotly_chart(fig)
 
 
