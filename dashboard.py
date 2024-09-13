@@ -260,24 +260,7 @@ def fetch_data():
                     df_masculino = df_grouped[df_grouped['Sexo'] == 'M'].reset_index(drop=True)
                     df_feminino = df_grouped[df_grouped['Sexo'] == 'F'].reset_index(drop=True)
 
-                    st.write(df_masculino)
-                    st.write(df_feminino)
-
-                    # df_grouped2 = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
-                    # df_grouped2.columns = ['Idade','Sexo','Total']
- 
-                    stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
-                    df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
-                    df_mtl['office'] = 'Montreal'
-
-                    st.write(df_mtl)
-                    st.write(df_grouped)
-
-
-                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
-                    df_toronto['office'] = 'Toronto'
                     df = pd.concat([df_masculino, df_feminino], axis=0)
-                    # df2 = pd.concat([df_grouped, df_grouped2], axis=0)
                     fig = px.funnel(df, x='Total', y='Idade', color='Sexo')
                     
                     st.write(df)
