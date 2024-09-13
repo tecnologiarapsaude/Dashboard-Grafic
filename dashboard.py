@@ -257,8 +257,8 @@ def fetch_data():
                     df_grouped = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
                     df_grouped.columns = ['Idade','Sexo','Total']
 
-                    df_masculino = df_grouped[df_grouped['Sexo'] == 'M']
-                    df_feminino = df_grouped[df_grouped['Sexo'] == 'F']
+                    df_masculino = df_grouped[df_grouped['Sexo'] == 'M'].reset_index(drop=True)
+                    df_feminino = df_grouped[df_grouped['Sexo'] == 'F'].reset_index(drop=True)
 
                     df_masculino['Sexo'] = 'Masculino'
                     df_feminino['Sexo'] = 'Feminino'
