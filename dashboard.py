@@ -253,19 +253,15 @@ def fetch_data():
 
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
-                    filtered_df['faixa_etaria'] = ['20-30', '20-30', '30-40', '30-40', '40-50', '40-50', 
-                     '50-60', '50-60', '60-70', '60-70', '20-30', '20-30', 
-                     '30-40', '30-40', '40-50', '40-50', '50-60', '50-60', 
-                     '60-70', '60-70']
-                     
+                    
                     df_grouped = filtered_df.groupby(['ID', 'SEXO']).count().reset_index()
                     st.write(df_grouped)
 
 
-                    stages = df_grouped['faixa_etaria']
-                    df_mtl = pd.DataFrame(dict(number=df_grouped['ID'], stage=stages))
+                    stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
+                    df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
                     df_mtl['office'] = 'Montreal'
-                    df_toronto = pd.DataFrame(dict(number=df_grouped['ID'], stage=stages))
+                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
                     df_toronto['office'] = 'Toronto'
                     df = pd.concat([df_mtl, df_toronto], axis=0)
                     fig = px.funnel(df, x='number', y='stage', color='office')
