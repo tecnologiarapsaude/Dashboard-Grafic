@@ -255,6 +255,11 @@ def fetch_data():
                 with st.container():
 
                     stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
+                    faixa_etaria = filtered_df['ID']
+
+                    st.write(stages)
+                    st.write(faixa_etaria)
+
                     df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
                     df_mtl['Sexo'] = 'M'
                     df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
