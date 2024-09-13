@@ -255,9 +255,9 @@ def fetch_data():
                 with st.container():
 
                     df_grouped = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
-                    df_grouped2 = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
+                    # df_grouped2 = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
                     df_grouped.columns = ['Idade','Sexo','Total']
-                    df_grouped2.columns = ['Idade','Sexo','Total']
+                    # df_grouped2.columns = ['Idade','Sexo','Total']
  
                     stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
                     df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
@@ -270,8 +270,8 @@ def fetch_data():
                     df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
                     df_toronto['office'] = 'Toronto'
                     df = pd.concat([df_mtl, df_toronto], axis=0)
-                    df2 = pd.concat([df_grouped, df_grouped2], axis=0)
-                    fig = px.funnel(df2, x='Idade', y='Total', color='Sexo')
+                    # df2 = pd.concat([df_grouped, df_grouped2], axis=0)
+                    fig = px.funnel(df_grouped, x='Idade', y='Total', color='Sexo')
                     
                     st.write(df)
                     st.plotly_chart(fig)
