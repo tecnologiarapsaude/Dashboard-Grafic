@@ -153,8 +153,8 @@ def fetch_data():
                 # Adicionando o filtro de sexo
                 sexo_selecionado = st.sidebar.multiselect(
                     'Selecione o Sexo',
-                    options=filtered_df['SEXO'].unique(),
-                    default=filtered_df['SEXO'].unique(),
+                    options=filtered_df['sexo_map'].unique(),
+                    default=filtered_df['sexo_map'].unique(),
                     placeholder='Selecione o Sexo'
                 )
 
