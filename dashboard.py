@@ -254,7 +254,7 @@ def fetch_data():
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
 
-                    df_grouped = df.groupby(['Faixa_Etaria', 'Sexo']).size().reset_index()
+                    df_grouped = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
 
 
                     total_idades_funil = filtered_df['ID'].value_counts().sort_index().reset_index()  
