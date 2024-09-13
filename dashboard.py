@@ -225,7 +225,7 @@ def fetch_data():
                 with st.container():
     
                     df_total_valor = filtered_df[' COBRADO '].sum()
-                    st.write(df_total_valor)
+                    st.write(df_total_valor.astype())
 
                     custo_operadora = px.bar(
                         filtered_df, 
