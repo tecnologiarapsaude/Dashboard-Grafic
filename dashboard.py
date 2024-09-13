@@ -227,7 +227,7 @@ def fetch_data():
 
                     filtered_df[' COBRADO '] = pd.to_numeric(filtered_df[' COBRADO '], errors='coerce')
                     # df_total_valor= filtered_df[' COBRADO '].sum()
-                    df_total_valor = filtered_df.groupby(['Nome_Fantasia', ' COBRADO ']).size().reset_index()
+                    df_total_valor = filtered_df.groupby(['Nome_Fantasia', ' COBRADO ']).size().reset_index().sum()
 
                     st.write(df_total_valor)
                     st.write(filtered_df[' COBRADO '].dtype)
