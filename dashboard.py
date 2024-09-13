@@ -204,6 +204,11 @@ def fetch_data():
                 col1, col2, col3 = st.columns(3)
 
                 # Criando um container para separar os conteudos das colunas
+                # Contagem de TD 
+                contagem_td = filtered_df['T/D'].value_counts()
+                # Obtendo o total de titulares e dependentes
+                total_titulares = contagem_td.get('TITULAR', 0)
+                total_dependentes = contagem_td.get('DEPENDENTE', 0)
                 with st.container():
                     with col1:
                         # pegando o total de vidas do dataframe
@@ -212,13 +217,11 @@ def fetch_data():
 
                     with col2:
                         # pegando o total de titular do dataframe
-                        total_titular = filtered_df['TITULAR'].count()
-                        st.metric(label='Total de Titulares' , value=f'{total_titular:,}')
+                        st.metric(label='Total de Titulares' , value=f'{total_titulares:,}')
 
                     with col3:  
                         # pegando o total de dependentes do dataframe 
                         # OBS:Não tem a tabela dependentes foi colocada outra tabela
-                        total_dependentes = filtered_df['MATRICULA'].count()
                         st.metric(label='Total de Dependentes', value=f'{total_dependentes:,}')
 
                 # grafico de custo por operadora com streamlit
