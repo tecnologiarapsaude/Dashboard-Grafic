@@ -270,6 +270,7 @@ def fetch_data():
                     df = pd.concat([df_mtl, df_toronto], axis=0)
                     fig = px.funnel(df, x='number', y='stage', color='office')
                     
+                    st.write(df)
                     st.plotly_chart(fig)
 
 
