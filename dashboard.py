@@ -266,7 +266,7 @@ def fetch_data():
                     df = pd.concat([df_masculino, df_feminino], axis=0)
                     fig = px.funnel(
                         df, 
-                        x='Total', 
+                        x='Sexo', 
                         y='Idade', 
                         color='Sexo',
                         title='Distribuição por Faixa Etária e Sexo',
