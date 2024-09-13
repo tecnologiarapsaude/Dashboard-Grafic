@@ -256,7 +256,7 @@ def fetch_data():
 
                     stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
                     faixa_etaria = filtered_df['ID'].sort_index().reset_index()
-                    faixa_etaria.columns = ['idade']
+                    # faixa_etaria.columns = ['idade']
 
                     st.write(stages)
                     st.write(faixa_etaria)
