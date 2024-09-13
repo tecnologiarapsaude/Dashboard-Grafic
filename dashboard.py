@@ -224,15 +224,9 @@ def fetch_data():
                 # grafico de custo por operadora com streamlit
                 with st.container():
     
-                    df_total_valor = filtered_df.groupby(['Nome_Fantasia', ' COBRADO ']).size().reset_index()
+                    # df_total_valor = filtered_df.groupby(['Nome_Fantasia', ' COBRADO ']).size().reset_index()
+                    # st.write(df_total_valor)
 
-                    
-                    st.write(df_total_valor)
-
-                    total_cobrado = df_total_valor[' COBRADO '].sum()
-                    st.write(total_cobrado)
-
-                    # st.write(filter)
                     custo_operadora = px.bar(
                         filtered_df, 
                         x='Nome_Fantasia', 
@@ -247,7 +241,7 @@ def fetch_data():
                 
                 # preparar o grafico com streamlit faixa etaria e sexo
                 with st.container():
-                    total_idades = filtered_df['ID'].value_counts().sort_index().reset_index()
+                    total_idades = filtered_df['ID'].sum().sort_index().reset_index()
                     total_idades.columns = ['Idade', 'Total_idades']
                     distribuicao_faixa_sexo = px.bar(
                         total_idades, 
