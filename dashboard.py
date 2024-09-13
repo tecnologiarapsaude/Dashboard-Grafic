@@ -264,9 +264,9 @@ def fetch_data():
                     st.write(faixa_etaria)
                     st.write(idades)
 
-                    df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=idades))
+                    df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3, 2, 1], stage=idades))
                     df_mtl['Sexo'] = 'M'
-                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=idades))
+                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5, 3, 1], stage=idades))
                     df_toronto['Sexo'] = 'F'
                     df = pd.concat([df_mtl, df_toronto], axis=0)
                     fig = px.funnel(df, x='number', y='stage', color='Sexo')
