@@ -263,8 +263,8 @@ def fetch_data():
                     df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
                     df_mtl['office'] = 'Montreal'
 
-                    st.write(df_mtl)
-                    st.write(df_grouped)
+                    st.write(df_mtl.astype)
+                    st.write(df_grouped.astype)
 
 
                     df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
