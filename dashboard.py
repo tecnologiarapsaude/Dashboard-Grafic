@@ -254,15 +254,52 @@ def fetch_data():
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
 
-                    stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
-                    df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
-                    df_mtl['office'] = 'Montreal'
-                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
-                    df_toronto['office'] = 'Toronto'
-                    df = pd.concat([df_mtl, df_toronto], axis=0)
-                    fig = px.funnel(df, x='number', y='stage', color='office')
-                    # Exibir o gráfico no Streamlit
-                    st.plotly_chart(fig)
+                    data = {
+                    'ID': range(1, 21),
+                    'Sexo': ['M', 'F', 'M', 'F', 'M', 'F', 'M', 'F', 'M', 'F',
+                            'M', 'F', 'M', 'F', 'M', 'F', 'M', 'F', 'M', 'F'],
+                    'Faixa_Etaria': ['20-30', '20-30', '30-40', '30-40', '40-50', '40-50', 
+                                    '50-60', '50-60', '60-70', '60-70', '20-30', '20-30', 
+                                    '30-40', '30-40', '40-50', '40-50', '50-60', '50-60', 
+                                    '60-70', '60-70']
+                }
+
+                df = pd.DataFrame(data)
+
+                # Contar o total de idades por faixa etária e sexo usando value_counts
+                df['count'] = 1
+                df_grouped = df.groupby(['Faixa_Etaria', 'Sexo']).count().reset_index()
+
+                # Criar o gráfico de funil empilhado
+                fig = px.bar(
+                    df_grouped,
+                    x='count',
+                    y='Faixa_Etaria',
+                    color='Sexo',
+                    title='Distribuição por Faixa Etária e Sexo',
+                    labels={'count': 'Total de Idades', 'Faixa_Etaria': 'Faixa Etária'},
+                    text='count',
+                    orientation='h'  # Horizontal para simular o funil
+                )
+
+                # Ajustar o gráfico para parecer um funil empilhado
+                fig.update_layout(
+                    barmode='stack',  # Empilha as barras
+                    xaxis_title='Total de Idades',
+                    yaxis_title='Faixa Etária',
+                    yaxis=dict(
+                        categoryorder='total descending'  # Ordena as faixas etárias do maior para o menor
+                    ),
+                    xaxis=dict(
+                        title='Total de Idades'
+                    )
+                )
+
+                # Ajustar as barras para exibir o texto
+                fig.update_traces(texttemplate='%{text}', textposition='inside')
+
+                # Exibir o gráfico no Streamlit
+                st.plotly_chart(fig)
 
 
                 # Container dos graficos de vidas em cada operadora e distribuiçao por vinculo
