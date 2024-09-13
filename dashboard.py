@@ -254,14 +254,47 @@ def fetch_data():
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
 
-                    stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
-                    df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
-                    df_mtl['office'] = 'Montreal'
-                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
-                    df_toronto['office'] = 'Toronto'
-                    df = pd.concat([df_mtl, df_toronto], axis=0)
-                    fig = px.funnel(df, x='number', y='stage', color='office')
-                    fig.show()
+                    # Suponha que este seja o DataFrame que você tem
+                    data = {
+                        'ID': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                        'Sexo': ['M', 'F', 'M', 'F', 'M', 'F', 'M', 'F', 'M', 'F'],
+                        'Faixa_Etaria': ['20-30', '20-30', '30-40', '30-40', '40-50', '40-50', '50-60', '50-60', '60-70', '60-70']
+                    }
+
+                    df = pd.DataFrame(data)
+
+                    # Agrupar por faixa etária e sexo
+                    df_grouped = df.groupby(['Faixa_Etaria', 'Sexo']).size().reset_index()
+
+                    # Criar o gráfico de barras empilhadas
+                    fig = px.bar(
+                        df_grouped,
+                        x='Total_idades',
+                        y='Faixa_Etaria',
+                        color='Sexo',
+                        title='Distribuição por Faixa Etária e Sexo',
+                        labels={'Total_idades': 'Total de Idades', 'Faixa_Etaria': 'Faixa Etária'},
+                        text='Total_idades',
+                        orientation='h'  # Horizontal para simular o funil
+                    )
+
+                    # Ajustar o gráfico para parecer um funil empilhado
+                    fig.update_layout(
+                        barmode='stack',  # Empilha as barras
+                        xaxis_title='Total de Idades',
+                        yaxis_title='Faixa Etária',
+                        yaxis=dict(
+                            categoryorder='total descending'  # Ordena as faixas etárias do maior para o menor
+                        ),
+                        xaxis=dict(
+                            title='Total de Idades'
+                        )
+                    )
+
+                    # Ajuste das barras
+                    fig.update_traces(texttemplate='%{text}', textposition='inside')
+
+                    # Exibir o gráfico no Streamlit
                     st.plotly_chart(fig)
 
 
