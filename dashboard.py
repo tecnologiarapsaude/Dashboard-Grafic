@@ -225,13 +225,13 @@ def fetch_data():
                 with st.container():
                     # Verificar se a coluna é numérica e converter se necessário
                     filtered_df[' COBRADO '] = pd.to_numeric(df[' COBRADO '], errors='coerce')
-                    total_valor = filtered_df[' COBRADO '].sum(axis=0)
+                    filtered_df['total_valor'] = filtered_df[' COBRADO '].sum(axis=0)
                     
-                    st.write(total_valor)
+                    # st.write(filter)
                     custo_operadora = px.bar(
                         filtered_df, 
                         x='Nome_Fantasia', 
-                        y=total_valor, 
+                        y='total_valor', 
                         title='Custo por Operadoras',
                         labels={'Nome_Fantasia':'Operadora',' COBRADO ':'Valor Cobrado'},
                         color='Nome_Fantasia',  # Adiciona uma cor baseada na contagem
