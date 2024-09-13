@@ -267,7 +267,7 @@ def fetch_data():
                     st.write(df_feminino)
 
                     df = pd.concat([df_masculino, df_feminino], axis=0)
-                    fig = px.funnel(df, x='Total', y='Idade', color='Sexo')
+                    fig = px.funnel(df, x='Idade', y='Total', color='Sexo')
                     
                     st.write(df)
                     st.plotly_chart(fig)
