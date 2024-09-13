@@ -225,14 +225,13 @@ def fetch_data():
                 with st.container():
                     # Verificar se a coluna é numérica e converter se necessário
                     # filtered_df[' COBRADO '] = pd.to_numeric(df[' COBRADO '], errors='coerce')
-                    total_valor = filtered_df[' COBRADO '].value_counts().sort_index().reset_index().sum()
-                    df_total_cobrado = filtered_df.groupby(['Nome_Fantasia', ' COBRADO ']).size().reset_index()
+                    total_valor = filtered_df[' COBRADO '].value_counts().sort_index().reset_index()
                     
-                    st.write(df_total_cobrado)
+                    # st.write(df_total_cobrado)
 
                     # st.write(filter)
                     custo_operadora = px.bar(
-                        total_valor, 
+                        filtered_df, 
                         x=' COBRADO ', 
                         y='total_valor', 
                         title='Custo por Operadoras',
