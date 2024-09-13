@@ -257,8 +257,14 @@ def fetch_data():
                     df_grouped = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
                     df_grouped.columns = ['Idade','Sexo','Total']
 
-                    df_masculino = df_grouped[df_grouped['Sexo'] == 'M'].reset_index(drop=True)
-                    df_feminino = df_grouped[df_grouped['Sexo'] == 'F'].reset_index(drop=True)
+                    df_masculino = df_grouped[df_grouped['Sexo'] == 'M']
+                    df_feminino = df_grouped[df_grouped['Sexo'] == 'F']
+
+                    df_masculino['Sexo'] = 'Masculino'
+                    df_feminino['Sexo'] = 'Feminino'
+
+                    st.write(df_masculino)
+                    st.write(df_feminino)
 
                     df = pd.concat([df_masculino, df_feminino], axis=0)
                     fig = px.funnel(df, x='Total', y='Idade', color='Sexo')
