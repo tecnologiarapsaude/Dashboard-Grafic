@@ -147,7 +147,9 @@ def fetch_data():
                     else:
                         filtered_df = combined_df
 
-                
+                # Mapear o sexo para valores mais legíveis
+                sexo_map = {'M': 'Masculino', 'F': 'Feminino'}
+
                 # Adicionando o filtro de sexo
                 sexo_selecionado = st.sidebar.multiselect(
                     'Selecione o Sexo',
@@ -156,9 +158,12 @@ def fetch_data():
                     placeholder='Selecione o Sexo'
                 )
 
-                if sexo_selecionado:
+                # Reverter o mapeamento do sexo pelos os valores Originais
+                sexo_selecionado_originais = [sexo_map.get(sexo, sexo) for sexo in sexo_selecionado]
+
+                if sexo_selecionado_originais:
                     # Filtrar dados com base na seleção de sexo
-                    dados_filtrados = filtered_df[filtered_df['SEXO'].isin(sexo_selecionado)]
+                    dados_filtrados = filtered_df[filtered_df['SEXO'].isin(sexo_selecionado_originais)]
                     filtered_df = dados_filtrados
 
                 # Filtro por Tipo de Atendimento
