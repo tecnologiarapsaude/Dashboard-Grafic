@@ -267,6 +267,8 @@ def fetch_data():
 
                     filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes, default='Não Definido')
 
+                    st.write(filtered_df)
+
 
 
                     df_grouped = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
