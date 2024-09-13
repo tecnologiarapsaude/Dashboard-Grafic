@@ -224,13 +224,12 @@ def fetch_data():
                 # grafico de custo por operadora com streamlit
                 with st.container():
     
-                    total_valor = filtered_df[' COBRADO '].value_counts().sort_index().reset_index()
                     df_total_valor = filtered_df.groupby(['Nome_Fantasia', ' COBRADO ']).size().reset_index()
 
-                    st.write(total_valor)
+                    
                     st.write(df_total_valor)
 
-                    total_cobrado = df_total_valor['0'].sum()
+                    total_cobrado = df_total_valor[' COBRADO '].sum()
                     st.write(total_cobrado)
 
                     # st.write(filter)
