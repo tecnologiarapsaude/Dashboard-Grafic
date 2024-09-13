@@ -265,7 +265,7 @@ def fetch_data():
                     stages = df_grouped['faixa_etaria']
                     df_mtl = pd.DataFrame(dict(number=df_grouped['ID'], stage=stages))
                     df_mtl['office'] = 'Montreal'
-                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
+                    df_toronto = pd.DataFrame(dict(number=df_grouped['ID'], stage=stages))
                     df_toronto['office'] = 'Toronto'
                     df = pd.concat([df_mtl, df_toronto], axis=0)
                     fig = px.funnel(df, x='number', y='stage', color='office')
