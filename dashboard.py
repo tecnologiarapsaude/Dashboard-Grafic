@@ -253,6 +253,10 @@ def fetch_data():
 
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
+                    
+                    df_grouped = filtered_df.groupby(['ID', 'SEXO']).count().reset_index()
+                    st.write(df_grouped)
+
 
                     stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
                     df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
