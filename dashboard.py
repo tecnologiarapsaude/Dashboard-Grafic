@@ -255,8 +255,15 @@ def fetch_data():
                 with st.container():
 
                     df_grouped = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
-                    # df_grouped2 = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
                     df_grouped.columns = ['Idade','Sexo','Total']
+
+                    df_masculino = df_grouped[df_grouped['Sexo'] == 'M'].reset_index(drop=True)
+                    df_feminino = df_grouped[df_grouped['Sexo'] == 'F'].reset_index(drop=True)
+
+                    st.write(df_masculino)
+                    st.write(df_feminino)
+
+                    # df_grouped2 = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
                     # df_grouped2.columns = ['Idade','Sexo','Total']
  
                     stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
