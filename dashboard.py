@@ -276,7 +276,7 @@ def fetch_data():
 
                     df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
                     df_toronto['office'] = 'Toronto'
-                    df = pd.concat([df_mtl, df_toronto], axis=0)
+                    df = pd.concat([df_masculino, df_feminino], axis=0)
                     # df2 = pd.concat([df_grouped, df_grouped2], axis=0)
                     fig = px.funnel(df_grouped, x='Idade', y='Total', color='Sexo')
                     
