@@ -253,12 +253,13 @@ def fetch_data():
 
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
-                    
+                    total_idades_funil = filtered_df['ID'].value_counts().sort_index().reset_index()  
                     stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
                     df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
                     df_mtl['office'] = 'Montreal'
 
                     st.write(df_mtl)
+                    st.write(total_idades_funil)
 
 
                     df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
