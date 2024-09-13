@@ -232,9 +232,9 @@ def fetch_data():
                     st.write(df_total_valor)
                     st.write(filtered_df[' COBRADO '].dtype)
                     custo_operadora = px.bar(
-                        filtered_df, 
+                        df_total_valor, 
                         x='Nome_Fantasia', 
-                        y='df_total_valor', 
+                        y=' COBRADO ', 
                         title='Custo por Operadoras',
                         labels={'Nome_Fantasia':'Operadora',' COBRADO ':'Valor Cobrado'},
                         color='Nome_Fantasia',  # Adiciona uma cor baseada na contagem
