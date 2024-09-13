@@ -148,28 +148,17 @@ def fetch_data():
                         filtered_df = combined_df
 
                 
-                #Filtro por Nome_Fantasia da Operadora
-                operadora_selecionada = st.sidebar.multiselect(
-                    'Selecione a Operadora',
-                    options=filtered_df['Nome_Fantasia'].unique(),
-                    default=filtered_df['Nome_Fantasia'].unique(),
-                    placeholder='Selecione a Operadora'
+                # Adicionando o filtro de sexo
+                sexo_selecionado = st.sidebar.multiselect(
+                    'Selecione o Sexo',
+                    options=filtered_df['SEXO'].unique(),
+                    default=filtered_df['SEXO'].unique(),
+                    placeholder='Selecione o Sexo'
                 )
 
-                if operadora_selecionada:
-                    # Filtrar dados com base na seleção da empresa
-                    dados_filtrados = filtered_df[filtered_df['Nome_Fantasia'].isin(operadora_selecionada)]
-                    filtered_df = dados_filtrados
-                #Filtrar por Status_Fatura
-                status_fatura_selecionada = st.sidebar.multiselect(
-                    'Selecione o Status Fatura',
-                    options=filtered_df['Status_Fatura'].unique(),
-                    default=filtered_df['Status_Fatura'].unique(),
-                    placeholder='Selecione o Status Fatura'
-                )
-
-                if status_fatura_selecionada:
-                    dados_filtrados = filtered_df[filtered_df['Status_Fatura'].isin(status_fatura_selecionada)]
+                if sexo_selecionado:
+                    # Filtrar dados com base na seleção de sexo
+                    dados_filtrados = filtered_df[filtered_df['SEXO'].isin(sexo_selecionado)]
                     filtered_df = dados_filtrados
 
                 # Filtro por Tipo de Atendimento
