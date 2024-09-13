@@ -231,7 +231,7 @@ def fetch_data():
 
                     st.write(df_total_valor)
                     st.write(filtered_df[' COBRADO '].dtype)
-
+                    st.write("O leo feza 1° alteração")
                     custo_operadora = px.bar(
                         filtered_df, 
                         x='Nome_Fantasia', 
