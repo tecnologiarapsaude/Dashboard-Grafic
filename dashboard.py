@@ -225,7 +225,7 @@ def fetch_data():
                 with st.container():
                     # Verificar se a coluna é numérica e converter se necessário
                     # filtered_df[' COBRADO '] = pd.to_numeric(df[' COBRADO '], errors='coerce')
-                    total_valor = filtered_df['COBRADO'].value_counts().sort_index().reset_index()
+                    total_valor = filtered_df[' COBRADO '].value_counts().sort_index().reset_index()
                     
                     st.write(total_valor)
 
