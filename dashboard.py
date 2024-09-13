@@ -274,6 +274,21 @@ def fetch_data():
                         )
                     
                     st.write(df)
+                    # Ajustar o gráfico para parecer um funil empilhado
+                    fig.update_layout(
+                        barmode='stack',  # Empilha as barras
+                        xaxis_title='Total de Pessoas',
+                        yaxis_title='Faixa Etária',
+                        yaxis=dict(
+                            categoryorder='total descending'  # Ordena as faixas etárias do maior para o menor
+                        ),
+                        xaxis=dict(
+                            title='Total de Pessoas'
+                        )
+                    )
+
+                    # Ajustar as barras para exibir o texto
+                    fig.update_traces(texttemplate='%{text}', textposition='inside')
                     st.plotly_chart(fig)
 
 
