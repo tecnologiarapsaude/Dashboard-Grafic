@@ -255,16 +255,17 @@ def fetch_data():
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
 
-                    condicao_faixa_etaria = [(filtered_df['ID'] > 59),
-                                    (filtered_df['ID'] > 49),
-                                    (filtered_df['ID'] > 39),
-                                    (filtered_df['ID'] > 29),
-                                    (filtered_df['ID'] > 17),
-                                    (filtered_df['ID'] < 18)]
-                    
+                    condicao_faixa_etaria = [
+                        (filtered_df['ID'] > 59),
+                        (filtered_df['ID'] > 49) & (filtered_df['ID'] <= 59),
+                        (filtered_df['ID'] > 39) & (filtered_df['ID'] <= 49),
+                        (filtered_df['ID'] > 29) & (filtered_df['ID'] <= 39),
+                        (filtered_df['ID'] > 17) & (filtered_df['ID'] <= 29),
+                        (filtered_df['ID'] <= 17)
+                    ]
                     opcoes = ['Maior que 60 Anos', '50 - 59 Anos','40 - 49 Anos','30 - 39 Anos','18 - 29 Anos', '0 - 17 Anos']
 
-                    filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes)
+                    filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes, default='Não Definido')
 
 
 
