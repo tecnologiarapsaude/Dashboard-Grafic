@@ -230,7 +230,7 @@ def fetch_data():
                     st.write(total_valor)
                     st.write(df_total_valor)
 
-                    total_cobrado = df_total_valor[' COBRADO '].sum()
+                    total_cobrado = df_total_valor['0'].sum()
                     st.write(total_cobrado)
 
                     # st.write(filter)
