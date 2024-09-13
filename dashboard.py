@@ -255,6 +255,7 @@ def fetch_data():
                 with st.container():
 
                     df_grouped = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
+                    df_grouped.columns = ['Idade','Sexo','Total']
 
 
                     total_idades_funil = filtered_df['ID'].value_counts().sort_index().reset_index()  
