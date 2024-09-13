@@ -267,7 +267,14 @@ def fetch_data():
                     st.write(df_feminino)
 
                     df = pd.concat([df_masculino, df_feminino], axis=0)
-                    fig = px.funnel(df, x='Idade', y='Total', color='Sexo')
+                    fig = px.funnel(
+                        df, 
+                        x='Idade', 
+                        y='Total', 
+                        color='Sexo',
+                        title='Distribuição por Faixa Etária e Sexo',
+                        labels={'Idade':'Idades','Total':'Total de Idades'}
+                        )
                     
                     st.write(df)
                     st.plotly_chart(fig)
