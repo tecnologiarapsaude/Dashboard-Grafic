@@ -6,6 +6,7 @@ from datetime import datetime
 import plotly.express as px
 import streamlit.components.v1 as components
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def fetch_data():
@@ -253,6 +254,19 @@ def fetch_data():
 
                 # teste do grafico do estilo funil para faixa etaria e sexo
                 with st.container():
+
+                    condicao_faixa_etaria = [(filtered_df['ID'] > 59),
+                                    (filtered_df['ID'] > 49),
+                                    (filtered_df['ID'] > 39),
+                                    (filtered_df['ID'] > 29),
+                                    (filtered_df['ID'] > 17),
+                                    (filtered_df['ID'] < 18)]
+                    
+                    opcoes = ['Maior que 60 Anos', '50 - 59 Anos','40 - 49 Anos','30 - 39 Anos','18 - 29 Anos', '0 - 17 Anos']
+
+                    filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes)
+
+
 
                     df_grouped = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
                     df_grouped.columns = ['Idade','Sexo','Total']
