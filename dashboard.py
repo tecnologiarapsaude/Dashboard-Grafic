@@ -256,15 +256,12 @@ def fetch_data():
 
                     df_grouped = filtered_df.groupby(['ID', 'SEXO']).size().reset_index()
                     df_grouped.columns = ['Idade','Sexo','Total']
-
-
-                    total_idades_funil = filtered_df['ID'].value_counts().sort_index().reset_index()  
+ 
                     stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
                     df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
                     df_mtl['office'] = 'Montreal'
 
                     st.write(df_mtl)
-                    st.write(total_idades_funil)
                     st.write(df_grouped)
 
 
