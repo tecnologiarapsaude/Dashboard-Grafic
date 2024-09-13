@@ -255,21 +255,13 @@ def fetch_data():
                 with st.container():
 
                     stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
-                    faixa_etaria = filtered_df['ID'].value_counts().sort_index().reset_index()
-                    faixa_etaria.columns = ['idade', 'total_idade']
-
-                    idades = faixa_etaria['idade']
-
-                    st.write(stages)
-                    st.write(faixa_etaria)
-                    st.write(idades)
-
-                    df_mtl = pd.DataFrame(dict(number=[39, 27, 20, 11, 3, 2, 1], stage=idades))
-                    df_mtl['Sexo'] = 'M'
-                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5, 3, 1], stage=idades))
-                    df_toronto['Sexo'] = 'F'
-                    df = pd.concat([df_mtl, df_toronto], axis=1)
-                    fig = px.funnel(df, x='number', y='stage', color='Sexo')
+                    df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
+                    df_mtl['office'] = 'Montreal'
+                    df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
+                    df_toronto['office'] = 'Toronto'
+                    df = pd.concat([df_mtl, df_toronto], axis=0)
+                    fig = px.funnel(df, x='number', y='stage', color='office')
+                    fig.show()
                     st.plotly_chart(fig)
 
 
