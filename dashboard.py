@@ -153,13 +153,13 @@ def fetch_data():
                 # Adicionando o filtro de sexo
                 sexo_selecionado = st.sidebar.multiselect(
                     'Selecione o Sexo',
-                    options=filtered_df['sexo_map'].unique(),
-                    default=filtered_df['sexo_map'].unique(),
+                    options=list(sexo_map.values()),
+                    default=list(sexo_map.values()),
                     placeholder='Selecione o Sexo'
                 )
 
                 # Reverter o mapeamento do sexo pelos os valores Originais
-                sexo_selecionado_originais = [sexo_map.get(sexo, sexo) for sexo in sexo_selecionado]
+                sexo_selecionado_originais = [key for key, value in sexo_map.items() if value in sexo_selecionado]
 
                 if sexo_selecionado_originais:
                     # Filtrar dados com base na seleção de sexo
