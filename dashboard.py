@@ -226,7 +226,10 @@ def fetch_data():
                     # Verificar se a coluna é numérica e converter se necessário
                     filtered_df[' COBRADO '] = pd.to_numeric(df[' COBRADO '], errors='coerce')
                     filtered_df['total_valor'] = filtered_df[' COBRADO '].sum(axis=0)
+                    df_total_cobrado = filtered_df.groupby(['Nome_Fantasia', ' COBRADO ']).size().reset_index()
                     
+                    st.write(df_total_cobrado)
+
                     # st.write(filter)
                     custo_operadora = px.bar(
                         filtered_df, 
