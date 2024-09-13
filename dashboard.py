@@ -260,9 +260,6 @@ def fetch_data():
                     df_masculino = df_grouped[df_grouped['Sexo'] == 'M'].reset_index(drop=True)
                     df_feminino = df_grouped[df_grouped['Sexo'] == 'F'].reset_index(drop=True)
 
-                    df_masculino['Sexo'] = 'Masculino'
-                    df_feminino['Sexo'] = 'Feminino'
-
                     st.write(df_masculino)
                     st.write(df_feminino)
 
