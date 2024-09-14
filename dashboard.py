@@ -224,7 +224,7 @@ def fetch_data():
                         # OBS:Não tem a tabela dependentes foi colocada outra tabela
                         st.metric(label='Total de Dependentes', value=f'{total_dependentes:,}')
 
-                # Container dos graficos de vidas em cada operadora e distribuiçao por vinculo
+                # Container dos graficos de vidas em cada sexo e distribuiçao por vinculo
                 with st.container():
                     # criado colunas para separa os graficos
                     col_vidas_operadora,col_distribuicao_vinculo = st.columns(2) 
@@ -264,12 +264,12 @@ def fetch_data():
                 with st.container():
                     
 
-                    filtered_df[' COBRADO '] = pd.to_numeric(filtered_df[' COBRADO '], errors='coerce')
+                    #filtered_df[' COBRADO '] = pd.to_numeric(filtered_df[' COBRADO '], errors='coerce')
                     # df_total_valor= filtered_df[' COBRADO '].sum()
-                    df_total_valor = filtered_df.groupby('Nome_Fantasia') [' COBRADO '] .sum().reset_index()
+                    df_total_valor = filtered_df.groupby('Nome_Fantasia') [' COBRADO '] .value_counts().reset_index()
 
-                    st.write(df_total_valor)
-                    st.write(filtered_df[' COBRADO '].dtype)
+                    # st.write(df_total_valor)
+                    # st.write(filtered_df[' COBRADO '].dtype)
                     custo_operadora = px.bar(
                         df_total_valor, 
                         x='Nome_Fantasia', 
