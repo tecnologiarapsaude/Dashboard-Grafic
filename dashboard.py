@@ -224,6 +224,42 @@ def fetch_data():
                         # OBS:Não tem a tabela dependentes foi colocada outra tabela
                         st.metric(label='Total de Dependentes', value=f'{total_dependentes:,}')
 
+                # Container dos graficos de vidas em cada operadora e distribuiçao por vinculo
+                with st.container():
+                    # criado colunas para separa os graficos
+                    col_vidas_operadora,col_distribuicao_vinculo = st.columns(2) 
+
+                    # Grafico de Vidas em cada operadora com streamlit
+                    with col_vidas_operadora:
+                        # fazendo a contagem de quantas vidas tem cada operadora
+                        total_vidas = filtered_df['BENEFICIARIO'].value_counts().sort_index().reset_index()
+                        total_vidas.columns = ['SEXO','total_vidas'] #renomendo as tabelas do dataframe
+                        vidas_operadoras = px.pie(
+                            total_vidas, 
+                            names='SEXO', 
+                            values='total_vidas', 
+                            title='DISTRIBUIÇÃO POR SEXO',
+                            labels={'SEXO':'SEXO','total_vidas':'Total de Vidas'},
+                            color='total_vidas',
+                            hole=.6,
+                            color_discrete_sequence=['skyblue', 'blue']
+                            )
+                        st.plotly_chart(vidas_operadoras)
+
+                    # Grafico de distribuição por vinculos com streamlit
+                    with col_distribuicao_vinculo:
+                        total_vinculos = filtered_df['T/D'].value_counts().sort_index().reset_index()
+                        total_vinculos.columns = ['nome_vinculo','total_vinculo']
+                        grafico_vinculo = px.pie(
+                            total_vinculos,
+                            title='Vinculos',
+                            names='nome_vinculo',
+                            values='total_vinculo',
+                            labels={'nome_vinculo':'Nome do Vinculo','total_vinculo':'Total de Vinculos'},
+                            color='nome_vinculo',
+                            hole=.6,)
+                        st.plotly_chart(grafico_vinculo)
+
                 # grafico de custo por operadora com streamlit
                 with st.container():
                     
@@ -260,7 +296,7 @@ def fetch_data():
                         color_continuous_scale='Blues')  # Paleta de cores, ajuste conforme desejado)
                     st.plotly_chart(distribuicao_faixa_sexo)
 
-                # teste do grafico do estilo funil para faixa etaria e sexo
+                # Grafico do estilo funil para faixa etaria e sexo
                 with st.container():
 
                     condicao_faixa_etaria = [
@@ -308,45 +344,7 @@ def fetch_data():
                     st.write(df)
 
                     # Exibir o gráfico no Streamlit  
-                    st.plotly_chart(fig)
-
-
-                # Container dos graficos de vidas em cada operadora e distribuiçao por vinculo
-                with st.container():
-                    # criado colunas para separa os graficos
-                    col_vidas_operadora,col_distribuicao_vinculo = st.columns(2) 
-
-                    # Grafico de Vidas em cada operadora com streamlit
-                    with col_vidas_operadora:
-                        # fazendo a contagem de quantas vidas tem cada operadora
-                        total_vidas = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
-                        total_vidas.columns = ['nome_operadora','total_vidas'] #renomendo as tabelas do dataframe
-                        vidas_operadoras = px.pie(
-                            total_vidas, 
-                            names='nome_operadora', 
-                            values='total_vidas', 
-                            title='Vidas por Operadora',
-                            labels={'nome_operadora':'Nome da Operadora','total_vidas':'Total de Vidas'},
-                            color='total_vidas',
-                            hole=.6,
-                            color_discrete_sequence=['skyblue', 'blue']
-                            )
-                        st.plotly_chart(vidas_operadoras)
-
-                    # Grafico de distribuição por vinculos com streamlit
-                    with col_distribuicao_vinculo:
-                        total_vinculos = filtered_df['T/D'].value_counts().sort_index().reset_index()
-                        total_vinculos.columns = ['nome_vinculo','total_vinculo']
-                        grafico_vinculo = px.pie(
-                            total_vinculos,
-                            title='Vinculos',
-                            names='nome_vinculo',
-                            values='total_vinculo',
-                            labels={'nome_vinculo':'Nome do Vinculo','total_vinculo':'Total de Vinculos'},
-                            color='nome_vinculo',
-                            hole=.6,)
-                        st.plotly_chart(grafico_vinculo)
-            
+                    st.plotly_chart(fig)            
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
 
