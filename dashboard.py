@@ -266,17 +266,17 @@ def fetch_data():
 
                     #filtered_df[' COBRADO '] = pd.to_numeric(filtered_df[' COBRADO '], errors='coerce')
                     # df_total_valor= filtered_df[' COBRADO '].sum()
-                    df_total_valor = filtered_df.groupby('Nome_Fantasia') [' COBRADO '] .value_counts().reset_index()
-
-                    # st.write(df_total_valor)
+                    total_operadora = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
+                    total_operadora.columns = ['Operadora', 'Total Operadoras']
+                    st.write(total_operadora)
                     # st.write(filtered_df[' COBRADO '].dtype)
                     custo_operadora = px.bar(
-                        df_total_valor, 
-                        x='Nome_Fantasia', 
-                        y=' COBRADO ', 
-                        title='Custo por Operadoras',
-                        labels={'Nome_Fantasia':'Operadora',' COBRADO ':'Valor Cobrado'},
-                        color='Nome_Fantasia',  # Adiciona uma cor baseada na contagem
+                        total_operadora, 
+                        x='Operadora', 
+                        y='Total operadora', 
+                        title='Distribuição por Operadoras',
+                        labels={'Nome_Fantasia':'Operadora','Total Operadora':'Total Operadora'},
+                        color='Operadora',  # Adiciona uma cor baseada na contagem
                         color_continuous_scale='Blues'
                         )
                     st.plotly_chart(custo_operadora)
