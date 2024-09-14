@@ -273,7 +273,7 @@ def fetch_data():
                     custo_operadora = px.bar(
                         total_operadora, 
                         x='Operadora', 
-                        y='Total operadora', 
+                        y='Total Operadora', 
                         title='Distribuição por Operadoras',
                         labels={'Nome_Fantasia':'Operadora','Total Operadora':'Total Operadora'},
                         color='Operadora',  # Adiciona uma cor baseada na contagem
