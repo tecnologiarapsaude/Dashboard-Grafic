@@ -179,6 +179,19 @@ def fetch_data():
                     dados_filtrados = filtered_df[filtered_df['Tipo_Atendimento'].isin(tipo_atendimento_selecionado)]
                     filtered_df = dados_filtrados
 
+                # Filtro Titular e Dependente
+                td_selecionado = st.sidebar.multiselect(
+                    'Selecione o Tipo de Vínculo',
+                    options=filtered_df['T/D'].unique(),
+                    default=filtered_df['T/D'].unique(),
+                    placeholder='Selecione o Tipo de Vínculo'
+                )
+
+                if td_selecionado:
+                    # Filtrar dados com base na seleção do tipo de vínculo
+                    dados_filtrados = filtered_df[filtered_df['T/D'].isin(td_selecionado)]
+                    filtered_df = dados_filtrados    
+
                 #filtro por Operadoras
                 operadora_selecionada = st.sidebar.multiselect(
                     'Selecione a Operadora',
