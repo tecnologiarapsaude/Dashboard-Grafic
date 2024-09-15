@@ -179,6 +179,19 @@ def fetch_data():
                     dados_filtrados = filtered_df[filtered_df['Tipo_Atendimento'].isin(tipo_atendimento_selecionado)]
                     filtered_df = dados_filtrados
 
+                #filtro por Operadoras
+                operadora_selecionada = st.sidebar.multiselect(
+                    'Selecione a Operadora',
+                    options=filtered_df['Nome_Fantasia'].unique(),
+                    default=filtered_df['Nome_Fantasia'].unique(),
+                    placeholder='Selecione a Operadora'
+                )
+
+                if operadora_selecionada:
+                    # Filtrar dados com base na seleção da operadora
+                    dados_filtrados = filtered_df[filtered_df['Nome_Fantasia'].isin(operadora_selecionada)]
+                    filtered_df = dados_filtrados
+
                 # Filtrar por empresas
                 empresa_selecionada = st.sidebar.multiselect(
                     'Selecione a empresa',
