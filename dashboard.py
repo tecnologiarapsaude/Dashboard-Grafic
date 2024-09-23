@@ -103,7 +103,7 @@ def process_txt(content):
     """Processar arquivo TXT delimitado."""
     # Aqui vamos assumir que o arquivo é delimitado por tabulação ou outro caractere.
     file_buffer = StringIO(content)
-    df = pd.read_csv(file_buffer, delimiter='\t')  # Alterar o delimitador conforme necessário
+    df = pd.read_csv(file_buffer, delimiter='#')  # Alterar o delimitador conforme necessário
     return df
 
 
