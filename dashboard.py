@@ -55,6 +55,8 @@ def fetch_data():
 
                 file_response = requests.get(arquivo_url)
                 if file_response.status_code == 200:
+                    content_type = file_response.headers['Content-Type']
+                    st.write(f'Tipo de conteúdo: {content_type}')
                     st.write('Arquivo CSV baixado com sucesso')
                     file_content = file_response.text
                     file_buffer = StringIO(file_content)
