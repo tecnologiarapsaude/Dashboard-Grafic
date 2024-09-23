@@ -59,7 +59,7 @@ def fetch_data():
                         df = process_csv(file_response.text)
                     elif 'excel' in content_type:
                         df = process_excel(file_response.content)
-                    elif 'text' in content_type:
+                    elif 'text/plain' in content_type:
                         df = process_txt(file_response.text)
                     else:
                         st.error("Formato de arquivo não suportado.")
@@ -104,6 +104,7 @@ def process_txt(content):
     # Aqui vamos assumir que o arquivo é delimitado por tabulação ou outro caractere.
     file_buffer = StringIO(content)
     df = pd.read_csv(file_buffer, delimiter='#')  # Alterar o delimitador conforme necessário
+    df.columns = ["Código", "Beneficiário", "Matrícula", "CPF", "Plano", "Tipo", "Idade", "Dependência", "Data Limite", "Data Inclusão", "Data Exclusão", "Lotacao", "Rubrica", "Co-Participacao", "Outros", "Mensalidade", "Total Família"]
     return df
 
 
