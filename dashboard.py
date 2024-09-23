@@ -104,7 +104,7 @@ def process_txt(content):
     # Aqui vamos assumir que o arquivo é delimitado por tabulação ou outro caractere.
     file_buffer = StringIO(content)
     try:
-        df = pd.read_csv(file_buffer, delimiter='#')  # Alterar o delimitador conforme necessário
+        df = pd.read_csv(file_buffer, delimiter='#', skiprows=3)  # Ignorar as 3 primeiras linhas
     except Exception as e:
         st.error(f"Erro ao processar o arquivo TXT: {str(e)}")
         return None
