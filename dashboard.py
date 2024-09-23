@@ -59,7 +59,7 @@ def fetch_data():
                         df = process_csv(file_response.text)
                     elif 'excel' in content_type:
                         df = process_excel(file_response.content)
-                    elif 'text/plain' in content_type:
+                    elif 'txt' in content_type:
                         df = process_txt(file_response.text)
                     else:
                         st.error("Formato de arquivo não suportado.")
