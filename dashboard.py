@@ -133,7 +133,7 @@ def fetch_data():
 
                         df_gndi['data_vencimento'] = data_vencimento
 
-                        df_gndi['Cd Beneficiario'] = df_gndi['Cd Beneficiario'].astype(str)
+                        df_gndi['Cd Beneficiário'] = df_gndi['Cd Beneficiário'].astype(str)
 
                         dataframes.append(df_gndi)
 
