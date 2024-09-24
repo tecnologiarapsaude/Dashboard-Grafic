@@ -129,7 +129,7 @@ def fetch_data():
                         st.write(df_gndi)
 
                         # Define os nomes das colunas conforme a estrutura dos dados
-                        df_gndi.columns = ['Mês Ano Competencia','Cd Contrato ','Empresa', 'Tipo Faturamento','Cd Beneficiário', 'Matrícula','Titular' ,'Beneficiário','Sexo','Dependência','Data Nascimento','Data Vigencia contrato','Data Vigencia associado','Cod_Plano','Plano','CPF', 'Total Vidas gp Familiar', 'Valor Fatura','Valor Retroativo','Cd Local Trabalho','CNPJ', 'Rubrica', 'Cd Unico Cliente', 'Lotacão']
+                        df_gndi.columns = ['Mês Ano Competencia','Cd Contrato','Empresa', 'Tipo Faturamento','Cd Beneficiário', 'Matrícula','Titular' ,'Beneficiário','Sexo','Dependência','Data Nascimento','Data Vigencia contrato','Data Vigencia associado','Cod_Plano','Plano','CPF', 'Total Vidas gp Familiar', 'Valor Fatura','Valor Retroativo','Cd Local Trabalho','CNPJ', 'Rubrica', 'Cd Unico Cliente', 'Lotacão']
 
                         df_gndi['data_vencimento'] = data_vencimento
 
