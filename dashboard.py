@@ -7,6 +7,7 @@ import plotly.express as px
 import streamlit.components.v1 as components
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 
 def fetch_data():
@@ -59,6 +60,21 @@ def fetch_data():
                     file_content = file_response.text
                     file_buffer = StringIO(file_content)
                     df = pd.read_csv(file_buffer)
+
+
+                    # Extrai o nome do arquivo da URL
+                    filename = os.path.basename(arquivo_url)
+
+                    # Obtém a extensão do arquivo
+                    file_extension = os.path.splitext(filename)[1]
+
+                    # Remove o ponto da extensão
+                    file_type = file_extension[1:]
+
+                    st.write(f'O tipo do arquivo é: {file_type}')
+
+
+
 
                     # Adicionando a data de vencimento ao DataFrame
                     df['data_vencimento'] = data_vencimento
