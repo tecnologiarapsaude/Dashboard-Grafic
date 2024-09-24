@@ -92,7 +92,8 @@ def fetch_data():
                         dataframes.append(df_cnu)
                     
                     # Adicionando a data de vencimento ao DataFrame
-                    # df['data_vencimento'] = data_vencimento
+                    df_cnu['data_vencimento'] = data_vencimento
+                    df_hapvida['data_vencimento'] = data_vencimento
 
                     empresa_id = arquivo['empresas_id']
                     empresas = arquivo['_empresas']
