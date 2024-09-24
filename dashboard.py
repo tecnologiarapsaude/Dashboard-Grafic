@@ -214,43 +214,43 @@ def fetch_data():
                 #     filtered_df = dados_filtrados
 
                 # Filtro Titular e Dependente
-                td_selecionado = st.sidebar.multiselect(
-                    'Selecione o Tipo de Vínculo',
-                    options=filtered_df['T/D'].unique(),
-                    default=filtered_df['T/D'].unique(),
-                    placeholder='Selecione o Tipo de Vínculo'
-                )
+                # td_selecionado = st.sidebar.multiselect(
+                #     'Selecione o Tipo de Vínculo',
+                #     options=filtered_df['T/D'].unique(),
+                #     default=filtered_df['T/D'].unique(),
+                #     placeholder='Selecione o Tipo de Vínculo'
+                # )
 
-                if td_selecionado:
-                    # Filtrar dados com base na seleção do tipo de vínculo
-                    dados_filtrados = filtered_df[filtered_df['T/D'].isin(td_selecionado)]
-                    filtered_df = dados_filtrados    
+                # if td_selecionado:
+                #     # Filtrar dados com base na seleção do tipo de vínculo
+                #     dados_filtrados = filtered_df[filtered_df['T/D'].isin(td_selecionado)]
+                #     filtered_df = dados_filtrados    
 
                 #filtro por Operadoras
-                operadora_selecionada = st.sidebar.multiselect(
-                    'Selecione a Operadora',
-                    options=filtered_df['Nome_Fantasia'].unique(),
-                    default=filtered_df['Nome_Fantasia'].unique(),
-                    placeholder='Selecione a Operadora'
-                )
+                # operadora_selecionada = st.sidebar.multiselect(
+                #     'Selecione a Operadora',
+                #     options=filtered_df['Nome_Fantasia'].unique(),
+                #     default=filtered_df['Nome_Fantasia'].unique(),
+                #     placeholder='Selecione a Operadora'
+                # )
 
-                if operadora_selecionada:
-                    # Filtrar dados com base na seleção da operadora
-                    dados_filtrados = filtered_df[filtered_df['Nome_Fantasia'].isin(operadora_selecionada)]
-                    filtered_df = dados_filtrados
+                # if operadora_selecionada:
+                #     # Filtrar dados com base na seleção da operadora
+                #     dados_filtrados = filtered_df[filtered_df['Nome_Fantasia'].isin(operadora_selecionada)]
+                #     filtered_df = dados_filtrados
 
                 # Filtrar por empresas
-                empresa_selecionada = st.sidebar.multiselect(
-                    'Selecione a empresa',
-                    options=filtered_df['Nome_Empresa'].unique(),
-                    default=filtered_df['Nome_Empresa'].unique(),
-                    placeholder='Selecione a Empresa'
-                )
+                # empresa_selecionada = st.sidebar.multiselect(
+                #     'Selecione a empresa',
+                #     options=filtered_df['Nome_Empresa'].unique(),
+                #     default=filtered_df['Nome_Empresa'].unique(),
+                #     placeholder='Selecione a Empresa'
+                # )
 
-                if empresa_selecionada:
-                    # Filtrar dados com base na seleção da empresa
-                    dados_filtrados = filtered_df[filtered_df['Nome_Empresa'].isin(empresa_selecionada)]
-                    filtered_df = dados_filtrados
+                # if empresa_selecionada:
+                #     # Filtrar dados com base na seleção da empresa
+                #     dados_filtrados = filtered_df[filtered_df['Nome_Empresa'].isin(empresa_selecionada)]
+                #     filtered_df = dados_filtrados
 
                 # Exibir o gráfico com os dados filtrados ou o DataFrame original se o filtro estiver vazio
                 # st.line_chart(filtered_df if not filtered_df.empty else combined_df)
