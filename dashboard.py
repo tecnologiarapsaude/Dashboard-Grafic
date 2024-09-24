@@ -124,7 +124,7 @@ def fetch_data():
                         file_buffer = StringIO(file_content)
 
                         # Lê o arquivo como texto completo
-                        df_gndi = pd.read_csv(file_buffer, encoding='utf-8', sep=';')
+                        df_gndi = pd.read_csv(file_buffer, encoding='latin1', sep=';')
 
                         st.write(df_gndi)
 
