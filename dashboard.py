@@ -72,9 +72,9 @@ def fetch_data():
                     # Fazendo a verificação para ver o tipo do arquivo
                     if file_type == 'csv':
                         st.write('Arquivo CSV baixado com sucesso')
-                        file_content = file_response.text
-                        file_buffer = StringIO(file_content)
-                        df_hapvida = pd.read_csv(file_buffer, encoding='latin1', sep=';', skiprows=6, skipfooter=10)
+                        # file_content = file_response.text
+                        # file_buffer = StringIO(file_content)
+                        df_hapvida = pd.read_csv(arquivo_url, encoding='latin1', sep=';', skiprows=6, skipfooter=10)
 
                         df_hapvida.columns = ['Código', 'Unidade','Empresa','Credencial' ,'Matrícula', 'CPF', 'Beneficiário', 'Nome da Mãe', 'Data Nascimento', 'Data Exclusão', 'Idade', 'Dependência','Plano' ,'AC', 'Mensalidade', 'Adicional','Taxa Adesão' ,'Desconto','Valor Fatura',]
 
