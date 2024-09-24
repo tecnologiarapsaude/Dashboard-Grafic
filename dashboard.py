@@ -82,6 +82,8 @@ def fetch_data():
                         file_buffer = StringIO(file_content)
                         df_hapvida = pd.read_csv(file_buffer, encoding='latin1', sep=';', skiprows=7)
 
+                        st.write(df_hapvida)
+
                         df_hapvida.columns = ['Código', 'Unidade','Empresa','Credencial' ,'Matrícula', 'CPF', 'Beneficiário', 'Nome da Mãe', 'Data Nascimento', 'Data Exclusão', 'Idade', 'Dependência','Plano' ,'AC', 'Mensalidade', 'Adicional','Taxa Adesão' ,'Desconto','Valor Fatura',]
 
                         # Remover caracteres especiais e deixar apenas os números
@@ -93,6 +95,9 @@ def fetch_data():
                         file_content = file_response.content
                         file_buffer = BytesIO(file_content)
                         df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
+
+                        st.write(df_cnu)
+
                         df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
                         df_cnu['data_vencimento'] = data_vencimento
                         dataframes.append(df_cnu)
