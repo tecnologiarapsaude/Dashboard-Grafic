@@ -84,7 +84,7 @@ def fetch_data():
                         dataframes.append(df_hapvida)
 
 
-                    if file_type == 'xlsx':
+                    elif file_type == 'xlsx':
                         st.write('Arquivo CSV baixado com sucesso')
                         file_content = file_response.content
                         file_buffer = BytesIO(file_content)
