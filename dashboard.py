@@ -80,6 +80,7 @@ def fetch_data():
 
                         # Remover caracteres especiais e deixar apenas os números
                         df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
+                        df_hapvida['data_vencimento'] = data_vencimento
                         dataframes.append(df_hapvida)
 
 
@@ -89,11 +90,11 @@ def fetch_data():
                         file_buffer = BytesIO(file_content)
                         df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
                         df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+                        df_cnu['data_vencimento'] = data_vencimento
                         dataframes.append(df_cnu)
                     
                     # Adicionando a data de vencimento ao DataFrame
-                    df_cnu['data_vencimento'] = data_vencimento
-                    df_hapvida['data_vencimento'] = data_vencimento
+                    # df['data_vencimento'] = data_vencimento
 
                     empresa_id = arquivo['empresas_id']
                     empresas = arquivo['_empresas']
