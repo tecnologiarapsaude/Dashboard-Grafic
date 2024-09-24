@@ -55,8 +55,14 @@ def fetch_data():
                 st.write(f"URL do arquivo: {arquivo_url}")
                 st.write(f' Esse é os dados do arquivo detalhamento: {arquivo_detalhamento}')
 
+                operadoras_id = arquivo['operadoras_id']
+                operadoras = arquivo['_operadoras']
+                st.write(operadoras)
+
                 file_response = requests.get(arquivo_url)
                 if file_response.status_code == 200:
+
+                    nome_operadora = operadoras
                     
                     # Extrai o nome do arquivo da URL
                     filename = os.path.basename(arquivo_url)
@@ -70,7 +76,7 @@ def fetch_data():
                     st.write(f'O tipo do arquivo é: {file_type}')
 
                     # Fazendo a verificação para ver o tipo do arquivo
-                    if file_type == 'csv':
+                    if operadoras['Nome_Fantasia'] == 'Hapvida' and file_type == 'csv':
                         st.write('Arquivo CSV baixado com sucesso')
                         file_content = file_response.text
                         file_buffer = StringIO(file_content)
@@ -82,14 +88,14 @@ def fetch_data():
                         # df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
                         df_hapvida['data_vencimento'] = data_vencimento
                         dataframes.append(df_hapvida)
-                    if file_type == 'xlsx':
-                        st.write('Arquivo EXCEL baixado com sucesso')
-                        file_content = file_response.content
-                        file_buffer = BytesIO(file_content)
-                        df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
-                        df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
-                        df_cnu['data_vencimento'] = data_vencimento
-                        dataframes.append(df_cnu)
+                    # if file_type == 'xlsx':
+                    #     st.write('Arquivo EXCEL baixado com sucesso')
+                    #     file_content = file_response.content
+                    #     file_buffer = BytesIO(file_content)
+                    #     df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
+                    #     df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+                    #     df_cnu['data_vencimento'] = data_vencimento
+                    #     dataframes.append(df_cnu)
                     
                     # Adicionando a data de vencimento ao DataFrame
                     # df['data_vencimento'] = data_vencimento
@@ -105,8 +111,7 @@ def fetch_data():
                     #     df['Nome_Empresa'] = 'Empresa não encontrada'
 
                     # Comparando operadoras_id com o id em _operadoras e obtendo Nome_Fantasia
-                    operadoras_id = arquivo['operadoras_id']
-                    operadoras = arquivo['_operadoras']
+                    
 
                     # if operadoras_id == operadoras['id']:
                     #     df['Nome_Fantasia'] = operadoras['Nome_Fantasia']
