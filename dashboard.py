@@ -81,7 +81,7 @@ def fetch_data():
                         file_buffer = BytesIO(file_content)
                         df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
                         df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
-
+                        dataframes.append(df_cnu)
                     # Adicionando a data de vencimento ao DataFrame
                     df['data_vencimento'] = data_vencimento
 
@@ -123,7 +123,7 @@ def fetch_data():
                         df['Tipo_Atendimento'] = 'Tipo atendimento não existe'
 
                     dataframes.append(df)
-                    dataframes.append(df_cnu)
+                    
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
 
