@@ -196,10 +196,10 @@ def fetch_data():
                 # Reverter o mapeamento do sexo pelos os valores Originais
                 sexo_selecionado_originais = [key for key, value in sexo_map.items() if value in sexo_selecionado]
 
-                if sexo_selecionado_originais:
-                    # Filtrar dados com base na seleção de sexo
-                    dados_filtrados = filtered_df[filtered_df['SEXO'].isin(sexo_selecionado_originais)]
-                    filtered_df = dados_filtrados
+                # if sexo_selecionado_originais:
+                #     # Filtrar dados com base na seleção de sexo
+                #     dados_filtrados = filtered_df[filtered_df['SEXO'].isin(sexo_selecionado_originais)]
+                #     filtered_df = dados_filtrados
 
                 # Filtro por Tipo de Atendimento
                 tipo_atendimento_selecionado = st.sidebar.multiselect(
