@@ -132,10 +132,6 @@ def fetch_data():
                         df_gndi.columns = ['Mês Ano Competencia','Cd Contrato','Empresa', 'Tipo Faturamento','Cd Beneficiário', 'Matrícula','Titular' ,'Beneficiário','Sexo','Dependência','Data Nascimento','Data Vigencia contrato','Data Vigencia associado','Cod_Plano','Plano','CPF', 'Total Vidas gp Familiar', 'Valor Fatura','Valor Retroativo','Cd Local Trabalho','CNPJ', 'Rubrica', 'Cd Unico Cliente', 'Lotacão']
 
                         df_gndi['data_vencimento'] = data_vencimento
-                        data_nascimento = df_gndi['Data Nascimento']
-                        data_nascimento['Idade'] = pd.to_datetime(df_gndi['Data Nascimento'])
-
-
 
                         # Colocando tipo da coluna
                         df_gndi['Cd Beneficiário'] = df_gndi['Cd Beneficiário'].astype(str)
