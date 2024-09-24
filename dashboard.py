@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 import streamlit as st
 from io import StringIO
+from io import BytesIO
 from datetime import datetime
 import plotly.express as px
 import streamlit.components.v1 as components
@@ -75,11 +76,11 @@ def fetch_data():
                         file_buffer = StringIO(file_content)
                         df = pd.read_csv(file_buffer)
                     elif file_type == 'xlsx':
-                    #     st.write('Arquivo CSV baixado com sucesso')
-                        file_content = file_response.text
-                        file_buffer = StringIO(file_content)
+                        st.write('Arquivo CSV baixado com sucesso')
+                        file_content = file_response.content
+                        file_buffer = BytesIO(file_content)
                         df = pd.read_excel(file_buffer, engine='openpyxl')
-                        # df.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+                        df.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
 
 
 
