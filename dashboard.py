@@ -106,17 +106,9 @@ def fetch_data():
                         st.write('Arquivo Amil baixado com sucesso')
                         file_content = file_response.text
                         file_buffer = StringIO(file_content)
-                        # Lê o arquivo como texto completo
-                        with open(arquivo_url, 'r', encoding='latin1') as file:
-                            arquivo_amil = file.readlines()
 
-                        # Ignora as linhas iniciais de cabeçalho (se existirem) e remove espaços em branco
-                        data_lines = [line.strip() for line in arquivo_amil[6:] if line.strip()]
-                        
-                        # Divide cada linha pelo delimitador '#'
-                        split_lines = [line.split('#') for line in data_lines]
-                        # Cria um DataFrame
-                        df_amil = pd.DataFrame(split_lines)
+                        # Lê o arquivo como texto completo
+                        df_amil = pd.read_csv(file_buffer, encoding='latin1', skiprows=6, sep='#')
 
                         # Define os nomes das colunas conforme a estrutura dos dados
                         df_amil.columns = ['Código', 'Beneficiário', 'Matrícula', 'CPF', 'Plano', 'Tipo', 'Idade', 'Dependência', 'Data Limite', 'Data Inclusão', 'Data Exclusão', 'Lotacao', 'Rubrica', 'Co-Participacao', 'Outros', 'Mensalidade', 'Total Família']
