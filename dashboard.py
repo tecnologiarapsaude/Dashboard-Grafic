@@ -78,8 +78,8 @@ def fetch_data():
                         st.write('Arquivo CSV baixado com sucesso')
                         # file_content = file_response.text
                         # file_buffer = StringIO(file_content)
-                        df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
-                        df_cnu = pd.read_excel(file_buffer, dtype={'CPF_TITULAR':str})
+                        df.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+                        df = pd.read_excel(file_buffer, dtype={'CPF_TITULAR':str})
 
 
 
