@@ -74,7 +74,14 @@ def fetch_data():
                         st.write('Arquivo CSV baixado com sucesso')
                         file_content = file_response.text
                         file_buffer = StringIO(file_content)
-                        df = pd.read_csv(file_buffer)
+                        df_hapvida = pd.read_csv(file_buffer, encoding='latin1', sep=';', skiprows=6, skipfooter=10)
+
+                        df_hapvida.columns = ['Código', 'Unidade','Empresa','Credencial' ,'Matrícula', 'CPF', 'Beneficiário', 'Nome da Mãe', 'Data Nascimento', 'Data Exclusão', 'Idade', 'Dependência','Plano' ,'AC', 'Mensalidade', 'Adicional','Taxa Adesão' ,'Desconto','Valor Fatura',]
+
+                        # Remover caracteres especiais e deixar apenas os números
+                        df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
+
+
                     elif file_type == 'xlsx':
                         st.write('Arquivo CSV baixado com sucesso')
                         file_content = file_response.content
@@ -83,53 +90,53 @@ def fetch_data():
                         df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
                     
                     # Adicionando a data de vencimento ao DataFrame
-                    df['data_vencimento'] = data_vencimento
+                    # df['data_vencimento'] = data_vencimento
 
                     empresa_id = arquivo['empresas_id']
                     empresas = arquivo['_empresas']
 
                     empresa_encontrada = next((empresa for empresa in empresas if empresa['id'] == empresa_id), None)
 
-                    if empresa_encontrada:
-                        df['Nome_Empresa'] = empresa_encontrada['nome_fantasia']
-                    else:
-                        df['Nome_Empresa'] = 'Empresa não encontrada'
+                    # if empresa_encontrada:
+                    #     df['Nome_Empresa'] = empresa_encontrada['nome_fantasia']
+                    # else:
+                    #     df['Nome_Empresa'] = 'Empresa não encontrada'
 
                     # Comparando operadoras_id com o id em _operadoras e obtendo Nome_Fantasia
                     operadoras_id = arquivo['operadoras_id']
                     operadoras = arquivo['_operadoras']
 
-                    if operadoras_id == operadoras['id']:
-                        df['Nome_Fantasia'] = operadoras['Nome_Fantasia']
-                    else:
-                        df['Nome_Fantasia'] = 'Operadora não encontrada'
+                    # if operadoras_id == operadoras['id']:
+                    #     df['Nome_Fantasia'] = operadoras['Nome_Fantasia']
+                    # else:
+                    #     df['Nome_Fantasia'] = 'Operadora não encontrada'
 
                     # Comparando status_faturas_id com o status_faturas
                     status_faturas_id = arquivo['status_faturas_id']
                     status_fatura = arquivo['_status_faturas']
 
-                    if status_faturas_id == status_fatura['id']:
-                        df['Status_Fatura'] = status_fatura['Status_Fatura']
-                    else:
-                        df['Status_Fatura'] = 'Status não encontrado'
+                    # if status_faturas_id == status_fatura['id']:
+                    #     df['Status_Fatura'] = status_fatura['Status_Fatura']
+                    # else:
+                    #     df['Status_Fatura'] = 'Status não encontrado'
 
                     # _tipo_atendimento & 'tipo_atendimento_id
                     tipo_atendimento_id = arquivo['tipo_atendimento_id']
                     tipo_atendimento = arquivo['_tipo_atendimento']
 
-                    if tipo_atendimento_id == tipo_atendimento['id']:
-                        df['Tipo_Atendimento'] = tipo_atendimento['Tipo_Atendimento']
-                    else:
-                        df['Tipo_Atendimento'] = 'Tipo atendimento não existe'
+                    # if tipo_atendimento_id == tipo_atendimento['id']:
+                    #     df['Tipo_Atendimento'] = tipo_atendimento['Tipo_Atendimento']
+                    # else:
+                    #     df['Tipo_Atendimento'] = 'Tipo atendimento não existe'
 
-                    dataframes.append(df)
+                    # dataframes.append(df)
                     
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
 
             if dataframes:
                 # Concatenar os DataFrames
-                combined_df = pd.concat(dataframes, ignore_index=True)
+                combined_df = pd.concat([df_cnu, df_hapvida], ignore_index=True)
                 combined_df = combined_df.dropna()
                 st.write(combined_df.head(100))
 
