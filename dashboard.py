@@ -58,7 +58,6 @@ def fetch_data():
                     st.write('Arquivo CSV baixado com sucesso')
                     file_content = file_response.text
                     file_buffer = StringIO(file_content)
-                    st.write(file_content)
                     df = pd.read_csv(file_buffer)
 
                     # Adicionando a data de vencimento ao DataFrame
