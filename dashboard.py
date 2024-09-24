@@ -70,26 +70,26 @@ def fetch_data():
                     st.write(f'O tipo do arquivo é: {file_type}')
 
                     # Fazendo a verificação para ver o tipo do arquivo
-                    if file_type == 'csv':
-                        st.write('Arquivo CSV baixado com sucesso')
-                        # file_content = file_response.text
-                        # file_buffer = StringIO(file_content)
-                        df_hapvida = pd.read_csv(arquivo_url, encoding='latin1', sep=';', skiprows=6, skipfooter=10)
+                    # if file_type == 'csv':
+                    #     st.write('Arquivo CSV baixado com sucesso')
+                    #     # file_content = file_response.text
+                    #     # file_buffer = StringIO(file_content)
+                    #     df_hapvida = pd.read_csv(arquivo_url, encoding='latin1', sep=';', skiprows=6, skipfooter=10)
 
-                        df_hapvida.columns = ['Código', 'Unidade','Empresa','Credencial' ,'Matrícula', 'CPF', 'Beneficiário', 'Nome da Mãe', 'Data Nascimento', 'Data Exclusão', 'Idade', 'Dependência','Plano' ,'AC', 'Mensalidade', 'Adicional','Taxa Adesão' ,'Desconto','Valor Fatura',]
+                    #     df_hapvida.columns = ['Código', 'Unidade','Empresa','Credencial' ,'Matrícula', 'CPF', 'Beneficiário', 'Nome da Mãe', 'Data Nascimento', 'Data Exclusão', 'Idade', 'Dependência','Plano' ,'AC', 'Mensalidade', 'Adicional','Taxa Adesão' ,'Desconto','Valor Fatura',]
 
-                        # Remover caracteres especiais e deixar apenas os números
-                        df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
-                        df_hapvida['data_vencimento'] = data_vencimento
-                        dataframes.append(df_hapvida)
-                    # elif file_type == 'xlsx':
-                    #     st.write('Arquivo EXCEL baixado com sucesso')
-                    #     file_content = file_response.content
-                    #     file_buffer = BytesIO(file_content)
-                    #     df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
-                    #     df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
-                    #     df_cnu['data_vencimento'] = data_vencimento
-                    #     dataframes.append(df_cnu)
+                    #     # Remover caracteres especiais e deixar apenas os números
+                    #     df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
+                    #     df_hapvida['data_vencimento'] = data_vencimento
+                    #     dataframes.append(df_hapvida)
+                    if file_type == 'xlsx':
+                        st.write('Arquivo EXCEL baixado com sucesso')
+                        file_content = file_response.content
+                        file_buffer = BytesIO(file_content)
+                        df_cnu = pd.read_excel(arquivo_url, engine='openpyxl')
+                        df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+                        df_cnu['data_vencimento'] = data_vencimento
+                        dataframes.append(df_cnu)
                     
                     # Adicionando a data de vencimento ao DataFrame
                     # df['data_vencimento'] = data_vencimento
