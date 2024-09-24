@@ -118,6 +118,22 @@ def fetch_data():
                         df_amil['data_vencimento'] = data_vencimento
                         dataframes.append(df_amil)
 
+                    if operadoras['Nome_Fantasia'] == 'GNDI':
+                        st.write('Arquivo GNDI baixado com sucesso')
+                        file_content = file_response.text
+                        file_buffer = StringIO(file_content)
+
+                        # Lê o arquivo como texto completo
+                        df_gndi = pd.read_csv(file_buffer, encoding='latin1', sep=';')
+
+                        st.write(df_gndi)
+
+                        # Define os nomes das colunas conforme a estrutura dos dados
+                        df_gndi.columns = ['Código', 'Beneficiário', 'Matrícula', 'CPF', 'Plano', 'Tipo', 'Idade', 'Dependência', 'Data Limite', 'Data Inclusão', 'Data Exclusão', 'Lotacao', 'Rubrica', 'Co-Participacao', 'Outros', 'Mensalidade', 'Total Família']
+
+                        df_gndi['data_vencimento'] = data_vencimento
+                        dataframes.append(df_gndi)
+
                     # Adicionando a data de vencimento ao DataFrame
                     # df['data_vencimento'] = data_vencimento
 
