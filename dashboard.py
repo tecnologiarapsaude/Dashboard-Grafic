@@ -136,7 +136,7 @@ def fetch_data():
 
             if dataframes:
                 # Concatenar os DataFrames
-                combined_df = pd.concat([df_cnu, df_hapvida])
+                combined_df = pd.concat([df_cnu, df_hapvida], ignore_index=True)
                 combined_df = combined_df.dropna()
                 st.write(combined_df.head(100))
 
