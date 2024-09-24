@@ -82,14 +82,14 @@ def fetch_data():
                         df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
                         df_hapvida['data_vencimento'] = data_vencimento
                         dataframes.append(df_hapvida)
-                    elif file_type == 'xlsx':
-                        st.write('Arquivo EXCEL baixado com sucesso')
-                        file_content = file_response.content
-                        file_buffer = BytesIO(file_content)
-                        df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
-                        df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
-                        df_cnu['data_vencimento'] = data_vencimento
-                        dataframes.append(df_cnu)
+                    # elif file_type == 'xlsx':
+                    #     st.write('Arquivo EXCEL baixado com sucesso')
+                    #     file_content = file_response.content
+                    #     file_buffer = BytesIO(file_content)
+                    #     df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
+                    #     df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+                    #     df_cnu['data_vencimento'] = data_vencimento
+                    #     dataframes.append(df_cnu)
                     
                     # Adicionando a data de vencimento ao DataFrame
                     # df['data_vencimento'] = data_vencimento
