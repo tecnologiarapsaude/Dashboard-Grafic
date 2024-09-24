@@ -265,24 +265,24 @@ def fetch_data():
 
                 # Criando um container para separar os conteudos das colunas
                 # Contagem de TD 
-                contagem_td = filtered_df['T/D'].value_counts()
+                # contagem_td = filtered_df['T/D'].value_counts()
                 # Obtendo o total de titulares e dependentes
-                total_titulares = contagem_td.get('TITULAR', 0)
-                total_dependentes = contagem_td.get('DEPENDENTE', 0)
-                with st.container():
-                    with col1:
-                        # pegando o total de vidas do dataframe
-                        total_vidas = filtered_df['BENEFICIARIO'].count()
-                        st.metric(label="Total de Vidas", value=f'{total_vidas:,}')
+                # total_titulares = contagem_td.get('TITULAR', 0)
+                # total_dependentes = contagem_td.get('DEPENDENTE', 0)
+                # with st.container():
+                #     with col1:
+                #         # pegando o total de vidas do dataframe
+                #         total_vidas = filtered_df['BENEFICIARIO'].count()
+                #         st.metric(label="Total de Vidas", value=f'{total_vidas:,}')
 
-                    with col2:
-                        # pegando o total de titular do dataframe
-                        st.metric(label='Total de Titulares' , value=f'{total_titulares:,}')
+                #     with col2:
+                #         # pegando o total de titular do dataframe
+                #         st.metric(label='Total de Titulares' , value=f'{total_titulares:,}')
 
-                    with col3:  
-                        # pegando o total de dependentes do dataframe 
-                        # OBS:Não tem a tabela dependentes foi colocada outra tabela
-                        st.metric(label='Total de Dependentes', value=f'{total_dependentes:,}')
+                #     with col3:  
+                #         # pegando o total de dependentes do dataframe 
+                #         # OBS:Não tem a tabela dependentes foi colocada outra tabela
+                #         st.metric(label='Total de Dependentes', value=f'{total_dependentes:,}')
 
                 # Container dos graficos de vidas em cada sexo e distribuiçao por vinculo
                 with st.container():
