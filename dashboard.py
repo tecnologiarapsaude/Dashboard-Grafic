@@ -140,7 +140,7 @@ def fetch_data():
                 # Concatenar os DataFrames
                 combined_df = pd.concat(dataframes, ignore_index=True)
                 # combined_df = combined_df.dropna()
-                st.dataframe(combined_df)
+                st.write(combined_df)
 
                 # gerar menu lateral com filtros
                 st.sidebar.header('Filtros')
