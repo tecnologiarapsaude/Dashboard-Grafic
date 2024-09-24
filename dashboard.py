@@ -74,6 +74,17 @@ def fetch_data():
                         file_content = file_response.text
                         file_buffer = StringIO(file_content)
                         df = pd.read_csv(file_buffer)
+                    elif file_type == 'xlsx':
+                        st.write('Arquivo CSV baixado com sucesso')
+                        file_content = file_response.text
+                        file_buffer = StringIO(file_content)
+                        df_cnu = pd.read_excel(file_buffer, dtype={'CPF_TITULAR':str})
+
+                        df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+
+                        # Verifica e converte a coluna 'Código' para string
+                        df_cnu['Código'] = df_cnu['Código'].astype(str)
+                        df_cnu['Matrícula'] = df_cnu['Matrícula'].astype(str)
 
 
 
