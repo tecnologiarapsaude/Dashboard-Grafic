@@ -84,7 +84,7 @@ def fetch_data():
 
                         st.write(df_hapvida)
 
-                        df_hapvida.columns = ['Código', 'Unidade','Empresa','Credencial' ,'Matrícula', 'CPF', 'Beneficiário', 'Nome da Mãe', 'Data Nascimento', 'Data Exclusão', 'Idade', 'Dependência','Plano' ,'AC', 'Mensalidade', 'Adicional','Taxa Adesão' ,'Desconto','Valor Fatura',]
+                        df_hapvida.columns = ['Código', 'Unidade','Empresa','Cd Beneficiario' ,'Matrícula', 'CPF', 'Beneficiário', 'Nome da Mãe', 'Data Nascimento', 'Data Exclusão', 'Idade', 'Dependência','Plano' ,'AC', 'Mensalidade', 'Adicional','Taxa Adesão' ,'Desconto','Valor Fatura',]
 
                         # Remover caracteres especiais e deixar apenas os números
                         # df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
@@ -113,7 +113,7 @@ def fetch_data():
                         st.write(df_amil)
 
                         # Define os nomes das colunas conforme a estrutura dos dados
-                        df_amil.columns = ['Código', 'Beneficiário', 'Matrícula', 'CPF', 'Plano', 'Tipo', 'Idade', 'Dependência', 'Data Limite', 'Data Inclusão', 'Data Exclusão', 'Lotacao', 'Rubrica', 'Co-Participacao', 'Outros', 'Mensalidade', 'Total Família']
+                        df_amil.columns = ['Cd Beneficiário', 'Beneficiário', 'Matrícula', 'CPF', 'Plano', 'Dependência', 'Idade', 'Tipo', 'Data Limite', 'Data Inclusão', 'Data Exclusão', 'Lotacão', 'Rubrica', 'Co-Participacao', 'Outros', 'Mensalidade', 'Total Família']
 
                         df_amil['data_vencimento'] = data_vencimento
                         dataframes.append(df_amil)
@@ -129,7 +129,7 @@ def fetch_data():
                         st.write(df_gndi)
 
                         # Define os nomes das colunas conforme a estrutura dos dados
-                        df_gndi.columns = ['Mês Ano Competencia','Cd Contrato ','Empresa', 'Tipo Faturamento','Cd Beneficiario', 'Matrícula','Titular' ,'Beneficiário','Sexo','Dependência','Data Nascimento','Data Vigencia contrato','Data Vigencia associado','Cod_Plano','Plano','CPF', 'Total Vidas gp Familiar', 'Valor Fatura','Valor Retroativo','Cd Local Trabalho','CNPJ', 'Rubrica', 'Cd Unico Cliente', 'Nome Lotação']
+                        df_gndi.columns = ['Mês Ano Competencia','Cd Contrato ','Empresa', 'Tipo Faturamento','Cd Beneficiario', 'Matrícula','Titular' ,'Beneficiário','Sexo','Dependência','Data Nascimento','Data Vigencia contrato','Data Vigencia associado','Cod_Plano','Plano','CPF', 'Total Vidas gp Familiar', 'Valor Fatura','Valor Retroativo','Cd Local Trabalho','CNPJ', 'Rubrica', 'Cd Unico Cliente', 'Lotacão']
 
                         df_gndi['data_vencimento'] = data_vencimento
 
