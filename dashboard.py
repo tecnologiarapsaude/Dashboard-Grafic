@@ -129,7 +129,8 @@ def fetch_data():
                     # else:
                     #     df['Tipo_Atendimento'] = 'Tipo atendimento não existe'
 
-                    # dataframes.append(df)
+                    dataframes.append(df_hapvida)
+                    dataframes.append(df_cnu)
                     
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
