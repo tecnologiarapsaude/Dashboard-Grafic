@@ -74,7 +74,7 @@ def fetch_data():
                         file_content = file_response.text
                         file_buffer = StringIO(file_content)
                         df = pd.read_csv(file_buffer)
-                    elif file_type == 'xlsx':
+                    if file_type == 'xlsx':
                         st.write('Arquivo CSV baixado com sucesso')
                         file_content = file_response.text
                         file_buffer = StringIO(file_content)
