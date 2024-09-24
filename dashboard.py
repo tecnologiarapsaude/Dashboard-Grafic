@@ -82,10 +82,8 @@ def fetch_data():
                         df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
                         df_hapvida['data_vencimento'] = data_vencimento
                         dataframes.append(df_hapvida)
-
-
-                    if file_type == 'xlsx':
-                        st.write('Arquivo CSV baixado com sucesso')
+                    elif file_type == 'xlsx':
+                        st.write('Arquivo EXCEL baixado com sucesso')
                         file_content = file_response.content
                         file_buffer = BytesIO(file_content)
                         df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
@@ -140,7 +138,7 @@ def fetch_data():
 
             if dataframes:
                 # Concatenar os DataFrames
-                combined_df = pd.concat([df_cnu, df_hapvida])
+                combined_df = pd.concat(dataframes, ignore_index=True)
                 # combined_df = combined_df.dropna()
                 st.write(combined_df.head(100))
 
