@@ -110,6 +110,8 @@ def fetch_data():
                         # Lê o arquivo como texto completo
                         df_amil = pd.read_csv(file_buffer, encoding='latin1', skiprows=5, sep='#')
 
+                        st.write(df_amil)
+
                         # Define os nomes das colunas conforme a estrutura dos dados
                         df_amil.columns = ['Código', 'Beneficiário', 'Matrícula', 'CPF', 'Plano', 'Tipo', 'Idade', 'Dependência', 'Data Limite', 'Data Inclusão', 'Data Exclusão', 'Lotacao', 'Rubrica', 'Co-Participacao', 'Outros', 'Mensalidade', 'Total Família']
 
