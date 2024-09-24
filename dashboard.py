@@ -25,12 +25,12 @@ def fetch_data():
         st.error("O parâmetro 'id_empresas' deve ser uma lista de inteiros separados por vírgula.")
         return None
 
-    XANO_API_GET = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento_teste_Post'
+    XANO_API_POST = f'https://xqyx-rytf-8kv4.n7d.xano.io/api:IVkUsJEe/arquivos_faturamento_teste_Post'
     payload = {'ID_empresa': id_empresas_list}
     st.write(f'URL chamada: {payload}')
 
     try:
-        response = requests.post(XANO_API_GET, json=payload)
+        response = requests.post(XANO_API_POST, json=payload)
         st.write(response)
 
         # pegando o json com as informaçoes
@@ -56,12 +56,7 @@ def fetch_data():
 
                 file_response = requests.get(arquivo_url)
                 if file_response.status_code == 200:
-                    st.write('Arquivo CSV baixado com sucesso')
-                    file_content = file_response.text
-                    file_buffer = StringIO(file_content)
-                    df = pd.read_csv(file_buffer)
-
-
+                    
                     # Extrai o nome do arquivo da URL
                     filename = os.path.basename(arquivo_url)
 
@@ -72,6 +67,15 @@ def fetch_data():
                     file_type = file_extension[1:]
 
                     st.write(f'O tipo do arquivo é: {file_type}')
+
+                    # Fazendo a verificação para ver o tipo do arquivo
+                    if file_type == 'csv':
+                        st.write('Arquivo CSV baixado com sucesso')
+                        file_content = file_response.text
+                        file_buffer = StringIO(file_content)
+                        df = pd.read_csv(file_buffer)
+
+
 
 
 
