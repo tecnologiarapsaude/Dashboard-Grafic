@@ -113,7 +113,7 @@ def fetch_data():
                         st.write(df_amil)
 
                         # Define os nomes das colunas conforme a estrutura dos dados
-                        df_amil.columns = ['Cd Beneficiário', 'Beneficiário', 'Matrícula', 'CPF', 'Plano', 'Dependência', 'Idade', 'Tipo', 'Data Limite', 'Data Inclusão', 'Data Exclusão', 'Lotacão', 'Rubrica', 'Co-Participacao', 'Outros', 'Mensalidade', 'Total Família']
+                        df_amil.columns = ['Cd Beneficiário', 'Beneficiário', 'Matrícula', 'CPF', 'Plano', 'Dependência', 'Idade', 'Tipo', 'Data Limite', 'Data Inclusão', 'Data Exclusão', 'Lotacão', 'Rubrica', 'Co-Participacao', 'Outros', 'Valor Fatura', 'Total Família']
 
                         df_amil['data_vencimento'] = data_vencimento
                         dataframes.append(df_amil)
