@@ -132,6 +132,9 @@ def fetch_data():
                         df_gndi.columns = ['Mês Ano Competencia','Cd Contrato ','Empresa', 'Tipo Faturamento','Cd Beneficiario', 'Matrícula','Titular' ,'Beneficiário','Sexo','Dependência','Data Nascimento','Data Vigencia contrato','Data Vigencia associado','Cod_Plano','Plano','CPF', 'Total Vidas gp Familiar', 'Valor Fatura','Valor Retroativo','Cd Local Trabalho','CNPJ', 'Rubrica', 'Cd Unico Cliente', 'Nome Lotação']
 
                         df_gndi['data_vencimento'] = data_vencimento
+
+                        df_gndi['Cd Beneficiario'] = df_gndi['Cd Beneficiario'].astype(str)
+
                         dataframes.append(df_gndi)
 
                     # Adicionando a data de vencimento ao DataFrame
