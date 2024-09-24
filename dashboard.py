@@ -79,8 +79,8 @@ def fetch_data():
                         st.write('Arquivo CSV baixado com sucesso')
                         file_content = file_response.content
                         file_buffer = BytesIO(file_content)
-                        df = pd.read_excel(file_buffer, engine='openpyxl')
-                        df.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+                        df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
+                        df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
 
 
 
