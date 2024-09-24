@@ -285,126 +285,126 @@ def fetch_data():
                 #         st.metric(label='Total de Dependentes', value=f'{total_dependentes:,}')
 
                 # Container dos graficos de vidas em cada sexo e distribuiçao por vinculo
-                with st.container():
-                    # criado colunas para separa os graficos
-                    col_vidas_operadora,col_distribuicao_vinculo = st.columns(2) 
+                # with st.container():
+                #     # criado colunas para separa os graficos
+                #     col_vidas_operadora,col_distribuicao_vinculo = st.columns(2) 
 
-                    # Grafico de Vidas em cada operadora com streamlit
-                    with col_vidas_operadora:
-                        # fazendo a contagem de quantas vidas tem cada operadora
-                        total_vidas = filtered_df['SEXO'].value_counts().sort_index().reset_index()
-                        total_vidas.columns = ['SEXO','total_vidas'] #renomendo as tabelas do dataframe
-                        vidas_operadoras = px.pie(
-                            total_vidas, 
-                            names='SEXO', 
-                            values='total_vidas', 
-                            title='DISTRIBUIÇÃO POR SEXO',
-                            labels={'SEXO':'SEXO','total_vidas':'Total de Vidas'},
-                            color='total_vidas',
-                            hole=.6,
-                            color_discrete_sequence=['skyblue', 'blue']
-                            )
-                        st.plotly_chart(vidas_operadoras)
+                #     # Grafico de Vidas em cada operadora com streamlit
+                #     with col_vidas_operadora:
+                #         # fazendo a contagem de quantas vidas tem cada operadora
+                #         total_vidas = filtered_df['SEXO'].value_counts().sort_index().reset_index()
+                #         total_vidas.columns = ['SEXO','total_vidas'] #renomendo as tabelas do dataframe
+                #         vidas_operadoras = px.pie(
+                #             total_vidas, 
+                #             names='SEXO', 
+                #             values='total_vidas', 
+                #             title='DISTRIBUIÇÃO POR SEXO',
+                #             labels={'SEXO':'SEXO','total_vidas':'Total de Vidas'},
+                #             color='total_vidas',
+                #             hole=.6,
+                #             color_discrete_sequence=['skyblue', 'blue']
+                #             )
+                #         st.plotly_chart(vidas_operadoras)
 
-                    # Grafico de distribuição por vinculos com streamlit
-                    with col_distribuicao_vinculo:
-                        total_vinculos = filtered_df['T/D'].value_counts().sort_index().reset_index()
-                        total_vinculos.columns = ['nome_vinculo','total_vinculo']
-                        grafico_vinculo = px.pie(
-                            total_vinculos,
-                            title='Vinculos',
-                            names='nome_vinculo',
-                            values='total_vinculo',
-                            labels={'nome_vinculo':'Nome do Vinculo','total_vinculo':'Total de Vinculos'},
-                            color='nome_vinculo',
-                            hole=.6,)
-                        st.plotly_chart(grafico_vinculo)
+                #     # Grafico de distribuição por vinculos com streamlit
+                #     with col_distribuicao_vinculo:
+                #         total_vinculos = filtered_df['T/D'].value_counts().sort_index().reset_index()
+                #         total_vinculos.columns = ['nome_vinculo','total_vinculo']
+                #         grafico_vinculo = px.pie(
+                #             total_vinculos,
+                #             title='Vinculos',
+                #             names='nome_vinculo',
+                #             values='total_vinculo',
+                #             labels={'nome_vinculo':'Nome do Vinculo','total_vinculo':'Total de Vinculos'},
+                #             color='nome_vinculo',
+                #             hole=.6,)
+                #         st.plotly_chart(grafico_vinculo)
 
-                # grafico de custo por operadora com streamlit
-                with st.container():
+                # # grafico de custo por operadora com streamlit
+                # with st.container():
                     
 
-                    #filtered_df[' COBRADO '] = pd.to_numeric(filtered_df[' COBRADO '], errors='coerce')
-                    # df_total_valor= filtered_df[' COBRADO '].sum()
-                    total_operadora = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
-                    total_operadora.columns = ['Operadora', 'Total Operadoras']
-                    st.write(total_operadora)
-                    # st.write(filtered_df[' COBRADO '].dtype)
-                    custo_operadora = px.bar(
-                        total_operadora, 
-                        x='Operadora', 
-                        y='Total Operadoras', 
-                        title='Distribuição por Operadoras',
-                        labels={'Nome_Fantasia':'Operadora','Total Operadora':'Total Operadora'},
-                        color='Operadora',  # Adiciona uma cor baseada na contagem
-                        color_continuous_scale='Blues'
-                        )
-                    st.plotly_chart(custo_operadora)
+                #     #filtered_df[' COBRADO '] = pd.to_numeric(filtered_df[' COBRADO '], errors='coerce')
+                #     # df_total_valor= filtered_df[' COBRADO '].sum()
+                #     total_operadora = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
+                #     total_operadora.columns = ['Operadora', 'Total Operadoras']
+                #     st.write(total_operadora)
+                #     # st.write(filtered_df[' COBRADO '].dtype)
+                #     custo_operadora = px.bar(
+                #         total_operadora, 
+                #         x='Operadora', 
+                #         y='Total Operadoras', 
+                #         title='Distribuição por Operadoras',
+                #         labels={'Nome_Fantasia':'Operadora','Total Operadora':'Total Operadora'},
+                #         color='Operadora',  # Adiciona uma cor baseada na contagem
+                #         color_continuous_scale='Blues'
+                #         )
+                #     st.plotly_chart(custo_operadora)
 
                 
-                # preparar o grafico com streamlit faixa etaria e sexo
-                with st.container():
-                    total_idades = filtered_df['ID'].value_counts().sort_index().reset_index()
-                    total_idades.columns = ['Idade', 'Total_idades']
-                    distribuicao_faixa_sexo = px.bar(
-                        total_idades, 
-                        x='Idade', 
-                        y='Total_idades', 
-                        title='Distribuição por Faixa Etária e Sexo',
-                        labels={'Idade': 'Idade', 'Total_idades': 'Total Pessoas'},
-                        color='Idade',  # Adiciona uma cor baseada na contagem
-                        color_continuous_scale='Blues')  # Paleta de cores, ajuste conforme desejado)
-                    st.plotly_chart(distribuicao_faixa_sexo)
+                # # preparar o grafico com streamlit faixa etaria e sexo
+                # with st.container():
+                #     total_idades = filtered_df['ID'].value_counts().sort_index().reset_index()
+                #     total_idades.columns = ['Idade', 'Total_idades']
+                #     distribuicao_faixa_sexo = px.bar(
+                #         total_idades, 
+                #         x='Idade', 
+                #         y='Total_idades', 
+                #         title='Distribuição por Faixa Etária e Sexo',
+                #         labels={'Idade': 'Idade', 'Total_idades': 'Total Pessoas'},
+                #         color='Idade',  # Adiciona uma cor baseada na contagem
+                #         color_continuous_scale='Blues')  # Paleta de cores, ajuste conforme desejado)
+                #     st.plotly_chart(distribuicao_faixa_sexo)
 
-                # Grafico do estilo funil para faixa etaria e sexo
-                with st.container():
+                # # Grafico do estilo funil para faixa etaria e sexo
+                # with st.container():
 
-                    condicao_faixa_etaria = [
-                        (filtered_df['ID'] > 59),
-                        (filtered_df['ID'] > 49) & (filtered_df['ID'] <= 59),
-                        (filtered_df['ID'] > 39) & (filtered_df['ID'] <= 49),
-                        (filtered_df['ID'] > 29) & (filtered_df['ID'] <= 39),
-                        (filtered_df['ID'] > 17) & (filtered_df['ID'] <= 29),
-                        (filtered_df['ID'] <= 17)
-                    ]
-                    opcoes = ['Maior que 60 Anos', '50 - 59 Anos','40 - 49 Anos','30 - 39 Anos','18 - 29 Anos', '0 - 17 Anos']
+                #     condicao_faixa_etaria = [
+                #         (filtered_df['ID'] > 59),
+                #         (filtered_df['ID'] > 49) & (filtered_df['ID'] <= 59),
+                #         (filtered_df['ID'] > 39) & (filtered_df['ID'] <= 49),
+                #         (filtered_df['ID'] > 29) & (filtered_df['ID'] <= 39),
+                #         (filtered_df['ID'] > 17) & (filtered_df['ID'] <= 29),
+                #         (filtered_df['ID'] <= 17)
+                #     ]
+                #     opcoes = ['Maior que 60 Anos', '50 - 59 Anos','40 - 49 Anos','30 - 39 Anos','18 - 29 Anos', '0 - 17 Anos']
 
-                    filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes, default='Não Definido')
+                #     filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes, default='Não Definido')
 
-                    df_grouped = filtered_df.groupby(['faixa_etaria', 'SEXO']).size().reset_index()
-                    df_grouped.columns = ['Faixa_etaria','Sexo','Total']
+                #     df_grouped = filtered_df.groupby(['faixa_etaria', 'SEXO']).size().reset_index()
+                #     df_grouped.columns = ['Faixa_etaria','Sexo','Total']
 
-                    df_masculino = df_grouped[df_grouped['Sexo'] == 'M'].reset_index(drop=True)
-                    df_feminino = df_grouped[df_grouped['Sexo'] == 'F'].reset_index(drop=True)
+                #     df_masculino = df_grouped[df_grouped['Sexo'] == 'M'].reset_index(drop=True)
+                #     df_feminino = df_grouped[df_grouped['Sexo'] == 'F'].reset_index(drop=True)
 
-                    df = pd.concat([df_masculino, df_feminino], axis=0)
-                    fig = px.funnel(
-                        df, 
-                        x='Total', 
-                        y='Faixa_etaria', 
-                        color='Sexo',
-                        title='Distribuição por Faixa Etária e Sexo',
-                        labels={'Idade':'Idades','Total':'Total de Idades'}
-                        )
+                #     df = pd.concat([df_masculino, df_feminino], axis=0)
+                #     fig = px.funnel(
+                #         df, 
+                #         x='Total', 
+                #         y='Faixa_etaria', 
+                #         color='Sexo',
+                #         title='Distribuição por Faixa Etária e Sexo',
+                #         labels={'Idade':'Idades','Total':'Total de Idades'}
+                #         )
 
-                    # Ajustar o gráfico para parecer um funil empilhado
-                    fig.update_layout(
-                        barmode='stack',  # Empilha as barras
-                        xaxis_title='Total de Pessoas',
-                        yaxis_title='Faixa Etária',
-                        yaxis=dict(
-                            categoryorder='total descending'  # Ordena as faixas etárias do maior para o menor
-                        ),
-                        xaxis=dict(
-                            title='Total de Pessoas'
-                        )
-                    )
+                #     # Ajustar o gráfico para parecer um funil empilhado
+                #     fig.update_layout(
+                #         barmode='stack',  # Empilha as barras
+                #         xaxis_title='Total de Pessoas',
+                #         yaxis_title='Faixa Etária',
+                #         yaxis=dict(
+                #             categoryorder='total descending'  # Ordena as faixas etárias do maior para o menor
+                #         ),
+                #         xaxis=dict(
+                #             title='Total de Pessoas'
+                #         )
+                #     )
 
 
-                    st.write(df)
+                #     st.write(df)
 
-                    # Exibir o gráfico no Streamlit  
-                    st.plotly_chart(fig)            
+                #     # Exibir o gráfico no Streamlit  
+                #     st.plotly_chart(fig)            
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
 
