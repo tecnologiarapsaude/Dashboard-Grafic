@@ -76,8 +76,8 @@ def fetch_data():
                     st.write(f'O tipo do arquivo é: {file_type}')
 
                     # Fazendo a verificação para ver o tipo do arquivo
-                    if operadoras['Nome_Fantasia'] == 'Hapvida' and file_type == 'csv':
-                        st.write('Arquivo CSV baixado com sucesso')
+                    if operadoras['Nome_Fantasia'] == 'Hapvida':
+                        st.write('Arquivo Hapvida baixado com sucesso')
                         file_content = file_response.text
                         file_buffer = StringIO(file_content)
                         df_hapvida = pd.read_csv(file_buffer, encoding='latin1', sep=';', skiprows=7)
@@ -88,14 +88,14 @@ def fetch_data():
                         # df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
                         df_hapvida['data_vencimento'] = data_vencimento
                         dataframes.append(df_hapvida)
-                    # if file_type == 'xlsx':
-                    #     st.write('Arquivo EXCEL baixado com sucesso')
-                    #     file_content = file_response.content
-                    #     file_buffer = BytesIO(file_content)
-                    #     df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
-                    #     df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
-                    #     df_cnu['data_vencimento'] = data_vencimento
-                    #     dataframes.append(df_cnu)
+                    if operadoras['Nome_Fantasia'] == 'CNU':
+                        st.write('Arquivo CNU baixado com sucesso')
+                        file_content = file_response.content
+                        file_buffer = BytesIO(file_content)
+                        df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
+                        df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+                        df_cnu['data_vencimento'] = data_vencimento
+                        dataframes.append(df_cnu)
                     
                     # Adicionando a data de vencimento ao DataFrame
                     # df['data_vencimento'] = data_vencimento
