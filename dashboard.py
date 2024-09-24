@@ -135,6 +135,8 @@ def fetch_data():
 
                         df_gndi['Cd Beneficiário'] = df_gndi['Cd Beneficiário'].astype(str)
 
+                        st.write(df_gndi)
+
                         dataframes.append(df_gndi)
 
                     # Adicionando a data de vencimento ao DataFrame
