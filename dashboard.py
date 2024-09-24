@@ -84,7 +84,7 @@ def fetch_data():
 
                         st.write(df_hapvida)
 
-                        df_hapvida.columns = ['Cd Contrato', 'Unidade','Empresa','Cd Beneficiario' ,'Matrícula', 'CPF', 'Beneficiário', 'Nome da Mãe', 'Data Nascimento', 'Data Exclusão', 'Idade', 'Dependência','Plano' ,'AC', 'Mensalidade', 'Adicional','Taxa Adesão' ,'Desconto','Valor Fatura',]
+                        df_hapvida.columns = ['Cd Contrato', 'Unidade','Empresa','Cd Beneficiário' ,'Matrícula', 'CPF', 'Beneficiário', 'Nome da Mãe', 'Data Nascimento', 'Data Exclusão', 'Idade', 'Dependência','Plano' ,'AC', 'Mensalidade', 'Adicional','Taxa Adesão' ,'Desconto','Valor Fatura',]
 
                         # Remover caracteres especiais e deixar apenas os números
                         # df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
