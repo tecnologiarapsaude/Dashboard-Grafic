@@ -74,11 +74,11 @@ def fetch_data():
                         file_content = file_response.text
                         file_buffer = StringIO(file_content)
                         df = pd.read_csv(file_buffer)
-                    # elif file_type == 'xlsx':
+                    elif file_type == 'xlsx':
                     #     st.write('Arquivo CSV baixado com sucesso')
-                        # file_content = file_response.text
-                        # file_buffer = StringIO(file_content)
-                        # df = pd.read_excel(file_buffer, engine='openpyxl')
+                        file_content = file_response.text
+                        file_buffer = StringIO(file_content)
+                        df = pd.read_excel(file_buffer, engine='openpyxl')
                         # df.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
 
 
