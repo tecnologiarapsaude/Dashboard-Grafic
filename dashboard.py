@@ -98,7 +98,7 @@ def fetch_data():
 
                         st.write(df_cnu)
 
-                        df_cnu.columns = ['Código', 'Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+                        df_cnu.columns = ['Data Competencia','Empresa', 'CNPJ' ,'Cartão' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
                         df_cnu['data_vencimento'] = data_vencimento
                         dataframes.append(df_cnu)
                     
@@ -124,7 +124,7 @@ def fetch_data():
                         file_buffer = StringIO(file_content)
 
                         # Lê o arquivo como texto completo
-                        df_gndi = pd.read_csv(file_buffer, encoding='latin1', sep=';')
+                        df_gndi = pd.read_csv(file_buffer, encoding='utf-8', sep=';')
 
                         st.write(df_gndi)
 
