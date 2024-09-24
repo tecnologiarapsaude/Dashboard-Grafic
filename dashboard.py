@@ -202,16 +202,16 @@ def fetch_data():
                 #     filtered_df = dados_filtrados
 
                 # Filtro por Tipo de Atendimento
-                tipo_atendimento_selecionado = st.sidebar.multiselect(
-                    'Selecione o Tipo de Atendimento',
-                    options = filtered_df['Tipo_Atendimento'].unique(),
-                    default=filtered_df['Tipo_Atendimento'].unique(),
-                    placeholder="Selecione o Tipo de atendimento"
-                )
+                # tipo_atendimento_selecionado = st.sidebar.multiselect(
+                #     'Selecione o Tipo de Atendimento',
+                #     options = filtered_df['Tipo_Atendimento'].unique(),
+                #     default=filtered_df['Tipo_Atendimento'].unique(),
+                #     placeholder="Selecione o Tipo de atendimento"
+                # )
 
-                if tipo_atendimento_selecionado:
-                    dados_filtrados = filtered_df[filtered_df['Tipo_Atendimento'].isin(tipo_atendimento_selecionado)]
-                    filtered_df = dados_filtrados
+                # if tipo_atendimento_selecionado:
+                #     dados_filtrados = filtered_df[filtered_df['Tipo_Atendimento'].isin(tipo_atendimento_selecionado)]
+                #     filtered_df = dados_filtrados
 
                 # Filtro Titular e Dependente
                 td_selecionado = st.sidebar.multiselect(
