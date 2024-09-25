@@ -62,20 +62,7 @@ def fetch_data():
                 file_response = requests.get(arquivo_url)
                 if file_response.status_code == 200:
 
-                    nome_operadora = operadoras
-                    
-                    # Extrai o nome do arquivo da URL
-                    filename = os.path.basename(arquivo_url)
-
-                    # Obtém a extensão do arquivo
-                    file_extension = os.path.splitext(filename)[1]
-
-                    # Remove o ponto da extensão
-                    file_type = file_extension[1:]
-
-                    st.write(f'O tipo do arquivo é: {file_type}')
-
-                    # Fazendo a verificação para ver o tipo do arquivo
+                    # Fazendo a verificação para pega o nome de cada operadora
                     if operadoras['Nome_Fantasia'] == 'Hapvida':
                         st.write('Arquivo Hapvida baixado com sucesso')
                         file_content = file_response.text
@@ -88,8 +75,11 @@ def fetch_data():
 
                         # Remover caracteres especiais e deixar apenas os números
                         # df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
+                        
+                        # Adicionando a data de vencimento ao DataFrame
                         df_hapvida['data_vencimento'] = data_vencimento
                         dataframes.append(df_hapvida)
+                        
                     if operadoras['Nome_Fantasia'] == 'CNU':
                         st.write('Arquivo CNU baixado com sucesso')
                         file_content = file_response.content
@@ -99,6 +89,8 @@ def fetch_data():
                         st.write(df_cnu)
 
                         df_cnu.columns = ['Data Competencia','Empresa', 'CNPJ' ,'Cd Beneficiário' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+                        
+                        # Adicionando a data de vencimento ao DataFrame
                         df_cnu['data_vencimento'] = data_vencimento
                         dataframes.append(df_cnu)
                     
@@ -115,6 +107,7 @@ def fetch_data():
                         # Define os nomes das colunas conforme a estrutura dos dados
                         df_amil.columns = ['Cd Beneficiário', 'Beneficiário', 'Matrícula', 'CPF', 'Plano', 'Dependência', 'Idade', 'Tipo', 'Data Limite', 'Data Inclusão', 'Data Exclusão', 'Lotacão', 'Rubrica', 'Co-Participacao', 'Outros', 'Valor Fatura', 'Total Família']
 
+                        # Adicionando a data de vencimento ao DataFrame
                         df_amil['data_vencimento'] = data_vencimento
                         dataframes.append(df_amil)
 
@@ -131,6 +124,7 @@ def fetch_data():
                         # Define os nomes das colunas conforme a estrutura dos dados
                         df_gndi.columns = ['Mês Ano Competencia','Cd Contrato','Empresa', 'Tipo Faturamento','Cd Beneficiário', 'Matrícula','Titular' ,'Beneficiário','Sexo','Dependência','Data Nascimento','Data Vigencia contrato','Data Vigencia associado','Cod_Plano','Plano','CPF', 'Total Vidas gp Familiar', 'Valor Fatura','Valor Retroativo','Cd Local Trabalho','CNPJ', 'Rubrica', 'Cd Unico Cliente', 'Lotacão']
 
+                        # Adicionando a data de vencimento ao DataFrame
                         df_gndi['data_vencimento'] = data_vencimento
 
                         # Colocando tipo da coluna
@@ -139,9 +133,6 @@ def fetch_data():
                         st.write(df_gndi)
 
                         dataframes.append(df_gndi)
-
-                    # Adicionando a data de vencimento ao DataFrame
-                    # df['data_vencimento'] = data_vencimento
 
                     empresa_id = arquivo['empresas_id']
                     empresas = arquivo['_empresas']
