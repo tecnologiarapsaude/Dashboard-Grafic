@@ -403,7 +403,7 @@ def fetch_data():
                     ]
                     opcoes = ['Maior que 60 Anos', '50 - 59 Anos','40 - 49 Anos','30 - 39 Anos','18 - 29 Anos', '0 - 17 Anos']
 
-                    filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes, default='Não Definido')
+                    filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes)
 
                     df_grouped = filtered_df.groupby(['faixa_etaria', 'Sexo']).size().reset_index()
                     df_grouped.columns = ['Faixa_etaria','Sexo','Total']
