@@ -304,7 +304,7 @@ def fetch_data():
                 # Contagem de TD 
                 contagem_td = filtered_df['Dependência'].value_counts()
                 # Obtendo o total de titulares e dependentes
-                total_titulares = contagem_td.get('Titular', 0)
+                total_titulares = contagem_td.get('TITULAR', 0)
                 total_dependentes = contagem_td.get('Dependência', 0)
                 with st.container():
                     with col1:
