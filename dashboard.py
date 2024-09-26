@@ -357,26 +357,24 @@ def fetch_data():
                             hole=.6,)
                         st.plotly_chart(grafico_vinculo)
 
-                # # grafico de custo por operadora com streamlit
-                # with st.container():
-                    
-
-                #     #filtered_df[' COBRADO '] = pd.to_numeric(filtered_df[' COBRADO '], errors='coerce')
-                #     # df_total_valor= filtered_df[' COBRADO '].sum()
-                #     total_operadora = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
-                #     total_operadora.columns = ['Operadora', 'Total Operadoras']
-                #     st.write(total_operadora)
-                #     # st.write(filtered_df[' COBRADO '].dtype)
-                #     custo_operadora = px.bar(
-                #         total_operadora, 
-                #         x='Operadora', 
-                #         y='Total Operadoras', 
-                #         title='Distribuição por Operadoras',
-                #         labels={'Nome_Fantasia':'Operadora','Total Operadora':'Total Operadora'},
-                #         color='Operadora',  # Adiciona uma cor baseada na contagem
-                #         color_continuous_scale='Blues'
-                #         )
-                #     st.plotly_chart(custo_operadora)
+                # grafico de custo por operadora com streamlit
+                with st.container():
+                    #filtered_df[' COBRADO '] = pd.to_numeric(filtered_df[' COBRADO '], errors='coerce')
+                    # df_total_valor= filtered_df[' COBRADO '].sum()
+                    total_operadora = filtered_df['Nome_Fantasia'].value_counts().sort_index().reset_index()
+                    total_operadora.columns = ['Operadora', 'Total Operadoras']
+                    st.write(total_operadora)
+                    # st.write(filtered_df[' COBRADO '].dtype)
+                    custo_operadora = px.bar(
+                        total_operadora, 
+                        x='Operadora', 
+                        y='Total Operadoras', 
+                        title='Distribuição por Operadoras',
+                        labels={'Nome_Fantasia':'Operadora','Total Operadora':'Total Operadora'},
+                        color='Operadora',  # Adiciona uma cor baseada na contagem
+                        color_continuous_scale='Blues'
+                        )
+                    st.plotly_chart(custo_operadora)
 
                 
                 # # preparar o grafico com streamlit faixa etaria e sexo
