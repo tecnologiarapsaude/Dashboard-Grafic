@@ -67,32 +67,32 @@ def fetch_data():
                         st.write('Arquivo Hapvida baixado com sucesso')
                         file_content = file_response.text
                         file_buffer = StringIO(file_content)
-                        df_hapvida = pd.read_csv(file_buffer, encoding='latin1', sep=';', skiprows=7)
+                        df = pd.read_csv(file_buffer, encoding='latin1', sep=';', skiprows=7)
 
-                        st.write(df_hapvida)
+                        st.write(df)
 
-                        df_hapvida.columns = ['Cd Contrato', 'Unidade','Empresa','Cd Beneficiário' ,'Matrícula', 'CPF', 'Beneficiário', 'Nome da Mãe', 'Data Nascimento', 'Data Exclusão', 'Idade', 'Dependência','Plano' ,'AC', 'Mensalidade', 'Adicional','Taxa Adesão' ,'Desconto','Valor Fatura',]
+                        df.columns = ['Cd Contrato', 'Unidade','Empresa','Cd Beneficiário' ,'Matrícula', 'CPF', 'Beneficiário', 'Nome da Mãe', 'Data Nascimento', 'Data Exclusão', 'Idade', 'Dependência','Plano' ,'AC', 'Mensalidade', 'Adicional','Taxa Adesão' ,'Desconto','Valor Fatura',]
 
                         # Remover caracteres especiais e deixar apenas os números
-                        # df_hapvida['Código'] = df_hapvida['Código'].str.replace(r'[^0-9]', '', regex=True)
+                        # df['Código'] = df['Código'].str.replace(r'[^0-9]', '', regex=True)
                         
                         # Adicionando a data de vencimento ao DataFrame
-                        df_hapvida['data_vencimento'] = data_vencimento
-                        dataframes.append(df_hapvida)
+                        df['data_vencimento'] = data_vencimento
+                        dataframes.append(df)
                         
                     if operadoras['Nome_Fantasia'] == 'CNU':
                         st.write('Arquivo CNU baixado com sucesso')
                         file_content = file_response.content
                         file_buffer = BytesIO(file_content)
-                        df_cnu = pd.read_excel(file_buffer, engine='openpyxl')
+                        df = pd.read_excel(file_buffer, engine='openpyxl')
 
-                        st.write(df_cnu)
+                        st.write(df)
 
-                        df_cnu.columns = ['Data Competencia','Empresa', 'CNPJ' ,'Cd Beneficiário' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
+                        df.columns = ['Data Competencia','Empresa', 'CNPJ' ,'Cd Beneficiário' ,'Matrícula','CPF Titular', 'Titular' , 'CPF' ,'Beneficiário', 'Data Nascimento', 'Idade', 'Sexo', 'Dependência', 'Vigencia', 'Data Exclusão', 'Cod_Plano','Plano' , 'Mensalidade', 'Valor Inscrição', 'Valor Fatura',]
                         
                         # Adicionando a data de vencimento ao DataFrame
-                        df_cnu['data_vencimento'] = data_vencimento
-                        dataframes.append(df_cnu)
+                        df['data_vencimento'] = data_vencimento
+                        dataframes.append(df)
                     
                     if operadoras['Nome_Fantasia'] == 'Amil':
                         st.write('Arquivo Amil baixado com sucesso')
@@ -100,16 +100,16 @@ def fetch_data():
                         file_buffer = StringIO(file_content)
 
                         # Lê o arquivo como texto completo
-                        df_amil = pd.read_csv(file_buffer, encoding='latin1', skiprows=5, sep='#')
+                        df = pd.read_csv(file_buffer, encoding='latin1', skiprows=5, sep='#')
 
-                        st.write(df_amil)
+                        st.write(df)
 
                         # Define os nomes das colunas conforme a estrutura dos dados
-                        df_amil.columns = ['Cd Beneficiário', 'Beneficiário', 'Matrícula', 'CPF', 'Plano', 'Dependência', 'Idade', 'Tipo', 'Data Limite', 'Data Inclusão', 'Data Exclusão', 'Lotacão', 'Rubrica', 'Co-Participacao', 'Outros', 'Valor Fatura', 'Total Família']
+                        df.columns = ['Cd Beneficiário', 'Beneficiário', 'Matrícula', 'CPF', 'Plano', 'Dependência', 'Idade', 'Tipo', 'Data Limite', 'Data Inclusão', 'Data Exclusão', 'Lotacão', 'Rubrica', 'Co-Participacao', 'Outros', 'Valor Fatura', 'Total Família']
 
                         # Adicionando a data de vencimento ao DataFrame
-                        df_amil['data_vencimento'] = data_vencimento
-                        dataframes.append(df_amil)
+                        df['data_vencimento'] = data_vencimento
+                        dataframes.append(df)
 
                     if operadoras['Nome_Fantasia'] == 'GNDI':
                         st.write('Arquivo GNDI baixado com sucesso')
@@ -117,22 +117,22 @@ def fetch_data():
                         file_buffer = StringIO(file_content)
 
                         # Lê o arquivo como texto completo
-                        df_gndi = pd.read_csv(file_buffer, encoding='latin1', sep=';', index_col=False)
+                        df = pd.read_csv(file_buffer, encoding='latin1', sep=';', index_col=False)
 
-                        st.write(df_gndi)
+                        st.write(df)
 
                         # Define os nomes das colunas conforme a estrutura dos dados
-                        df_gndi.columns = ['Mês Ano Competencia','Cd Contrato','Empresa', 'Tipo Faturamento','Cd Beneficiário', 'Matrícula','Titular' ,'Beneficiário','Sexo','Dependência','Data Nascimento','Data Vigencia contrato','Data Vigencia associado','Cod_Plano','Plano','CPF', 'Total Vidas gp Familiar', 'Valor Fatura','Valor Retroativo','Cd Local Trabalho','CNPJ', 'Rubrica', 'Cd Unico Cliente', 'Lotacão']
+                        df.columns = ['Mês Ano Competencia','Cd Contrato','Empresa', 'Tipo Faturamento','Cd Beneficiário', 'Matrícula','Titular' ,'Beneficiário','Sexo','Dependência','Data Nascimento','Data Vigencia contrato','Data Vigencia associado','Cod_Plano','Plano','CPF', 'Total Vidas gp Familiar', 'Valor Fatura','Valor Retroativo','Cd Local Trabalho','CNPJ', 'Rubrica', 'Cd Unico Cliente', 'Lotacão']
 
                         # Adicionando a data de vencimento ao DataFrame
-                        df_gndi['data_vencimento'] = data_vencimento
+                        df['data_vencimento'] = data_vencimento
 
                         # Colocando tipo da coluna
-                        df_gndi['Cd Beneficiário'] = df_gndi['Cd Beneficiário'].astype(str)
+                        df['Cd Beneficiário'] = df['Cd Beneficiário'].astype(str)
 
-                        st.write(df_gndi)
+                        st.write(df)
 
-                        dataframes.append(df_gndi)
+                        dataframes.append(df)
 
                     empresa_id = arquivo['empresas_id']
                     empresas = arquivo['_empresas']
