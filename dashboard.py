@@ -139,18 +139,17 @@ def fetch_data():
 
                     empresa_encontrada = next((empresa for empresa in empresas if empresa['id'] == empresa_id), None)
 
-                    # if empresa_encontrada:
-                    #     df['Nome_Empresa'] = empresa_encontrada['nome_fantasia']
-                    # else:
-                    #     df['Nome_Empresa'] = 'Empresa não encontrada'
+                    if empresa_encontrada:
+                        df['Nome_Empresa'] = empresa_encontrada['nome_fantasia']
+                    else:
+                        df['Nome_Empresa'] = 'Empresa não encontrada'
 
                     # Comparando operadoras_id com o id em _operadoras e obtendo Nome_Fantasia
-                    
 
-                    # if operadoras_id == operadoras['id']:
-                    #     df['Nome_Fantasia'] = operadoras['Nome_Fantasia']
-                    # else:
-                    #     df['Nome_Fantasia'] = 'Operadora não encontrada'
+                    if operadoras_id == operadoras['id']:
+                        df['Nome_Fantasia'] = operadoras['Nome_Fantasia']
+                    else:
+                        df['Nome_Fantasia'] = 'Operadora não encontrada'
 
                     # Comparando status_faturas_id com o status_faturas
                     status_faturas_id = arquivo['status_faturas_id']
