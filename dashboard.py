@@ -229,14 +229,11 @@ def fetch_data():
                     placeholder='Selecione o Sexo'
                 )
 
-
                 # Filtrar valores não nulos ou não informados
                 filtered_df = filtered_df.fillna('None')
 
                 # Reverter o mapeamento do sexo pelos os valores Originais
                 sexo_selecionado_originais = [key for key, value in sexo_map.items() if value in sexo_selecionado]
-
-                st.write(sexo_selecionado_originais)
 
                 if sexo_selecionado_originais:
                     # Filtrar dados com base na seleção de sexo
