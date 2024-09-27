@@ -466,9 +466,9 @@ def fetch_data():
                         total_idade, 
                         x='Idade', 
                         y='Total Idades', 
-                        title='Distribuição por Operadoras',
+                        title='Distribuição por Idades',
                         labels={'Idade':'Idade','Total idades':'Total Idades'},
-                        color='Operadora',  # Adiciona uma cor baseada na contagem
+                        color='Idade',  # Adiciona uma cor baseada na contagem
                         color_continuous_scale='Blues'
                         )
                     st.plotly_chart(custo_idade)               
