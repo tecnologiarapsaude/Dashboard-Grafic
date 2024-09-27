@@ -398,6 +398,12 @@ def fetch_data():
 
                 # # Grafico do estilo funil para faixa etaria e sexo
                 with st.container():
+                    
+                    filtered_df['Idade'] = pd.to_numeric(filtered_df['Idade'], errors='coerce')
+
+                    # Optional: Drop rows where 'Idade' is NaN
+                    filtered_df = filtered_df.dropna(subset=['Idade'])
+
 
                     condicao_faixa_etaria = [
                         (filtered_df['Idade'] > 59),
