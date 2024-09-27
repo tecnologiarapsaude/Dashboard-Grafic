@@ -397,61 +397,75 @@ def fetch_data():
                 #     st.plotly_chart(distribuicao_faixa_sexo)
 
                 # # Grafico do estilo funil para faixa etaria e sexo
-                with st.container():
+                # with st.container():
                     
-                    filtered_df['Idade'] = pd.to_numeric(filtered_df['Idade'], errors='coerce')
+                #     filtered_df['Idade'] = pd.to_numeric(filtered_df['Idade'], errors='coerce')
 
-                    # Optional: Drop rows where 'Idade' is NaN
-                    filtered_df = filtered_df.dropna(subset=['Idade'])
+                #     # Optional: Drop rows where 'Idade' is NaN
+                #     filtered_df = filtered_df.dropna(subset=['Idade'])
 
 
-                    condicao_faixa_etaria = [
-                        (filtered_df['Idade'] > 59),
-                        (filtered_df['Idade'] > 49) & (filtered_df['Idade'] <= 59),
-                        (filtered_df['Idade'] > 39) & (filtered_df['Idade'] <= 49),
-                        (filtered_df['Idade'] > 29) & (filtered_df['Idade'] <= 39),
-                        (filtered_df['Idade'] > 17) & (filtered_df['Idade'] <= 29),
-                        (filtered_df['Idade'] <= 17)
+                #     condicao_faixa_etaria = [
+                #         (filtered_df['Idade'] > 59),
+                #         (filtered_df['Idade'] > 49) & (filtered_df['Idade'] <= 59),
+                #         (filtered_df['Idade'] > 39) & (filtered_df['Idade'] <= 49),
+                #         (filtered_df['Idade'] > 29) & (filtered_df['Idade'] <= 39),
+                #         (filtered_df['Idade'] > 17) & (filtered_df['Idade'] <= 29),
+                #         (filtered_df['Idade'] <= 17)
 
-                    ]
-                    opcoes = ['Maior que 60 Anos', '50 - 59 Anos','40 - 49 Anos','30 - 39 Anos','18 - 29 Anos', '0 - 17 Anos']
+                #     ]
+                #     opcoes = ['Maior que 60 Anos', '50 - 59 Anos','40 - 49 Anos','30 - 39 Anos','18 - 29 Anos', '0 - 17 Anos']
 
-                    filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes, default='Não Definido')
+                #     filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes, default='Não Definido')
 
-                    df_grouped = filtered_df.groupby(['faixa_etaria', 'Sexo']).size().reset_index()
-                    df_grouped.columns = ['Faixa_etaria','Sexo','Total']
+                #     df_grouped = filtered_df.groupby(['faixa_etaria', 'Sexo']).size().reset_index()
+                #     df_grouped.columns = ['Faixa_etaria','Sexo','Total']
 
-                    df_masculino = df_grouped[df_grouped['Sexo'] == 'M'].reset_index(drop=True)
-                    df_feminino = df_grouped[df_grouped['Sexo'] == 'F'].reset_index(drop=True)
+                #     df_masculino = df_grouped[df_grouped['Sexo'] == 'M'].reset_index(drop=True)
+                #     df_feminino = df_grouped[df_grouped['Sexo'] == 'F'].reset_index(drop=True)
 
-                    df = pd.concat([df_masculino, df_feminino], axis=0)
-                    fig = px.funnel(
-                        df, 
-                        x='Total', 
-                        y='Faixa_etaria', 
-                        color='Sexo',
-                        title='Distribuição por Faixa Etária e Sexo',
-                        labels={'Idade':'Idades','Total':'Total de Idades'}
+                #     df = pd.concat([df_masculino, df_feminino], axis=0)
+                #     fig = px.funnel(
+                #         df, 
+                #         x='Total', 
+                #         y='Faixa_etaria', 
+                #         color='Sexo',
+                #         title='Distribuição por Faixa Etária e Sexo',
+                #         labels={'Idade':'Idades','Total':'Total de Idades'}
+                #         )
+
+                #     # Ajustar o gráfico para parecer um funil empilhado
+                #     fig.update_layout(
+                #         barmode='stack',  # Empilha as barras
+                #         xaxis_title='Total de Pessoas',
+                #         yaxis_title='Faixa Etária',
+                #         yaxis=dict(
+                #             categoryorder='total descending'  # Ordena as faixas etárias do maior para o menor
+                #         ),
+                #         xaxis=dict(
+                #             title='Total de Pessoas'
+                #         )
+                #     )
+
+
+                #     st.write(df)
+
+                #     # Exibir o gráfico no Streamlit  
+                #     st.plotly_chart(fig) 
+                    total_idade = filtered_df['Idade'].value_counts().sort_index().reset_index()
+                    total_idade.columns = ['Idade', 'Total Idades']
+                    st.write(total_idade)
+                    # st.write(filtered_df[' COBRADO '].dtype)
+                    custo_idade = px.bar(
+                        total_idade, 
+                        x='Idade', 
+                        y='Total Idade', 
+                        title='Distribuição por Operadoras',
+                        labels={'Idade':'Idade','Total idades':'Total Idades'},
+                        color='Operadora',  # Adiciona uma cor baseada na contagem
+                        color_continuous_scale='Blues'
                         )
-
-                    # Ajustar o gráfico para parecer um funil empilhado
-                    fig.update_layout(
-                        barmode='stack',  # Empilha as barras
-                        xaxis_title='Total de Pessoas',
-                        yaxis_title='Faixa Etária',
-                        yaxis=dict(
-                            categoryorder='total descending'  # Ordena as faixas etárias do maior para o menor
-                        ),
-                        xaxis=dict(
-                            title='Total de Pessoas'
-                        )
-                    )
-
-
-                    st.write(df)
-
-                    # Exibir o gráfico no Streamlit  
-                    st.plotly_chart(fig)            
+                    st.plotly_chart(custo_idade)               
             else:
                 st.error("Menos de dois arquivos CSV foram encontrados.")
 
