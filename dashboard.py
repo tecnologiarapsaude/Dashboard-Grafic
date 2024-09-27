@@ -405,11 +405,10 @@ def fetch_data():
                         (filtered_df['Idade'] > 39) & (filtered_df['Idade'] <= 49),
                         (filtered_df['Idade'] > 29) & (filtered_df['Idade'] <= 39),
                         (filtered_df['Idade'] > 17) & (filtered_df['Idade'] <= 29),
-                        (filtered_df['Idade'] <= 17),
-                        (filtered_df['Idade'] == 'None'),
+                        (filtered_df['Idade'] <= 17)
 
                     ]
-                    opcoes = ['Maior que 60 Anos', '50 - 59 Anos','40 - 49 Anos','30 - 39 Anos','18 - 29 Anos', '0 - 17 Anos', 'Não Informado']
+                    opcoes = ['Maior que 60 Anos', '50 - 59 Anos','40 - 49 Anos','30 - 39 Anos','18 - 29 Anos', '0 - 17 Anos']
 
                     filtered_df['faixa_etaria'] = np.select(condicao_faixa_etaria, opcoes, default='Não Definido')
 
