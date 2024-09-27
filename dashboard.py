@@ -344,21 +344,21 @@ def fetch_data():
 
                     # Grafico de distribuição por vinculos com streamlit
                     with col_distribuicao_vinculo:
-                        total_vinculos = filtered_df['Dependência'].value_counts().sort_index().reset_index()
-                        total_vinculos.columns = ['nome_vinculo','total_vinculo']
 
                          
                         filtered_df['Categoria'] = np.where(filtered_df['Dependência'].isin(['T', 'TITULAR']), 'Titular', 'Dependente')
 
+                        total_vinculos = filtered_df['Categoria'].value_counts().sort_index().reset_index()
+                        total_vinculos.columns = ['nome_vinculo','total_vinculo']
 
 
                         grafico_vinculo = px.pie(
-                            filtered_df['Categoria'],
+                            total_vinculos,
                             title='Vinculos',
-                            names='Categoria',
+                            names='nome_vinculo',
                             values='total_vinculo',
-                            labels={'Categoria':'Nome do Vinculo','total_vinculo':'Total de Vinculos'},
-                            color='Categoria',
+                            labels={'nome_vinculo':'Nome do Vinculo','total_vinculo':'Total de Vinculos'},
+                            color='nome_vinculo',
                             hole=.6,)
                         st.plotly_chart(grafico_vinculo)
 
