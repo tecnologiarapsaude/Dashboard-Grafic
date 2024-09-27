@@ -346,6 +346,12 @@ def fetch_data():
                     with col_distribuicao_vinculo:
                         total_vinculos = filtered_df['Dependência'].value_counts().sort_index().reset_index()
                         total_vinculos.columns = ['nome_vinculo','total_vinculo']
+
+                         
+                        filtered_df['Categoria'] = np.where(filtered_df['Dependência'].isin(['T', 'TITULAR']), 'Titular', 'Dependente')
+
+
+
                         grafico_vinculo = px.pie(
                             total_vinculos,
                             title='Vinculos',
