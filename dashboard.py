@@ -155,21 +155,21 @@ def fetch_data():
                     status_faturas_id = arquivo['status_faturas_id']
                     status_fatura = arquivo['_status_faturas']
 
-                    # if status_faturas_id == status_fatura['id']:
-                    #     df['Status_Fatura'] = status_fatura['Status_Fatura']
-                    # else:
-                    #     df['Status_Fatura'] = 'Status não encontrado'
+                    if status_faturas_id == status_fatura['id']:
+                        df['Status_Fatura'] = status_fatura['Status_Fatura']
+                    else:
+                        df['Status_Fatura'] = 'Status não encontrado'
 
                     # _tipo_atendimento & 'tipo_atendimento_id
                     tipo_atendimento_id = arquivo['tipo_atendimento_id']
                     tipo_atendimento = arquivo['_tipo_atendimento']
 
-                    # if tipo_atendimento_id == tipo_atendimento['id']:
-                    #     df['Tipo_Atendimento'] = tipo_atendimento['Tipo_Atendimento']
-                    # else:
-                    #     df['Tipo_Atendimento'] = 'Tipo atendimento não existe'
+                    if tipo_atendimento_id == tipo_atendimento['id']:
+                        df['Tipo_Atendimento'] = tipo_atendimento['Tipo_Atendimento']
+                    else:
+                        df['Tipo_Atendimento'] = 'Tipo atendimento não existe'
 
-                    # dataframes.append(df)
+                    dataframes.append(df)
                     
                 else:
                     st.error(f"Erro ao baixar o arquivo CSV: {file_response.status_code}")
