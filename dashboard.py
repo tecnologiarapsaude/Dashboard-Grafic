@@ -452,6 +452,12 @@ def fetch_data():
 
                 #     # Exibir o gráfico no Streamlit  
                 #     st.plotly_chart(fig) 
+
+                    filtered_df['Idade'] = pd.to_numeric(filtered_df['Idade'], errors='coerce')
+                    # Optional: Drop rows where 'Idade' is NaN
+                    filtered_df = filtered_df.dropna(subset=['Idade'])
+
+                    
                     total_idade = filtered_df['Idade'].value_counts().sort_index().reset_index()
                     total_idade.columns = ['Idade', 'Total Idades']
                     st.write(total_idade)
