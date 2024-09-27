@@ -355,10 +355,10 @@ def fetch_data():
                         grafico_vinculo = px.pie(
                             filtered_df['Categoria'],
                             title='Vinculos',
-                            names='nome_vinculo',
+                            names='Categoria',
                             values='total_vinculo',
-                            labels={'nome_vinculo':'Nome do Vinculo','total_vinculo':'Total de Vinculos'},
-                            color='nome_vinculo',
+                            labels={'Categoria':'Nome do Vinculo','total_vinculo':'Total de Vinculos'},
+                            color='Categoria',
                             hole=.6,)
                         st.plotly_chart(grafico_vinculo)
 
