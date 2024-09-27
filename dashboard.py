@@ -276,17 +276,17 @@ def fetch_data():
                     filtered_df = dados_filtrados
 
                 # Filtrar por empresas
-                # empresa_selecionada = st.sidebar.multiselect(
-                #     'Selecione a empresa',
-                #     options=filtered_df['Nome_Empresa'].unique(),
-                #     default=filtered_df['Nome_Empresa'].unique(),
-                #     placeholder='Selecione a Empresa'
-                # )
+                empresa_selecionada = st.sidebar.multiselect(
+                    'Selecione a empresa',
+                    options=filtered_df['Empresa'].unique(),
+                    default=filtered_df['Empresa'].unique(),
+                    placeholder='Selecione a Empresa'
+                )
 
-                # if empresa_selecionada:
-                #     # Filtrar dados com base na seleção da empresa
-                #     dados_filtrados = filtered_df[filtered_df['Nome_Empresa'].isin(empresa_selecionada)]
-                #     filtered_df = dados_filtrados
+                if empresa_selecionada:
+                    # Filtrar dados com base na seleção da empresa
+                    dados_filtrados = filtered_df[filtered_df['Empresa'].isin(empresa_selecionada)]
+                    filtered_df = dados_filtrados
 
                 # Exibir o gráfico com os dados filtrados ou o DataFrame original se o filtro estiver vazio
                 # st.line_chart(filtered_df if not filtered_df.empty else combined_df)
