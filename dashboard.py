@@ -331,7 +331,7 @@ def fetch_data():
                 #     # Grafico de Vidas em cada operadora com streamlit
                     with col_vidas_operadora:
                         # fazendo a contagem de quantas vidas tem cada operadora
-                        total_vidas = filtered_df['Sexo'].value_counts().sort_index().reset_index()
+                        total_vidas = filtered_df['Sexo'].value_counts().sort_index().reset_index().replace('None', 'Não Informado')
                         total_vidas.columns = ['Sexo','total_vidas'] #renomendo as tabelas do dataframe
                         vidas_operadoras = px.pie(
                             total_vidas, 
