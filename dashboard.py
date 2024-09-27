@@ -219,7 +219,7 @@ def fetch_data():
                         filtered_df = combined_df
 
                 # Mapear o sexo para valores mais legíveis
-                sexo_map = {'M': 'Masculino', 'F': 'Feminino'}
+                sexo_map = {'M': 'Masculino', 'F': 'Feminino', 'None': 'Não Informado'}
 
                 # Adicionando o filtro de sexo
                 sexo_selecionado = st.sidebar.multiselect(
@@ -228,6 +228,10 @@ def fetch_data():
                     default=list(sexo_map.values()),
                     placeholder='Selecione o Sexo'
                 )
+
+
+                # Filtrar valores não nulos ou não informados
+                filtered_df = filtered_df.fillna('None')
 
                 # Reverter o mapeamento do sexo pelos os valores Originais
                 sexo_selecionado_originais = [key for key, value in sexo_map.items() if value in sexo_selecionado]
