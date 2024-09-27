@@ -457,7 +457,7 @@ def fetch_data():
                     # Optional: Drop rows where 'Idade' is NaN
                     filtered_df = filtered_df.dropna(subset=['Idade'])
 
-                    
+
                     total_idade = filtered_df['Idade'].value_counts().sort_index().reset_index()
                     total_idade.columns = ['Idade', 'Total Idades']
                     st.write(total_idade)
@@ -465,7 +465,7 @@ def fetch_data():
                     custo_idade = px.bar(
                         total_idade, 
                         x='Idade', 
-                        y='Total Idade', 
+                        y='Total Idades', 
                         title='Distribuição por Operadoras',
                         labels={'Idade':'Idade','Total idades':'Total Idades'},
                         color='Operadora',  # Adiciona uma cor baseada na contagem
