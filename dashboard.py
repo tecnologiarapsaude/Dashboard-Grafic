@@ -57,7 +57,7 @@ def fetch_data():
 
                 operadoras_id = arquivo['operadoras_id']
                 operadoras = arquivo['_operadoras']
-                st.write(operadoras)
+                st.write(operadoras['Nome_Fantasia'])
 
                 file_response = requests.get(arquivo_url)
                 if file_response.status_code == 200:
