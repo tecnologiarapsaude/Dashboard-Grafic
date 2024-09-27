@@ -383,18 +383,18 @@ def fetch_data():
 
                 
                 # # preparar o grafico com streamlit faixa etaria e sexo
-                # with st.container():
-                #     total_idades = filtered_df['Idade'].value_counts().sort_index().reset_index()
-                #     total_idades.columns = ['Idade', 'Total_idades']
-                #     distribuicao_faixa_sexo = px.bar(
-                #         total_idades, 
-                #         x='Idade', 
-                #         y='Total_idades', 
-                #         title='Distribuição por Faixa Etária e Sexo',
-                #         labels={'Idade': 'Idade', 'Total_idades': 'Total Pessoas'},
-                #         color='Idade',  # Adiciona uma cor baseada na contagem
-                #         color_continuous_scale='Blues')  # Paleta de cores, ajuste conforme desejado)
-                #     st.plotly_chart(distribuicao_faixa_sexo)
+                with st.container():
+                    total_idades = filtered_df['Idade'].value_counts().sort_index().reset_index()
+                    total_idades.columns = ['Idade', 'Total_idades']
+                    distribuicao_faixa_sexo = px.bar(
+                        total_idades, 
+                        x='Idade', 
+                        y='Total_idades', 
+                        title='Distribuição por Faixa Etária e Sexo',
+                        labels={'Idade': 'Idade', 'Total_idades': 'Total Pessoas'},
+                        color='Idade',  # Adiciona uma cor baseada na contagem
+                        color_continuous_scale='Blues')  # Paleta de cores, ajuste conforme desejado)
+                    st.plotly_chart(distribuicao_faixa_sexo)
 
                 # # Grafico do estilo funil para faixa etaria e sexo
                 # with st.container():
