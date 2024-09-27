@@ -353,7 +353,7 @@ def fetch_data():
 
 
                         grafico_vinculo = px.pie(
-                            total_vinculos,
+                            filtered_df['Categoria'],
                             title='Vinculos',
                             names='nome_vinculo',
                             values='total_vinculo',
