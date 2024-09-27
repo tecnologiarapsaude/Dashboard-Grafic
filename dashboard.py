@@ -219,7 +219,7 @@ def fetch_data():
                         filtered_df = combined_df
 
                 # Mapear o sexo para valores mais legíveis
-                sexo_map = {'M': 'Masculino', 'F': 'Feminino', 'None': 'Não Informado'}
+                sexo_map = {'M': 'Masculino', 'F': 'Feminino', '': 'Não Informado'}
 
                 # Adicionando o filtro de sexo
                 sexo_selecionado = st.sidebar.multiselect(
