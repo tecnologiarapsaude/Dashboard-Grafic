@@ -232,30 +232,30 @@ def fetch_data():
                 # Reverter o mapeamento do sexo pelos os valores Originais
                 sexo_selecionado_originais = [key for key, value in sexo_map.items() if value in sexo_selecionado]
 
-                # if sexo_selecionado_originais:
-                #     # Filtrar dados com base na seleção de sexo
-                #     dados_filtrados = filtered_df[filtered_df['SEXO'].isin(sexo_selecionado_originais)]
-                #     filtered_df = dados_filtrados
+                if sexo_selecionado_originais:
+                    # Filtrar dados com base na seleção de sexo
+                    dados_filtrados = filtered_df[filtered_df['Sexo'].isin(sexo_selecionado_originais)]
+                    filtered_df = dados_filtrados
 
                 # Filtro por Tipo de Atendimento
-                # tipo_atendimento_selecionado = st.sidebar.multiselect(
-                #     'Selecione o Tipo de Atendimento',
-                #     options = filtered_df['Tipo_Atendimento'].unique(),
-                #     default=filtered_df['Tipo_Atendimento'].unique(),
-                #     placeholder="Selecione o Tipo de atendimento"
-                # )
+                tipo_atendimento_selecionado = st.sidebar.multiselect(
+                    'Selecione o Tipo de Atendimento',
+                    options = filtered_df['Tipo_Atendimento'].unique(),
+                    default=filtered_df['Tipo_Atendimento'].unique(),
+                    placeholder="Selecione o Tipo de atendimento"
+                )
 
-                # if tipo_atendimento_selecionado:
-                #     dados_filtrados = filtered_df[filtered_df['Tipo_Atendimento'].isin(tipo_atendimento_selecionado)]
-                #     filtered_df = dados_filtrados
+                if tipo_atendimento_selecionado:
+                    dados_filtrados = filtered_df[filtered_df['Tipo_Atendimento'].isin(tipo_atendimento_selecionado)]
+                    filtered_df = dados_filtrados
 
                 # Filtro Titular e Dependente
-                # td_selecionado = st.sidebar.multiselect(
-                #     'Selecione o Tipo de Vínculo',
-                #     options=filtered_df['T/D'].unique(),
-                #     default=filtered_df['T/D'].unique(),
-                #     placeholder='Selecione o Tipo de Vínculo'
-                # )
+                td_selecionado = st.sidebar.multiselect(
+                    'Selecione o Tipo de Vínculo',
+                    options=filtered_df['Dependência'].unique(),
+                    default=filtered_df['Dependência'].unique(),
+                    placeholder='Selecione o Tipo de Vínculo'
+                )
 
                 # if td_selecionado:
                 #     # Filtrar dados com base na seleção do tipo de vínculo
@@ -345,12 +345,9 @@ def fetch_data():
                     # Grafico de distribuição por vinculos com streamlit
                     with col_distribuicao_vinculo:
 
-                         
                         filtered_df['Categoria'] = np.where(filtered_df['Dependência'].isin(['T', 'TITULAR']), 'Titular', 'Dependente')
-
                         total_vinculos = filtered_df['Categoria'].value_counts().sort_index().reset_index()
                         total_vinculos.columns = ['nome_vinculo','total_vinculo']
-
 
                         grafico_vinculo = px.pie(
                             total_vinculos,
