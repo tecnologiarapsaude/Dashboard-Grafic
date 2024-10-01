@@ -341,7 +341,7 @@ def fetch_data():
                             labels={'Sexo':'Sexo','total_vidas':'Total de Vidas'},
                             color='total_vidas',
                             hole=.6,
-                            color_discrete_sequence=['skyblue', 'blue', 'red']
+                            color_discrete_sequence=['skyblue', 'blue', 'orange']
                             )
                         st.plotly_chart(vidas_operadoras)
 
