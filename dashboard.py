@@ -328,7 +328,7 @@ def fetch_data():
                 #     # criado colunas para separa os graficos
                     col_vidas_operadora,col_distribuicao_vinculo = st.columns(2) 
 
-                #     # Grafico de Vidas em cada operadora com streamlit
+                    # Grafico de Vidas em cada operadora com streamlit
                     with col_vidas_operadora:
                         # fazendo a contagem de quantas vidas tem cada operadora
                         total_vidas = filtered_df['Sexo'].value_counts().sort_index().reset_index().replace('None', 'Não Informado')
@@ -341,7 +341,7 @@ def fetch_data():
                             labels={'Sexo':'Sexo','total_vidas':'Total de Vidas'},
                             color='total_vidas',
                             hole=.6,
-                            color_discrete_sequence=['skyblue', 'blue']
+                            color_discrete_sequence=['skyblue', 'blue', 'red']
                             )
                         st.plotly_chart(vidas_operadoras)
 
